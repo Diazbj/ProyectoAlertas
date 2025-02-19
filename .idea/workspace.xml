@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Dto/CrearReporteDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Dto/CrearUsuarioDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Dto/EditarReporteDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Dto/EditarUsuarioDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Dto/MensajeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Dto/ReporteDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Dto/UsuarioDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Dto/ValidacionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/ProyectoApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/ReporteControlador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/SaludoControlador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/UsuarioControlador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/excepciones/RestExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/ReporteServicio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/UsuarioServicio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/UsuarioServicioImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Saludo.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/usuarios.http" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTTP Request" />
+        <option value="Interface" />
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2sjuUZQZgPRzWNod0AXdG4Hvreg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build ProyectoAlertas.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ProyectoAlertas [:co.edu.uniquindio.proyecto.ProyectoApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.Saludo | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.Saludo | GET request to example server.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Actualizar un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Crear un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Eliminar un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia y su nombre sea Carlos.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios que tengan un nombre dado.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener un usuario por su id.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ProyectoApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/java/co/edu/uniquindio/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Spring Boot.ProyectoApplication">
+    <configuration name="usuarios | Actualizar un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="4" requestIdentifier="Actualizar un usuario" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="usuarios | Crear un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="3" requestIdentifier="Crear un usuario" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="usuarios | Eliminar un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="5" requestIdentifier="Eliminar un usuario" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="usuarios | Obtener todos los usuarios" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" requestIdentifier="Obtener todos los usuarios" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="usuarios | Obtener un usuario por su id" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="2" requestIdentifier="Obtener un usuario por su id" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="ProyectoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="ProyectoAlertas.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="co.edu.uniquindio.proyecto.ProyectoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.usuarios | Crear un usuario" />
+        <item itemvalue="HTTP Request.usuarios | Obtener todos los usuarios" />
+        <item itemvalue="HTTP Request.usuarios | Obtener un usuario por su id" />
+        <item itemvalue="HTTP Request.usuarios | Actualizar un usuario" />
+        <item itemvalue="HTTP Request.usuarios | Eliminar un usuario" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="" />
+      <created>1738981342404</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738981342404</updated>
+      <workItem from="1738981347792" duration="248000" />
+      <workItem from="1739256534201" duration="1738000" />
+      <workItem from="1739420781589" duration="208000" />
+      <workItem from="1739560653022" duration="2805000" />
+      <workItem from="1739582114032" duration="3819000" />
+      <workItem from="1739856973358" duration="3907000" />
+      <workItem from="1739861009517" duration="1415000" />
+      <workItem from="1739913675287" duration="3804000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/co/edu/uniquindio/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/UsuarioServicioImpl.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -19,7 +19,7 @@ public class ReporteControlador{
     public void editarReporte(@PathVariable String id, @RequestBody EditarReporteDTO reporte) throws Exception {
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/eliminar")
     public void eliminarReporte(@PathVariable String id) throws Exception {
     }
 

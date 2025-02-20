@@ -35,7 +35,7 @@ public class UsuarioControlador {
 
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/eliminar")
     public ResponseEntity<MensajeDTO<String>> eliminar(@PathVariable String id) throws Exception{
         usuarioServicio.eliminar(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Cuenta eliminada exitosamente"));

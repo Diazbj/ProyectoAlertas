@@ -1,5 +1,4 @@
-package co.edu.uniquindio.proyecto.Dto;
-import jakarta.validation.constraints.Email;
+package co.edu.uniquindio.proyecto.dto;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 

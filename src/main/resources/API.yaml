@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: API de Reportes
+  description: API para la gestión de usuarios
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /usuarios:
+    post:
+      summary: Registro de usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '201':
+          description: Registro exitoso
+        '400':
+          description: Datos inválidos
+        '409':
+          description: Email repetido
+  /usuarios/{id}:
+    put:
+      summary: Editar perfil del usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '200':
+          description: Datos actualizados correctamente
+    delete:
+      summary: Eliminar cuenta del usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cuenta eliminada correctamente
+    get:
+      summary: Obtener información del usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Información del usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+  /usuarios/password:
+    put:
+      summary: Cambiar contraseña
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordRequest'
+      responses:
+        '200':
+          description: Contraseña cambiada exitosamente
+  /auth/login:
+    post:
+      summary: Iniciar sesión
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Inicio de sesión exitoso
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        nombre:
+          type: string
+        ciudad:
+          type: string
+        direccion:
+          type: string
+        telefono:
+          type: string
+        email:
+          type: string
+        contraseña:
+          type: string
+    PasswordRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        codigo:
+          type: string
+        nuevaPassword:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string

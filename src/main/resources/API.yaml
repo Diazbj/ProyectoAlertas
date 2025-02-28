@@ -1,13 +1,29 @@
 openapi: 3.0.0
 info:
-  title: API de Reportes
-  description: API para la gestión de usuarios
+  title: API Plataforma de Reportes
+  description: |-
+    Proyecto final programacion avanzada Definicion de una API en Swagger.
+    
+    _Integrantes: Jordy Diaz - Jenniffer Suarez - John Cifuentes_
   version: 1.0.0
 servers:
   - url: http://localhost:8080/api
+tags:
+  - name: Usuarios
+    description: Operaciones relacionadas con los usuarios
+  - name: Login
+    description: Operaciones de inicio de sesión
+  - name: Reportes
+    description: Operaciones con reportes
+  - name: Notificaciones
+    description: notificaciones de reportes
+  - name: Moderador
+    description: Operaciones relacionadas con los moderadores
 paths:
   /usuarios:
     post:
+      tags:
+        - Usuarios
       summary: Registro de usuarios
       requestBody:
         required: true
@@ -17,14 +33,32 @@ paths:
               $ref: '#/components/schemas/Usuario'
       responses:
         '201':
-          description: Registro exitoso
+          description: Usuario creado exitosamente.
         '400':
-          description: Datos inválidos
-        '409':
-          description: Email repetido
+          description: Solicitud incorrecta. Verifique los datos enviados.
+  /usuarios/activar:
+    post:
+      tags:
+        - Usuarios
+      summary: Activación de cuenta
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioActivacion'
+      responses:
+        '200':
+          description: Cuenta activada exitosamente.
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
   /usuarios/{id}:
     put:
+      tags:
+        - Usuarios
       summary: Editar perfil del usuario
+      security:
+        - BearerAuth: []
       parameters:
         - name: id
           in: path
@@ -40,8 +74,14 @@ paths:
       responses:
         '200':
           description: Datos actualizados correctamente
+        '404':
+          description: Codigo de usuario no encontrado
     delete:
+      tags:
+        - Usuarios
       summary: Eliminar cuenta del usuario
+      security:
+        - BearerAuth: []
       parameters:
         - name: id
           in: path
@@ -51,8 +91,14 @@ paths:
       responses:
         '200':
           description: Cuenta eliminada correctamente
+        '404':
+          description: Codigo de usuario no encontrado
     get:
+      tags:
+        - Usuarios
       summary: Obtener información del usuario
+      security:
+        - BearerAuth: []
       parameters:
         - name: id
           in: path
@@ -66,9 +112,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Usuario'
+        '404':
+          description: Codigo de usuario no encontrado
+
   /usuarios/password:
     put:
+      tags:
+        - Usuarios
       summary: Cambiar contraseña
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -78,8 +131,10 @@ paths:
       responses:
         '200':
           description: Contraseña cambiada exitosamente
-  /auth/login:
+  /login:
     post:
+      tags:
+        - Login
       summary: Iniciar sesión
       requestBody:
         required: true
@@ -90,6 +145,402 @@ paths:
       responses:
         '200':
           description: Inicio de sesión exitoso
+  /reportes:
+    post:
+      tags:
+        - Reportes
+      summary: Registro de reportes
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reporte'
+      responses:
+        '201' :
+          description: Reporte creado exitosamente.
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
+        '401':
+          description: Falta autenticacion
+  /reportes/{id}:
+    put:
+      tags:
+        - Reportes
+      summary: Editar reporte del usuario
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reporte'
+      responses:
+        '200' :
+          description: Reporte actualizado
+        '404':
+          description: Código de reporte no encontrado
+    delete:
+      tags:
+        - Reportes
+      summary: Eliminar reporte del usuario
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200' :
+          description: Reporte actualizado
+        '404':
+          description: Código de reporte no encontrado
+    get:
+      tags:
+        - Reportes
+      summary: Obtener información de reporte
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalles del reporte.
+        '404':
+          description: Codigo de reporte no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporte'
+  /reportes/{id}/comentario:
+    post:
+      tags:
+        - Reportes
+      summary: Crear comentario en reporte
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComentarioReporte'
+      responses:
+        '201' :
+          description: Comentario creado exitosamente
+        '404':
+          description: Código de reporte no encontrado
+  /reportes/{id}/importante:
+    patch:
+      tags:
+        - Reportes
+      summary: Calificar reporte como importante
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportanciaReporte'
+      responses:
+        '200' :
+          description: Contador aumentado
+        '404':
+          description: Codigo de reporte no encontrado
+  /reportes/{id}/resuelto:
+    put:
+      tags:
+        - Reportes
+      summary: Marcar reporte como resuelto
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstadoReporte'
+      responses:
+        '200' :
+          description: Estado Reporte actualizado
+        '404':
+          description: Codigo de reporte no encontrado
+  /notificaciones/email:
+    post:
+      tags:
+        - Notificaciones
+      summary: notificacion a correo electronico
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notificacion'
+      responses:
+        '201':
+          description: Notificacion enviada
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
+  /notificaciones/ubicacion:
+    post:
+      tags:
+        - Notificaciones
+      summary: notificacion cerca a ubicacion de reporte
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificacionUbicacion'
+      responses:
+        '201':
+          description: Notificacion enviada
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
+  /moderador/login:
+    post:
+      tags:
+        - Moderador
+      summary: Iniciar sesión
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModeradorLogin'
+      responses:
+        "200":
+          description: Inicio de sesión exitoso
+        "401":
+          description: Credenciales incorrectas
+
+  /moderador/categorias:
+    post:
+      tags:
+        - Moderador
+      summary: Crear categoría de reporte
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+      responses:
+        "201":
+          description: Categoría creada exitosamente.
+        "400":
+          description: Solicitud incorrecta. Verifique los datos enviados.
+    put:
+      tags:
+        - Moderador
+      summary: Editar categoría de reporte
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+      responses:
+        "200":
+          description: Categoría editada
+        "400":
+          description: Solicitud incorrecta. Verifique los datos enviados.
+        '404':
+          description: categoría no existe.
+    delete:
+      tags:
+        - Moderador
+      summary: Eliminar categoría de reporte
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Categoría eliminada
+        "400":
+          description: Solicitud incorrecta. Verifique los datos enviados.
+        '404':
+          description: categoría no existe.
+
+  /moderador/reportes/{id}:
+    put:
+      tags:
+        - Moderador
+      summary: Verificar o rechazar un reporte
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificarReporte'
+      responses:
+        "200":
+          description: Reporte verificado o rechazado
+        "404":
+          description: Reporte no encontrado
+    delete:
+      tags:
+        - Moderador
+      summary: Eliminar un reporte
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Reporte eliminado
+        "404":
+          description: Reporte no encontrado
+
+  /moderador/reportes/{id}/resuelto:
+    put:
+      tags:
+        - Moderador
+      summary: Marcar reporte como resuelto
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstadoReporte'
+      responses:
+        "200":
+          description: Reporte marcado como resuelto
+        "404":
+          description: Reporte no encontrado
+
+  /moderador/cuenta:
+    put:
+      tags:
+        - Moderador
+      summary: Editar cuenta del administrador
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/jason:
+            schema:
+              $ref: '#/components/schemas/Moderador'
+      responses:
+        "200":
+          description: Cuenta editada
+        "400":
+          description: Solicitud incorrecta. Verifique los datos enviados.
+    delete:
+      tags:
+        - Moderador
+      summary: Eliminar cuenta del administrador
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Cuenta eliminada
+        "400":
+          description: Solicitud incorrecta. Verifique los datos enviados.
+
+  /moderador/informes:
+    get:
+      tags:
+        - Moderador
+      summary: Generar informe de reportes
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: fechaInicio
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: fechaFin
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: categoria
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sector
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Informe generado correctamente
+        "400":
+          description: Fechas inválidas
 components:
   schemas:
     Usuario:
@@ -123,3 +574,92 @@ components:
           type: string
         password:
           type: string
+    UsuarioActivacion:
+      type: object
+      properties:
+        email:
+          type: string
+        codigoActivacion:
+          type: string
+    Reporte:
+      type: object
+      properties:
+        idUsuario:
+          type: string
+        titulo:
+          type: string
+        categoria:
+          type: string
+        descripcion:
+          type: string
+        ubicacion:
+          type: string
+        estadoActual:
+          type: string
+        imagen:
+          type: string
+    ComentarioReporte:
+      type: object
+      properties:
+        idUsuario:
+          type: string
+        comentario:
+          type: string
+    ImportanciaReporte:
+      type: object
+      properties:
+        contadorImportancia:
+          type: integer
+    EstadoReporte:
+      type: object
+      properties:
+        estadoActual:
+          type: string
+    Notificacion:
+      type: object
+      properties:
+        email:
+          type: string
+        asunto:
+          type: string
+        mensaje:
+          type: string
+    NotificacionUbicacion:
+      type: object
+      properties:
+        idReporte:
+          type: string
+        latitud:
+          type: number
+        lobguitud:
+          type: number
+        radio:
+          type: integer
+    ModeradorLogin:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    VerificarReporte:
+      type: object
+      properties:
+        estado:
+          type: string
+        motivo:
+          type: string
+    Moderador:
+      type: object
+      properties:
+        nombre:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

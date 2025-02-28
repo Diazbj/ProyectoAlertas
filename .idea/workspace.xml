@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/API.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/API.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/API.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +39,12 @@
     &quot;assignee&quot;: &quot;Diazbj&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Diazbj/ProyectoAlertas.git",
-    "accountId": "0bc73bf1-f16e-4906-9e1b-d93fd234d950"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Diazbj/ProyectoAlertas.git&quot;,
+    &quot;accountId&quot;: &quot;0bc73bf1-f16e-4906-9e1b-d93fd234d950&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -54,51 +54,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Gradle.Build ProyectoAlertas.executor": "Run",
-    "Gradle.ProyectoAlertas [:co.edu.uniquindio.proyecto.ProyectoApplication.main()].executor": "Run",
-    "HTTP Request.Saludo | #2.executor": "Run",
-    "HTTP Request.Saludo | GET request to example server.executor": "Run",
-    "HTTP Request.auth | Iniciar sesión.executor": "Run",
-    "HTTP Request.usuarios | Actualizar un usuario.executor": "Run",
-    "HTTP Request.usuarios | Crear un usuario.executor": "Run",
-    "HTTP Request.usuarios | Eliminar un usuario.executor": "Run",
-    "HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia y su nombre sea Carlos.executor": "Run",
-    "HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia.executor": "Run",
-    "HTTP Request.usuarios | Obtener todos los usuarios que tengan un nombre dado.executor": "Run",
-    "HTTP Request.usuarios | Obtener todos los usuarios.executor": "Run",
-    "HTTP Request.usuarios | Obtener un usuario por su id.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.ProyectoApplication (1).executor": "Run",
-    "Spring Boot.ProyectoApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/java/co/edu/uniquindio/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Gradle.Build ProyectoAlertas.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ProyectoAlertas [:co.edu.uniquindio.proyecto.ProyectoApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.Saludo | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.Saludo | GET request to example server.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.auth | Iniciar sesión.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Actualizar un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Crear un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Eliminar un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia y su nombre sea Carlos.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios que tengan un nombre dado.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener un usuario por su id.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ProyectoApplication (1).executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ProyectoApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/java/co/edu/uniquindio/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="HTTP Request.auth | Iniciar sesión">
+}</component>
+  <component name="RunManager" selected="Spring Boot.ProyectoApplication (1)">
     <configuration name="auth | Iniciar sesión" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/auth.http" requestIdentifier="Iniciar sesión" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="usuarios | Crear un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="3" requestIdentifier="Crear un usuario" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="usuarios | Eliminar un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="5" requestIdentifier="Eliminar un usuario" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="usuarios | Obtener todos los usuarios" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" requestIdentifier="Obtener todos los usuarios" runType="Run single request">
@@ -126,13 +123,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="API.yaml" type="SwaggerCodegen" editBeforeRun="true" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="customTemplatesPath" value="" />
+      <option name="generateToPath" value="D:\Documentos\Programacion Avanzada\Proyecto Final\ProyectoAlertas\build\generated\sources\annotationProcessor\java\gen" />
+      <option name="generationParameters">
+        <list />
+      </option>
+      <option name="generatorType" value="OPENAPI_GENERATOR_V7" />
+      <option name="jdkPath" value="C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.1\jbr\bin\java.exe" />
+      <option name="language" value="java" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <option name="specificationPath" value="D:\Documentos\Programacion Avanzada\Proyecto Final\ProyectoAlertas\src\main\resources\API.yaml" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="OpenAPI/Swagger Code Generator.API.yaml" />
         <item itemvalue="HTTP Request.auth | Iniciar sesión" />
         <item itemvalue="Spring Boot.ProyectoApplication (1)" />
         <item itemvalue="HTTP Request.usuarios | Obtener todos los usuarios" />
         <item itemvalue="HTTP Request.usuarios | Crear un usuario" />
-        <item itemvalue="HTTP Request.usuarios | Eliminar un usuario" />
       </list>
     </recent_temporary>
   </component>
@@ -163,7 +177,8 @@
       <workItem from="1739983925894" duration="1720000" />
       <workItem from="1740006164231" duration="9602000" />
       <workItem from="1740547731951" duration="847000" />
-      <workItem from="1740698850425" duration="1292000" />
+      <workItem from="1740698850425" duration="1952000" />
+      <workItem from="1740718812706" duration="670000" />
     </task>
     <servers />
   </component>

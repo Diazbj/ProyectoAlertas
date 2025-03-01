@@ -89,9 +89,13 @@ paths:
               $ref: '#/components/schemas/Usuario'
       responses:
         '200':
-          description: Datos actualizados correctamente
-        '404':
-          description: Codigo de usuario no encontrado
+          description: Usuario actualizado exitosamente.
+        '400':
+          description: Datos inválidos.
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
     delete:
       tags:
         - Usuarios
@@ -105,10 +109,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: Cuenta eliminada correctamente
-        '404':
-          description: Codigo de usuario no encontrado
+        '204':
+          description: Usuario eliminado exitosamente.
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
     get:
       tags:
         - Usuarios
@@ -128,8 +134,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Usuario'
-        '404':
-          description: Codigo de usuario no encontrado
+        401:
+          description: No autorizado.
+        403:
+          description: Acceso prohibido.
+        404:
+          description: Usuario no encontrado.
 
   /usuarios/password:
     put:
@@ -146,7 +156,13 @@ paths:
               $ref: '#/components/schemas/PasswordRequest'
       responses:
         '200':
-          description: Contraseña cambiada exitosamente
+          description: Contraseña cambiada exitosamente.
+        '400':
+          description: Datos inválidos.
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
   /login:
     post:
       tags:
@@ -227,6 +243,8 @@ paths:
           description: Solicitud incorrecta. Verifique los datos enviados.
         '401':
           description: Falta autenticacion
+        '403':
+          description: Acceso prohibido.
   /reportes/{id}:
     put:
       tags:
@@ -251,6 +269,10 @@ paths:
           description: Reporte actualizado
         '404':
           description: Código de reporte no encontrado
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
     delete:
       tags:
         - Reportes
@@ -268,6 +290,10 @@ paths:
           description: Reporte actualizado
         '404':
           description: Código de reporte no encontrado
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
     get:
       tags:
         - Reportes
@@ -283,12 +309,17 @@ paths:
       responses:
         '200':
           description: Detalles del reporte.
-        '404':
-          description: Codigo de reporte no encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Reporte'
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
+        '404':
+          description: Reporte no encontrado.
+          
   /reportes/{id}/comentario:
     post:
       tags:

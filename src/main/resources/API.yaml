@@ -36,6 +36,22 @@ paths:
           description: Usuario creado exitosamente.
         '400':
           description: Solicitud incorrecta. Verifique los datos enviados.
+  /usuarios/notificacion:
+    post:
+      tags:
+        - Usuarios
+      summary: Notificacion de codigo a correo electronico
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioActivacion'
+      responses:
+        '200':
+          description: Codigo enviado exitosamente.
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
   /usuarios/activar:
     post:
       tags:
@@ -145,6 +161,52 @@ paths:
       responses:
         '200':
           description: Inicio de sesión exitoso
+  /login/password:
+    post:
+      tags:
+        - Login
+      summary: Recuperar contraseña
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordOlvidado'
+      responses:
+        '200':
+          description: Codigo enviado al correo
+        '404':
+          description: Correo no registrado
+  /login/password/verificar:
+    post:
+      tags:
+        - Login
+      summary: Verificar código de recuperación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordCodigo'
+      responses:
+        '200':
+          description: Codigo valido
+        '400':
+          description: Codigo invalido o expirado
+  /login/password/nueva:
+    post:
+      tags:
+        - Login
+      summary: Actualizar nueva contraseña
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordNuevo'
+      responses:
+        '200':
+          description: Contraseña actualizada
   /reportes:
     post:
       tags:
@@ -252,7 +314,7 @@ paths:
         '404':
           description: Código de reporte no encontrado
   /reportes/{id}/importante:
-    patch:
+    put:
       tags:
         - Reportes
       summary: Calificar reporte como importante
@@ -275,11 +337,11 @@ paths:
           description: Contador aumentado
         '404':
           description: Codigo de reporte no encontrado
-  /reportes/{id}/resuelto:
+  /reportes/{id}/estado:
     put:
       tags:
         - Reportes
-      summary: Marcar reporte como resuelto
+      summary: Cambiar estado de reporte
       security:
         - BearerAuth: []
       parameters:
@@ -565,7 +627,7 @@ components:
           type: string
         codigo:
           type: string
-        nuevaPassword:
+        nuevoPassword:
           type: string
     LoginRequest:
       type: object
@@ -657,6 +719,25 @@ components:
         email:
           type: string
         password:
+          type: string
+    PasswordOlvidado:
+      type: object
+      properties:
+        email:
+          type: string
+    PasswordCodigo:
+      type: object
+      properties:
+        email:
+          type: string
+        codigo:
+          type: string
+    PasswordNuevo:
+      type: object
+      properties:
+        codigo:
+          type: string
+        nuevoPassword:
           type: string
   securitySchemes:
     BearerAuth:

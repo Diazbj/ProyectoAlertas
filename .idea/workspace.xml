@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/API.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/API.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +42,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Diazbj/ProyectoAlertas.git&quot;,
-    &quot;accountId&quot;: &quot;0bc73bf1-f16e-4906-9e1b-d93fd234d950&quot;
+    &quot;accountId&quot;: &quot;8c190ad7-a9d9-4eae-96cd-3d1a9dbbe3e5&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -179,6 +179,8 @@
       <workItem from="1740547731951" duration="847000" />
       <workItem from="1740698850425" duration="1952000" />
       <workItem from="1740718812706" duration="670000" />
+      <workItem from="1740786110583" duration="43000" />
+      <workItem from="1740860429062" duration="14000" />
     </task>
     <servers />
   </component>

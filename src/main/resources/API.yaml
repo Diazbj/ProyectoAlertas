@@ -342,6 +342,10 @@ paths:
       responses:
         '201' :
           description: Comentario creado exitosamente
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
         '404':
           description: Código de reporte no encontrado
   /reportes/{id}/importante:
@@ -357,19 +361,17 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ImportanciaReporte'
       responses:
         '200' :
           description: Contador aumentado
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
         '404':
           description: Codigo de reporte no encontrado
   /reportes/{id}/estado:
-    put:
+    post:
       tags:
         - Reportes
       summary: Cambiar estado de reporte
@@ -390,6 +392,10 @@ paths:
       responses:
         '200' :
           description: Estado Reporte actualizado
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
         '404':
           description: Codigo de reporte no encontrado
   /notificaciones/email:
@@ -408,6 +414,10 @@ paths:
       responses:
         '201':
           description: Notificacion enviada
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
         '400':
           description: Solicitud incorrecta. Verifique los datos enviados.
   /notificaciones/ubicacion:
@@ -428,22 +438,10 @@ paths:
           description: Notificacion enviada
         '400':
           description: Solicitud incorrecta. Verifique los datos enviados.
-  /moderador/login:
-    post:
-      tags:
-        - Moderador
-      summary: Iniciar sesión
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ModeradorLogin'
-      responses:
-        "200":
-          description: Inicio de sesión exitoso
-        "401":
-          description: Credenciales incorrectas
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
 
   /moderador/categorias:
     post:
@@ -466,6 +464,29 @@ paths:
           description: Categoría creada exitosamente.
         "400":
           description: Solicitud incorrecta. Verifique los datos enviados.
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
+    get:
+      tags:
+        - Moderador
+      summary: Obtener lista de reportes
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Detalles del reporte.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporte'
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
+        '404':
+          description: Reporte no encontrado.
     put:
       tags:
         - Moderador
@@ -486,6 +507,10 @@ paths:
           description: Categoría editada
         "400":
           description: Solicitud incorrecta. Verifique los datos enviados.
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
         '404':
           description: categoría no existe.
     delete:
@@ -499,50 +524,12 @@ paths:
           description: Categoría eliminada
         "400":
           description: Solicitud incorrecta. Verifique los datos enviados.
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
         '404':
           description: categoría no existe.
-
-  /moderador/reportes/{id}:
-    put:
-      tags:
-        - Moderador
-      summary: Verificar o rechazar un reporte
-      security:
-        - BearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VerificarReporte'
-      responses:
-        "200":
-          description: Reporte verificado o rechazado
-        "404":
-          description: Reporte no encontrado
-    delete:
-      tags:
-        - Moderador
-      summary: Eliminar un reporte
-      security:
-        - BearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Reporte eliminado
-        "404":
-          description: Reporte no encontrado
 
   /moderador/reportes/{id}/resuelto:
     put:
@@ -566,38 +553,12 @@ paths:
       responses:
         "200":
           description: Reporte marcado como resuelto
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
         "404":
           description: Reporte no encontrado
-
-  /moderador/cuenta:
-    put:
-      tags:
-        - Moderador
-      summary: Editar cuenta del administrador
-      security:
-        - BearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/jason:
-            schema:
-              $ref: '#/components/schemas/Moderador'
-      responses:
-        "200":
-          description: Cuenta editada
-        "400":
-          description: Solicitud incorrecta. Verifique los datos enviados.
-    delete:
-      tags:
-        - Moderador
-      summary: Eliminar cuenta del administrador
-      security:
-        - BearerAuth: []
-      responses:
-        "200":
-          description: Cuenta eliminada
-        "400":
-          description: Solicitud incorrecta. Verifique los datos enviados.
 
   /moderador/informes:
     get:
@@ -632,6 +593,10 @@ paths:
       responses:
         "200":
           description: Informe generado correctamente
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
         "400":
           description: Fechas inválidas
 components:
@@ -686,11 +651,14 @@ components:
         descripcion:
           type: string
         ubicacion:
-          type: string
+          $ref: '#/components/schemas/Ubicacion'
         estadoActual:
           type: string
         imagen:
-          type: string
+          type: array
+          items: 
+            type: string
+          example: ["url1", "url2", "url3"]
     ComentarioReporte:
       type: object
       properties:
@@ -698,15 +666,14 @@ components:
           type: string
         comentario:
           type: string
-    ImportanciaReporte:
-      type: object
-      properties:
-        contadorImportancia:
-          type: integer
     EstadoReporte:
       type: object
       properties:
-        estadoActual:
+        nuevoEstado:
+          type: string
+        idUsuario:
+          type: string
+        motivo:
           type: string
     Notificacion:
       type: object
@@ -728,29 +695,6 @@ components:
           type: number
         radio:
           type: integer
-    ModeradorLogin:
-      type: object
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-    VerificarReporte:
-      type: object
-      properties:
-        estado:
-          type: string
-        motivo:
-          type: string
-    Moderador:
-      type: object
-      properties:
-        nombre:
-          type: string
-        email:
-          type: string
-        password:
-          type: string
     PasswordOlvidado:
       type: object
       properties:
@@ -770,6 +714,13 @@ components:
           type: string
         nuevoPassword:
           type: string
+    Ubicacion:
+      type: object
+      properties:
+        latitud:
+          type: number
+        longitud:
+          type: number
   securitySchemes:
     BearerAuth:
       type: http

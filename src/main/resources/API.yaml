@@ -245,6 +245,111 @@ paths:
           description: Falta autenticacion
         '403':
           description: Acceso prohibido.
+    get:
+      tags:
+        - Reportes
+      summary: Obtener lista de reporte.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Categorias.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reporte"
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
+        '404':
+          description: Categorías no encontradas.
+  /reportes/{idUsuario}:
+    get:
+      tags:
+        - Reportes
+      summary: obtener reportes del usuario
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: idUsuario
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200' :
+          description: Reportes del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reporte"
+        '404':
+          description: Usuario no encontrado
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
+  /reportes/{ubicacion}:
+    get:
+      tags:
+        - Reportes
+      summary: obtener reportes cerca del usuario
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: ubicacion
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: radio
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 5
+          description: "Radio de búsqueda en kilómetros (valor por defecto: 5 km)"
+      responses:
+        '200' :
+          description: Reportes cerca del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reporte"
+        '404':
+          description: Usuario no encontrado
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
+  /reportes/topImportantes:
+    get:
+      tags:
+        - Reportes
+      summary: Obtener los 10 reportes con más  "importante"
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Lista de los 10 reportes con más interacciones de "importante"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reporte"
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
   /reportes/{id}:
     put:
       tags:
@@ -348,6 +453,35 @@ paths:
           description: Acceso prohibido.
         '404':
           description: Código de reporte no encontrado
+  /reportes/{idReporte}/comentarios:
+    get:
+      tags:
+        - Reportes
+      summary: Obtener todos los comentarios de un reporte
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: idReporte
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: "ID del reporte del cual se quieren obtener los comentarios."
+      responses:
+        '200':
+          description: Lista de comentarios del reporte
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComentarioReporte'
+        '404':
+          description: Reporte no encontrado o sin comentarios.
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
   /reportes/{id}/importante:
     put:
       tags:
@@ -398,6 +532,42 @@ paths:
           description: Acceso prohibido.
         '404':
           description: Codigo de reporte no encontrado
+  /reportes/categoria/{ubicacion}:
+    get:
+      tags:
+        - Reportes
+      summary: Obtener cantidad de reportes por categoría en una ubicación
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: ubicacion
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "Ubicación en formato 'lat,lon'"
+      responses:
+        '200':
+          description: Datos para generar un diagrama de barras de reportes por categoría
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    categoria:
+                      type: string
+                      example: "Accidente"
+                    cantidad:
+                      type: integer
+                      example: 15
+        '404':
+          description: No se encontraron reportes en esta ubicación.
+        '401':
+          description: No autorizado.
+        '403':
+          description: Acceso prohibido.
   /notificaciones/email:
     post:
       tags:
@@ -442,7 +612,6 @@ paths:
           description: No autorizado.
         '403':
           description: Acceso prohibido.
-
   /moderador/categorias:
     post:
       tags:
@@ -530,7 +699,6 @@ paths:
           description: Acceso prohibido.
         '404':
           description: categoría no existe.
-
   /moderador/reportes/{id}/resuelto:
     put:
       tags:
@@ -559,7 +727,6 @@ paths:
           description: Acceso prohibido.
         "404":
           description: Reporte no encontrado
-
   /moderador/informes:
     get:
       tags:

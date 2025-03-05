@@ -471,22 +471,22 @@ paths:
     get:
       tags:
         - Moderador
-      summary: Obtener lista de reportes
+      summary: Obtener lista de categorias
       security:
         - BearerAuth: []
       responses:
         '200':
-          description: Detalles del reporte.
+          description: Categorias.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Reporte'
+                $ref: '#/components/schemas/ListCategoria'
         '401':
           description: No autorizado.
         '403':
           description: Acceso prohibido.
         '404':
-          description: Reporte no encontrado.
+          description: Categorías no encontradas.
     put:
       tags:
         - Moderador
@@ -721,6 +721,16 @@ components:
           type: number
         longitud:
           type: number
+    Categoria:
+      type: object
+      properties:
+        nombre:
+          type: string
+    ListCategoria:
+      type: array
+      items: 
+        type: string
+      example: ["cat1", "cat2", "cat3"]
   securitySchemes:
     BearerAuth:
       type: http

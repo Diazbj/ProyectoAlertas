@@ -201,6 +201,8 @@ paths:
       responses:
         '200':
           description: Inicio de sesión exitoso
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
         '404':
           description: Usuario no encontrado.
         '500':
@@ -221,6 +223,8 @@ paths:
           description: Codigo enviado al correo
         '404':
           description: Correo no registrado
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
         '500':
           description: Error interno del servidor
   /login/password/nuevo:
@@ -237,6 +241,8 @@ paths:
       responses:
         '200':
           description: Contraseña actualizada
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
         '500':
           description: Error interno del servidor
   /reportes:
@@ -403,12 +409,14 @@ paths:
       responses:
         '200' :
           description: Reporte actualizado
-        '404':
-          description: Código de reporte no encontrado
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
         '401':
           description: No autorizado.
         '403':
           description: Acceso prohibido.
+        '404':
+          description: Código de reporte no encontrado
         '500':
           description: Error interno del servidor
     delete:
@@ -461,7 +469,7 @@ paths:
           description: Reporte no encontrado.
         '500':
           description: Error interno del servidor
-          
+
   /reportes/{id}/comentario:
     post:
       tags:
@@ -484,6 +492,8 @@ paths:
       responses:
         '201' :
           description: Comentario creado exitosamente
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
         '401':
           description: No autorizado.
         '403':
@@ -569,6 +579,8 @@ paths:
       responses:
         '200' :
           description: Estado Reporte actualizado
+        '400':
+          description: Solicitud incorrecta. Verifique los datos enviados.
         '401':
           description: No autorizado.
         '403':
@@ -917,7 +929,7 @@ components:
           type: string
         imagen:
           type: array
-          items: 
+          items:
             type: string
           example: ["url1", "url2", "url3"]
     EditarReporte:
@@ -933,7 +945,7 @@ components:
           $ref: '#/components/schemas/Ubicacion'
         imagen:
           type: array
-          items: 
+          items:
             type: string
           example: ["url1", "url2", "url3"]
     ComentarioReporte:
@@ -957,6 +969,7 @@ components:
       properties:
         email:
           type: string
+          format: email
         asunto:
           type: string
         mensaje:
@@ -975,6 +988,7 @@ components:
       properties:
         email:
           type: string
+          format: email
     PasswordNuevo:
       type: object
       properties:
@@ -1001,7 +1015,7 @@ components:
           type: string
     ListCategoria:
       type: array
-      items: 
+      items:
         $ref: '#/components/schemas/Categoria'
   securitySchemes:
     BearerAuth:

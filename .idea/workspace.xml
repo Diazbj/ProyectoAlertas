@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances API 6.0" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,18 +14,6 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
-  </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -86,7 +72,6 @@
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Spring Boot.ProyectoApplication (1).executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.ProyectoApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
@@ -104,13 +89,13 @@
   }
 }</component>
   <component name="RunManager" selected="Spring Boot.ProyectoApplication (1)">
-    <configuration name="auth | Iniciar sesión" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/auth.http" runType="Run single request">
+    <configuration name="auth | Iniciar sesión" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/auth.http" requestIdentifier="Iniciar sesión" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="usuarios | Crear un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="3" runType="Run single request">
+    <configuration name="usuarios | Crear un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="3" requestIdentifier="Crear un usuario" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="usuarios | Obtener todos los usuarios" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" runType="Run single request">
+    <configuration name="usuarios | Obtener todos los usuarios" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" requestIdentifier="Obtener todos los usuarios" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ProyectoApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -154,9 +139,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.ProyectoApplication (1)" />
         <item itemvalue="OpenAPI/Swagger Code Generator.API.yaml" />
         <item itemvalue="HTTP Request.auth | Iniciar sesión" />
-        <item itemvalue="Spring Boot.ProyectoApplication (1)" />
         <item itemvalue="HTTP Request.usuarios | Obtener todos los usuarios" />
         <item itemvalue="HTTP Request.usuarios | Crear un usuario" />
       </list>
@@ -165,8 +150,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
       </set>
     </attachedChunks>
   </component>
@@ -194,18 +179,34 @@
       <workItem from="1740786110583" duration="43000" />
       <workItem from="1740860429062" duration="14000" />
       <workItem from="1740860551757" duration="68000" />
-      <workItem from="1741290880496" duration="300000" />
-      <workItem from="1741308271645" duration="330000" />
-      <workItem from="1741308623269" duration="172000" />
-      <workItem from="1741308817910" duration="257000" />
-      <workItem from="1741309137210" duration="31000" />
-      <workItem from="1741309183900" duration="41000" />
-      <workItem from="1741310725184" duration="22000" />
-      <workItem from="1741310762040" duration="23000" />
+      <workItem from="1741290880496" duration="887000" />
+      <workItem from="1741309727723" duration="181000" />
     </task>
+    <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
+      <option name="closed" value="true" />
+      <created>1741291316488</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741291316488</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Avances API 6.0">
+      <option name="closed" value="true" />
+      <created>1741301737716</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741301737716</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Se elimino archivos innecesarios" />
+    <MESSAGE value="Avances API 6.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avances API 6.0" />
   </component>
 </project>

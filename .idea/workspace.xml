@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/SaludoControlador.java" beforeDir="false" />
+    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances API 6.0">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,11 +181,33 @@
       <workItem from="1740786110583" duration="43000" />
       <workItem from="1740860429062" duration="14000" />
       <workItem from="1740860551757" duration="68000" />
-      <workItem from="1741290880496" duration="300000" />
+      <workItem from="1741290880496" duration="887000" />
     </task>
+    <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
+      <option name="closed" value="true" />
+      <created>1741291316488</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741291316488</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Avances API 6.0">
+      <option name="closed" value="true" />
+      <created>1741301737716</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741301737716</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Se elimino archivos innecesarios" />
+    <MESSAGE value="Avances API 6.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avances API 6.0" />
   </component>
 </project>

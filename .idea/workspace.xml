@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances API 6.0">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances API 6.0" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,9 +139,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.ProyectoApplication (1)" />
         <item itemvalue="OpenAPI/Swagger Code Generator.API.yaml" />
         <item itemvalue="HTTP Request.auth | Iniciar sesión" />
-        <item itemvalue="Spring Boot.ProyectoApplication (1)" />
         <item itemvalue="HTTP Request.usuarios | Obtener todos los usuarios" />
         <item itemvalue="HTTP Request.usuarios | Crear un usuario" />
       </list>
@@ -182,6 +180,7 @@
       <workItem from="1740860429062" duration="14000" />
       <workItem from="1740860551757" duration="68000" />
       <workItem from="1741290880496" duration="887000" />
+      <workItem from="1741309727723" duration="181000" />
     </task>
     <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
       <option name="closed" value="true" />

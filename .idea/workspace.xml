@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="">
+    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances API 6.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +16,18 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -41,7 +53,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Diazbj/ProyectoAlertas.git&quot;,
-    &quot;accountId&quot;: &quot;0bc73bf1-f16e-4906-9e1b-d93fd234d950&quot;
+    &quot;accountId&quot;: &quot;8c190ad7-a9d9-4eae-96cd-3d1a9dbbe3e5&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -53,51 +65,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Gradle.Build ProyectoAlertas.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ProyectoAlertas [:co.edu.uniquindio.proyecto.ProyectoApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.Saludo | #2.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.Saludo | GET request to example server.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.auth | Iniciar sesión.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.usuarios | Actualizar un usuario.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.usuarios | Crear un usuario.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.usuarios | Eliminar un usuario.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia y su nombre sea Carlos.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.usuarios | Obtener todos los usuarios que tengan un nombre dado.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.usuarios | Obtener todos los usuarios.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.usuarios | Obtener un usuario por su id.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ProyectoApplication (1).executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ProyectoApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/java/co/edu/uniquindio/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Gradle.Build ProyectoAlertas.executor": "Run",
+    "Gradle.ProyectoAlertas [:co.edu.uniquindio.proyecto.ProyectoApplication.main()].executor": "Run",
+    "HTTP Request.Saludo | #2.executor": "Run",
+    "HTTP Request.Saludo | GET request to example server.executor": "Run",
+    "HTTP Request.auth | Iniciar sesión.executor": "Run",
+    "HTTP Request.usuarios | Actualizar un usuario.executor": "Run",
+    "HTTP Request.usuarios | Crear un usuario.executor": "Run",
+    "HTTP Request.usuarios | Eliminar un usuario.executor": "Run",
+    "HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia y su nombre sea Carlos.executor": "Run",
+    "HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia.executor": "Run",
+    "HTTP Request.usuarios | Obtener todos los usuarios que tengan un nombre dado.executor": "Run",
+    "HTTP Request.usuarios | Obtener todos los usuarios.executor": "Run",
+    "HTTP Request.usuarios | Obtener un usuario por su id.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.ProyectoApplication (1).executor": "Run",
+    "Spring Boot.ProyectoApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/java/co/edu/uniquindio/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Spring Boot.ProyectoApplication (1)">
-    <configuration name="auth | Iniciar sesión" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/auth.http" requestIdentifier="Iniciar sesión" runType="Run single request">
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.ProyectoApplication">
+    <configuration name="auth | Iniciar sesión" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/auth.http" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="usuarios | Crear un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="3" requestIdentifier="Crear un usuario" runType="Run single request">
+    <configuration name="usuarios | Crear un usuario" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" index="3" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="usuarios | Obtener todos los usuarios" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" requestIdentifier="Obtener todos los usuarios" runType="Run single request">
+    <configuration name="usuarios | Obtener todos los usuarios" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/usuarios.http" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ProyectoApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -116,7 +129,7 @@
     <configuration name="ProyectoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <module name="ProyectoAlertas" />
+      <module name="ProyectoAlertas.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="co.edu.uniquindio.proyecto.ProyectoApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -141,9 +154,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.ProyectoApplication (1)" />
         <item itemvalue="OpenAPI/Swagger Code Generator.API.yaml" />
         <item itemvalue="HTTP Request.auth | Iniciar sesión" />
-        <item itemvalue="Spring Boot.ProyectoApplication (1)" />
         <item itemvalue="HTTP Request.usuarios | Obtener todos los usuarios" />
         <item itemvalue="HTTP Request.usuarios | Crear un usuario" />
       </list>
@@ -152,8 +165,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
       </set>
     </attachedChunks>
   </component>
@@ -177,23 +190,40 @@
       <workItem from="1740006164231" duration="9602000" />
       <workItem from="1740547731951" duration="847000" />
       <workItem from="1740698850425" duration="1952000" />
-      <workItem from="1740718812706" duration="716000" />
-      <workItem from="1741844477802" duration="373000" />
+      <workItem from="1740718812706" duration="670000" />
+      <workItem from="1740786110583" duration="43000" />
+      <workItem from="1740860429062" duration="14000" />
+      <workItem from="1740860551757" duration="68000" />
+      <workItem from="1741290880496" duration="887000" />
+      <workItem from="1741309727723" duration="181000" />
+      <workItem from="1741311722968" duration="84000" />
     </task>
+    <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
+      <option name="closed" value="true" />
+      <created>1741291316488</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741291316488</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Avances API 6.0">
+      <option name="closed" value="true" />
+      <created>1741301737716</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741301737716</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/co/edu/uniquindio/Main.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Se elimino archivos innecesarios" />
+    <MESSAGE value="Avances API 6.0" />
+    <MESSAGE value="comit" />
+    <option name="LAST_COMMIT_MESSAGE" value="comit" />
   </component>
 </project>

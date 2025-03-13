@@ -1,8 +1,8 @@
 package co.edu.uniquindio.proyecto.controladores;
 
-import co.edu.uniquindio.proyecto.dto.CrearReporteDTO;
-import co.edu.uniquindio.proyecto.dto.EditarReporteDTO;
-import co.edu.uniquindio.proyecto.dto.ReporteDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

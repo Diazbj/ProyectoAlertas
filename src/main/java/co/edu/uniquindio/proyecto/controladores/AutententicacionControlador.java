@@ -1,6 +1,6 @@
 package co.edu.uniquindio.proyecto.controladores;
 
-import co.edu.uniquindio.proyecto.dto.LoginDTO;
+import co.edu.uniquindio.proyecto.dto.usuarios.LoginDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

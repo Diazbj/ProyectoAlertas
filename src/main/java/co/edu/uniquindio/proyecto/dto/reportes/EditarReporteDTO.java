@@ -1,10 +1,13 @@
 package co.edu.uniquindio.proyecto.dto.reportes;
 
+import co.edu.uniquindio.proyecto.dto.UbicacionDTO;
+import jakarta.validation.constraints.NotBlank;
+import java.util.List;
+
 public record EditarReporteDTO(
-        String titulo,
-        String categoria,
-        String descripcion,
-        //Pregunta
-        String ubicacion,
-        String imagen) {
-}
+        @NotBlank String titulo,
+        @NotBlank String categoria,
+        @NotBlank String descripcion,
+        UbicacionDTO ubicacion,
+        List<String> imagen
+) {}

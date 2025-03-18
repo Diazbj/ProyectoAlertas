@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.dto.usuarios.CrearUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
 
 import java.util.List;
 
@@ -23,4 +24,5 @@ public interface UsuarioServicio {
 
     List<UsuarioDTO> listarTodos(String nombre, String ciudad);
 
+    void enviarCodigoActivacion(UsuarioActivacionDTO usuarioActivacionDTO);
 }

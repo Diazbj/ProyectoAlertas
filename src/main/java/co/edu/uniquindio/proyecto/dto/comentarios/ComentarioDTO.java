@@ -1,4 +1,8 @@
 package co.edu.uniquindio.proyecto.dto.comentarios;
 
-public record ComentarioDTO() {
-}
+import jakarta.validation.constraints.NotBlank;
+
+public record ComentarioDTO(
+        @NotBlank String idUsuario,
+        @NotBlank String comentario
+) {}

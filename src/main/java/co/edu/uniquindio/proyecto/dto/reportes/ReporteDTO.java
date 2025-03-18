@@ -1,10 +1,15 @@
 package co.edu.uniquindio.proyecto.dto.reportes;
 
-import java.time.LocalDateTime;
+import co.edu.uniquindio.proyecto.dto.UbicacionDTO;
+import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 
 public record ReporteDTO(
-        String nombre,
-        String descripcion,
-        LocalDateTime fechaCreacion
-) {
-}
+        @NotBlank String idUsuario,
+        @NotBlank String titulo,
+        @NotBlank String categoria,
+        @NotBlank String descripcion,
+        UbicacionDTO ubicacion,
+        @NotBlank String estadoActual,
+        List<String> imagen
+) {}

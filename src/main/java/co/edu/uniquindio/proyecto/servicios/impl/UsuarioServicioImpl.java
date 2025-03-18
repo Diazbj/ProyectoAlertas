@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.usuarios.CrearUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
@@ -19,13 +20,13 @@ import java.util.stream.Collectors;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private List<Usuario> usuarios = new ArrayList<>( List.of(
-            new Usuario("12","Jordy", "3123146223", "Armenia", "Calle 10", "jordy@email.com", "1213"),
-            new Usuario("14","Diana", "312212153", "Salento", "Cra17-25", "diana@email.com", "1212")
+            new Usuario("12","Jordy", "3123146223", "Armenia", "Calle 10", "jordy@email.com", "1213",true),
+            new Usuario("14","Diana", "312212153", "Salento", "Cra17-25", "diana@email.com", "1212",true)
     ));
 
     @Override
     public void crear(CrearUsuarioDTO cuenta) throws Exception {
-        usuarios.add( new Usuario(UUID.randomUUID().toString(), cuenta.nombre(), cuenta.telefono(), cuenta.ciudad(), cuenta.direccion(), cuenta.email(), cuenta.password() ) );
+        usuarios.add( new Usuario(UUID.randomUUID().toString(), cuenta.nombre(), cuenta.telefono(), cuenta.ciudad(), cuenta.direccion(), cuenta.email(), cuenta.password(),true ) );
     }
 
     @Override
@@ -82,6 +83,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         return usuarios.stream().map(u -> new UsuarioDTO(u.getId(), u.getNombre(), u.getEmail())).collect(Collectors.toList());
+    }
+
+    @Override
+    public void enviarCodigoActivacion(UsuarioActivacionDTO usuarioActivacionDTO) {
+
     }
     //TODO implementar todos los métodos de la interfaz
 }

@@ -1,4 +1,12 @@
 package co.edu.uniquindio.proyecto.dto.comentarios;
-// id, mensaje, nombre, fecha
-public record CrearComentarioDTO() {
+
+import org.bson.types.ObjectId;
+
+import java.time.LocalDateTime;
+
+public record CrearComentarioDTO(
+        ObjectId id,
+        String mensaje,
+        String nombre,
+        LocalDateTime fecha) {
 }

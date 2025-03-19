@@ -4,5 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public record ComentarioDTO(
         @NotBlank String idUsuario,
-        @NotBlank String comentario
+        @NotBlank String comentario,
+        @NotBlank String idReporte
 ) {}

@@ -24,22 +24,22 @@ public class ReporteControlador{
     }
 
     @GetMapping
-    public ResponseEntity<MensajeDTO<String>> obtenerReportes() {
+    public ResponseEntity<MensajeDTO<String>> obtenerReportes() throws Exception{
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
     @GetMapping("/{idUsuario}")
-    public ResponseEntity<MensajeDTO<String>> obtenerReportesUsuario(@PathVariable String idUsuario) {
+    public ResponseEntity<MensajeDTO<String>> obtenerReportesUsuario(@PathVariable String idUsuario) throws Exception {
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
     @GetMapping("/ubicacion")
-    public ResponseEntity<MensajeDTO<String>> obtenerReportesCerca() {
+    public ResponseEntity<MensajeDTO<String>> obtenerReportesCerca() throws Exception {
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
     @GetMapping("/topImportantes")
-    public ResponseEntity<MensajeDTO<String>> obtenerTopReportes() {
+    public ResponseEntity<MensajeDTO<String>> obtenerTopReportes() throws Exception {
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
@@ -68,7 +68,7 @@ public class ReporteControlador{
     }
 
     @GetMapping("/{idReporte}/comentarios")
-    public ResponseEntity<MensajeDTO<String>> obtenerComentarios(@PathVariable String idReporte) {
+    public ResponseEntity<MensajeDTO<String>> obtenerComentarios(@PathVariable String idReporte) throws Exception {
         return ResponseEntity.ok(new MensajeDTO<>(false, "comentarios"));
     }
 

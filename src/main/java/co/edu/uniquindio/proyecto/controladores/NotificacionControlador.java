@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class NotificacionControlador {
 
     @PostMapping("/email")
-    public ResponseEntity<MensajeDTO<String>> enviarNotificacion(@Valid @RequestBody NotificacionDTO notificacionDTO) {
+    public ResponseEntity<MensajeDTO<String>> enviarNotificacion(@Valid @RequestBody NotificacionDTO notificacionDTO) throws Exception{
         return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Notificación enviada"));
     }
 
     @PostMapping("/ubicacion")
-    public ResponseEntity<MensajeDTO<String>> enviarNotificacionUbicacion(@Valid @RequestBody NotificacionUbicacionDTO notificacionUbicacionDTO) {
+    public ResponseEntity<MensajeDTO<String>> enviarNotificacionUbicacion(@Valid @RequestBody NotificacionUbicacionDTO notificacionUbicacionDTO) throws Exception{
         return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Notificación enviada"));
     }
 }

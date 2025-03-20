@@ -18,23 +18,23 @@ public class ModeradorControlador {
 
 
     @PostMapping("/categorias")
-    public ResponseEntity<MensajeDTO<String>> crearCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO) {
+    public ResponseEntity<MensajeDTO<String>> crearCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO) throws Exception {
         return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Categoría creada exitosamente"));
     }
 
 
     @GetMapping("/categorias")
-    public ResponseEntity<MensajeDTO<String>> obtenerCategorias() {
+    public ResponseEntity<MensajeDTO<String>> obtenerCategorias() throws Exception {
         return ResponseEntity.ok(new MensajeDTO<>(false, "categorias"));
     }
 
     @PutMapping("/categorias/{id}")
-    public ResponseEntity<MensajeDTO<String>> editarCategoria(@PathVariable String id, @Valid @RequestBody CategoriaDTO categoriaDTO) {
+    public ResponseEntity<MensajeDTO<String>> editarCategoria(@PathVariable String id, @Valid @RequestBody CategoriaDTO categoriaDTO) throws Exception {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Categoría editada exitosamente"));
     }
 
     @DeleteMapping("/categorias/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarCategoria(@PathVariable String id) {
+    public ResponseEntity<MensajeDTO<String>> eliminarCategoria(@PathVariable String id) throws Exception {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Categoría eliminada"));
     }
 
@@ -45,7 +45,7 @@ public class ModeradorControlador {
             @RequestParam(required = false) String categoria,
             @RequestParam(required = false) Double latitud,
             @RequestParam(required = false) Double longitud,
-            @RequestParam(required = false, defaultValue = "5") int radio) {
+            @RequestParam(required = false, defaultValue = "5") int radio) throws Exception {
 
         List<InformeDTO> informes = null;
         return ResponseEntity.ok(new MensajeDTO<>(false, informes));

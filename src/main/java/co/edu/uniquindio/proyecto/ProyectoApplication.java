@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto;
 
-import co.edu.uniquindio.proyecto.modelo.Usuario;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

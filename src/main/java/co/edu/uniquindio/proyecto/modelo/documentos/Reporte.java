@@ -1,9 +1,10 @@
-package co.edu.uniquindio.proyecto.modelo;
+package co.edu.uniquindio.proyecto.modelo.documentos;
 
-import co.edu.uniquindio.proyecto.enums.EstadoReporte;
+import co.edu.uniquindio.proyecto.modelo.documentos.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.vo.HistorialReporte;
 import lombok.*;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import co.edu.uniquindio.proyecto.vo.Ubicacion;
 import java.time.LocalDateTime;
@@ -14,7 +15,8 @@ import java.util.List;
 @Builder
 public class Reporte {
 
-    private ObjectId reporteId;
+    @Id
+    private ObjectId id;
 
     private ObjectId clienteId;
 

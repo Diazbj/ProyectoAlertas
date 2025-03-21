@@ -2,7 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
-import co.edu.uniquindio.proyecto.dto.moderadores.InformeDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.servicios.ModeradorServicio;
 import org.springframework.http.ResponseEntity;
 
@@ -30,7 +30,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     }
 
     @Override
-    public List<InformeDTO> generarInforme(String fechaInicio, String fechaFin, String categoria, Double latitud, Double longitud, int radio) throws Exception {
+    public List<ReporteDTO> generarInforme(String fechaInicio, String fechaFin, String categoria, Double latitud, Double longitud, int radio) throws Exception {
         return List.of();
     }
 }

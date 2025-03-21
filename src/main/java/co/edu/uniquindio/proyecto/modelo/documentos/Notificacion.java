@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.modelo;
+package co.edu.uniquindio.proyecto.modelo.documentos;
 
 import lombok.*;
 import org.bson.types.ObjectId;
@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Notificacion {
 
+    @Id
     private ObjectId id;
     private String email;
     private String asunto;

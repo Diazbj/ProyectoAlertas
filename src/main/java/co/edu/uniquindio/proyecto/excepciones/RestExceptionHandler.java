@@ -24,6 +24,10 @@ public class RestExceptionHandler {
         return ResponseEntity.status(404).body( new MensajeDTO<>(true, "El recurso no fue encontrado") );
     }
 
+    @ExceptionHandler(EmailRepetidoException.class)
+    public ResponseEntity<MensajeDTO<String>> noResourceFoundExceptionHandler (EmailRepetidoException ex){
+        return ResponseEntity.status(409).body( new MensajeDTO<>(true, ex.getMessage()) );
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<MensajeDTO<String>> generalExceptionHandler (Exception e){

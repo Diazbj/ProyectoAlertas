@@ -2,8 +2,8 @@ package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
-import co.edu.uniquindio.proyecto.dto.moderadores.InformeDTO;
 
+import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public class ModeradorControlador {
     }
 
     @GetMapping("/informes")
-    public ResponseEntity<MensajeDTO<List<InformeDTO>>> generarInforme(
+    public ResponseEntity<MensajeDTO<List<ReporteDTO>>> generarInforme(
             @RequestParam String fechaInicio,
             @RequestParam String fechaFin,
             @RequestParam(required = false) String categoria,
@@ -47,7 +47,7 @@ public class ModeradorControlador {
             @RequestParam(required = false) Double longitud,
             @RequestParam(required = false, defaultValue = "5") int radio) throws Exception {
 
-        List<InformeDTO> informes = null;
+        List<ReporteDTO> informes = null;
         return ResponseEntity.ok(new MensajeDTO<>(false, informes));
     }
 }

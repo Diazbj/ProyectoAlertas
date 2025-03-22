@@ -6,13 +6,14 @@ import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
 import co.edu.uniquindio.proyecto.excepciones.EmailRepetidoException;
-import co.edu.uniquindio.proyecto.modelo.documentos.enums.EstadoUsuario;
-import co.edu.uniquindio.proyecto.modelo.documentos.enums.Rol;
+import co.edu.uniquindio.proyecto.mapper.UsuarioMapper;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
+import co.edu.uniquindio.proyecto.modelo.enums.Rol;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 
-import co.edu.uniquindio.proyecto.vo.CodigoValidacion;
+import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,23 +30,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Autowired
     private final UsuarioRepo usuarioRepo;
 
+    private final UsuarioMapper usuarioMapper;
+
     @Override
     public void crear(CrearUsuarioDTO crearUsuarioDTO) throws Exception {
         
         if(existeEmail(crearUsuarioDTO.email())) throw new EmailRepetidoException("El email ya existe");
-        
-        Usuario usuario = new Usuario();
-        // Datos enviados por el usuario
-        usuario.setNombre(crearUsuarioDTO.nombre());
-        usuario.setPassword(crearUsuarioDTO.password());
-        usuario.setEmail(crearUsuarioDTO.email());
-        usuario.setTelefono(crearUsuarioDTO.telefono());
-        usuario.setDireccion( crearUsuarioDTO.direccion());
-        // Datos internos de la base de datos
-        
-        usuario.setRol(Rol.CLIENTE);
-        usuario.setEstado(EstadoUsuario.INACTIVO);
-        usuario.setFechaCreacion(LocalDateTime.now());
+
+
+        Usuario usuario = usuarioMapper.toDocument(crearUsuarioDTO);
+        usuarioRepo.save(usuario);
         
         //Se crea un codigo de validacion
         CodigoValidacion codigo= new CodigoValidacion(
@@ -53,7 +47,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 generarCodigoAleatorio()
                 
         );
-        
+
         usuario.setCodigoValidacion(codigo);
         usuarioRepo.save(usuario);
 
@@ -116,12 +110,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         //Retornamos el usuario encontrado convertido a DTO
-        return new UsuarioDTO(
-                usuarioOptional.get().getNombre(),
-                usuarioOptional.get().getTelefono(),
-                usuarioOptional.get().getDireccion(),
-                usuarioOptional.get().getEmail()
-        );
+        return usuarioMapper.toDTO(usuarioOptional.get());
 
     }
 }

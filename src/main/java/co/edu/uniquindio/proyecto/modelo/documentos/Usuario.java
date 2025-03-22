@@ -1,8 +1,8 @@
 package co.edu.uniquindio.proyecto.modelo.documentos;
 
-import co.edu.uniquindio.proyecto.modelo.documentos.enums.EstadoUsuario;
-import co.edu.uniquindio.proyecto.modelo.documentos.enums.Rol;
-import co.edu.uniquindio.proyecto.vo.CodigoValidacion;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
+import co.edu.uniquindio.proyecto.modelo.enums.Rol;
+import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import co.edu.uniquindio.proyecto.modelo.documentos.enums.Ciudad;
+import co.edu.uniquindio.proyecto.modelo.enums.Ciudad;
 
 import java.time.LocalDateTime;
 
@@ -33,5 +33,5 @@ public class Usuario {
     private String email;
     private String password;
     private CodigoValidacion codigoValidacion;
-    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaRegistro;
 }

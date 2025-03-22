@@ -1,12 +1,12 @@
 package co.edu.uniquindio.proyecto.modelo.documentos;
 
-import co.edu.uniquindio.proyecto.modelo.documentos.enums.EstadoReporte;
-import co.edu.uniquindio.proyecto.vo.HistorialReporte;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
+import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import co.edu.uniquindio.proyecto.vo.Ubicacion;
+import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 import java.time.LocalDateTime;
 import java.util.List;
 

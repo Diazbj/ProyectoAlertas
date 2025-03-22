@@ -5,7 +5,7 @@ import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
-import co.edu.uniquindio.proyecto.vo.Ubicacion;
+import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 
 import java.util.List;
 

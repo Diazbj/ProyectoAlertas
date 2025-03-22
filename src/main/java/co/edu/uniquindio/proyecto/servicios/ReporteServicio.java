@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public interface ReporteServicio {
 
-    void crearReporte( ReporteDTO reporteDTO) throws Exception ;
+    void crearReporte( CrearReporteDTO crearReporteDTO) throws Exception ;
 
     List<ReporteDTO> obtenerReportes() throws Exception;
 

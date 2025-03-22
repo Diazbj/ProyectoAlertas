@@ -23,15 +23,11 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final ReporteRepo reporteRepo;
 
     @Override
-    public void crearReporte(ReporteDTO reporteDTO) throws Exception {
+    public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
 
         Reporte reporte = new Reporte();
-
         //Datos enviados por usuario
-
-        reporte.setTitulo(CrearReporteDTO.);
-
-
+        reporte.setTitulo(crearReporteDTO.titulo());
 
     }
 

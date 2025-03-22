@@ -1,17 +1,37 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
+import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
 import co.edu.uniquindio.proyecto.vo.Ubicacion;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
+@Service
 public class ReporteServicioImpl implements ReporteServicio {
+
+    @Autowired
+    private final ReporteRepo reporteRepo;
+
     @Override
     public void crearReporte(ReporteDTO reporteDTO) throws Exception {
+
+        Reporte reporte = new Reporte();
+
+        //Datos enviados por usuario
+
+        reporte.setTitulo(CrearReporteDTO.);
+
+
 
     }
 

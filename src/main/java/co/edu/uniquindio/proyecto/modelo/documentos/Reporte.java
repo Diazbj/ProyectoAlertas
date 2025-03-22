@@ -12,6 +12,9 @@ import java.util.List;
 
 @Document(collection = "reportes")
 @AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Builder
 public class Reporte {
 

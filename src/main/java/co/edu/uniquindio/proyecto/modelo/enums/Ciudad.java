@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.modelo.documentos.enums;
+package co.edu.uniquindio.proyecto.modelo.enums;
 
 public enum Ciudad {
     ARMENIA,
@@ -6,5 +6,6 @@ public enum Ciudad {
     MEDELLIN,
     CALI,
     MANIZALES,
+    PEREIRA
 
 }

@@ -1,7 +1,7 @@
-package co.edu.uniquindio.proyecto.vo;
+package co.edu.uniquindio.proyecto.modelo.vo;
 
 
-import co.edu.uniquindio.proyecto.modelo.documentos.enums.EstadoReporte;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

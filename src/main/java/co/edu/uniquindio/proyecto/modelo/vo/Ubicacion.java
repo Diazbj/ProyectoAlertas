@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.vo;
+package co.edu.uniquindio.proyecto.modelo.vo;
 
 
 import lombok.AllArgsConstructor;

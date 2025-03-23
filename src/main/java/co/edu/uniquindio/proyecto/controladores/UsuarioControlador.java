@@ -8,6 +8,7 @@ import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,7 @@ public class UsuarioControlador {
 
     @PostMapping("/Activar")
     public ResponseEntity<MensajeDTO<String>> activarCuenta(@Valid @RequestBody UsuarioActivacionDTO usuarioActivacionDTO) throws Exception {
+        usuarioServicio.activarCuenta(usuarioActivacionDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Activado exitosamente"));
     }
 

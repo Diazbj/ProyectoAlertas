@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.usuarios.CrearUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
+import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,12 +22,10 @@ public interface UsuarioServicio {
     void cambiarPassword( String id) throws Exception ;
 
 
-
-
-    void eliminar(@PathVariable String id) throws Exception;
+    void eliminar( String id) throws Exception;
 
 
 
-    UsuarioDTO obtener(@PathVariable String id) throws Exception;
+    UsuarioDTO obtener(String id) throws Exception;
 
 }

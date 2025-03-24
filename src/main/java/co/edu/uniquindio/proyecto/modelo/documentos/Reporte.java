@@ -28,6 +28,7 @@ public class Reporte {
     private String descripcion;
     private Ubicacion ubicacion;
     private LocalDateTime fecha;
+    private LocalDateTime fechaCreacion;
     private List<HistorialReporte> historial;
     private EstadoReporte estadoActual;
     private List<String> imagenes;

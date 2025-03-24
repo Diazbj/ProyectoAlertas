@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.excepciones;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.ValidacionDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,6 +18,11 @@ import java.util.List;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
+
+    @ExceptionHandler(DatoRepetidoException.class)
+    public ResponseEntity<String> manejarDatoRepetidoException(DatoRepetidoException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
 
 
     @ExceptionHandler(NoResourceFoundException.class)

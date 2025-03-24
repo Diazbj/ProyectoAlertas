@@ -5,6 +5,8 @@ import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
+import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
@@ -15,19 +17,28 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class ReporteServicioImpl implements ReporteServicio {
 
-    @Autowired
     private final ReporteRepo reporteRepo;
+    private final ReporteMapper reporteMapper;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
 
-        Reporte reporte = new Reporte();
-        //Datos enviados por usuario
-        reporte.setTitulo(crearReporteDTO.titulo());
+        // Validar si ya existe un reporte con la misma ubicación y descripción
+        if (existeReporte(crearReporteDTO.latitud(), crearReporteDTO.longitud(), crearReporteDTO.descripcion())) {
+            throw new DatoRepetidoException("Ya existe un reporte similar en la misma ubicación.");
+        }
+
+        // Mapear DTO a documento y guardar en la base de datos
+        Reporte reporte = reporteMapper.toDocument(crearReporteDTO);
+        reporteRepo.save(reporte);
+    }
+
+    private boolean existeReporte(double latitud, double longitud, String descripcion) {
+        return reporteRepo.findByUbicacion_LatitudAndUbicacion_LongitudAndDescripcion(latitud, longitud, descripcion).isPresent();
 
     }
 

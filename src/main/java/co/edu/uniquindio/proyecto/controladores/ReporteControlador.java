@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,11 @@ import java.util.List;
 @RequestMapping("/reportes")
 public class ReporteControlador{
 
+    private final ReporteServicio reporteServicio; // Inyectar servicio
+
     @PostMapping
-    public ResponseEntity<MensajeDTO<String>> crearReporte(@Valid @RequestBody ReporteDTO reporteDTO) throws Exception {
+    public ResponseEntity<MensajeDTO<String>> crearReporte(@Valid @RequestBody CrearReporteDTO crearReporteDTO) throws Exception {
+        reporteServicio.crearReporte(crearReporteDTO);
         return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Reporte creado exitosamente"));
     }
 

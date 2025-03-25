@@ -2,10 +2,7 @@ package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
 import jakarta.validation.Valid;
@@ -31,16 +28,19 @@ public class ReporteControlador{
 
     @GetMapping
     public ResponseEntity<MensajeDTO<String>> obtenerReportes() throws Exception{
+        reporteServicio.obtenerReportes();
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<MensajeDTO<String>> obtenerReportesUsuario(@PathVariable String idUsuario) throws Exception {
+        reporteServicio.obtenerReportesUsuario(idUsuario);
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
     @GetMapping("/ubicacion")
-    public ResponseEntity<MensajeDTO<String>> obtenerReportesCerca() throws Exception {
+    public ResponseEntity<MensajeDTO<String>> obtenerReportesCerca(@Valid @RequestBody ReporteUbicacionDTO reporteUbicacionDTO ) throws Exception {
+        reporteServicio.obtenerReportesCerca(reporteUbicacionDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 

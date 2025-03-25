@@ -1,10 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
@@ -57,7 +54,7 @@ public class ReporteServicioImpl implements ReporteServicio {
     }
 
     @Override
-    public List<ReporteDTO> obtenerReportesCerca(Ubicacion ubicacion) throws Exception {
+    public List<ReporteDTO> obtenerReportesCerca(ReporteUbicacionDTO reporteUbicacionDTO) throws Exception {
         return List.of();
     }
 

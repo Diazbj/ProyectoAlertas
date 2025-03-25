@@ -1,10 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
-import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 
 import java.util.List;
@@ -17,7 +14,7 @@ public interface ReporteServicio {
 
     List<ReporteDTO> obtenerReportesUsuario( String idUsuario) throws Exception ;
 
-    List<ReporteDTO> obtenerReportesCerca(Ubicacion ubicacion) throws Exception ;
+    List<ReporteDTO> obtenerReportesCerca(ReporteUbicacionDTO reporteUbicacionDTO) throws Exception ;
 
     List<ReporteDTO> obtenerTopReportes() throws Exception ;
 

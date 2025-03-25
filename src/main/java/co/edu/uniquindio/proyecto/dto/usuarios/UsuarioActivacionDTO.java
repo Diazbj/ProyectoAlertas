@@ -9,5 +9,4 @@ public record UsuarioActivacionDTO (
 
         @NotBlank String codigo
 ){
-
 }

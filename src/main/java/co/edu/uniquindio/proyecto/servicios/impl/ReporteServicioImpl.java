@@ -12,14 +12,18 @@ import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
 import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ReporteServicioImpl implements ReporteServicio {
+
+
 
     private final ReporteRepo reporteRepo;
     private final ReporteMapper reporteMapper;
@@ -28,7 +32,7 @@ public class ReporteServicioImpl implements ReporteServicio {
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
 
         // Validar si ya existe un reporte con la misma ubicación y descripción
-        if (existeReporte(crearReporteDTO.latitud(), crearReporteDTO.longitud(), crearReporteDTO.descripcion())) {
+        if (existeReporte(crearReporteDTO.ubicacion().latitud(), crearReporteDTO.ubicacion().longitud(), crearReporteDTO.descripcion())) {
             throw new DatoRepetidoException("Ya existe un reporte similar en la misma ubicación.");
         }
 
@@ -74,7 +78,22 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public ReporteDTO obtenerReporte(String id) throws Exception {
-        return null;
+
+        // Validamos que el id sea válido
+        if (!ObjectId.isValid(id)) {
+            throw new Exception("No se encontró el reporte con el id " + id);
+        }
+
+        // Buscamos el reporte que se quiere obtener usando el id en formato String
+        Optional<Reporte> reporteOptional = reporteRepo.findById(id);
+
+        // Si no se encontró el reporte, lanzamos una excepción
+        if (reporteOptional.isEmpty()) {
+            throw new Exception("No se encontró el reporte con el id " + id);
+        }
+
+        // Retornamos el reporte encontrado convertido a DTO
+        return reporteMapper.toDTO(reporteOptional.get());
     }
 
     @Override
@@ -97,3 +116,4 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     }
 }
+

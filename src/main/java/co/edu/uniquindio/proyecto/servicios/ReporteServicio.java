@@ -25,7 +25,7 @@ public interface ReporteServicio {
 
     void eliminarReporte( String id) throws Exception ;
 
-    ReporteDTO obtenerReporte( String id) throws Exception ;
+    ReporteDTO obtenerReporte(String id) throws Exception;
 
     void agregarComentario(String id, ComentarioDTO comentarioDTO) throws Exception ;
 

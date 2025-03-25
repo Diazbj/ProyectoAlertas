@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.reportes.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,7 +34,7 @@ public class ReporteControlador{
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
-    @GetMapping("/{idUsuario}")
+    @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<MensajeDTO<String>> obtenerReportesUsuario(@PathVariable String idUsuario) throws Exception {
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
@@ -60,8 +62,9 @@ public class ReporteControlador{
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MensajeDTO<String>> obtenerReporte(@PathVariable String id) throws Exception {
-        return ResponseEntity.ok(new MensajeDTO<>(false, "reporte"));
+    public ResponseEntity<MensajeDTO<ReporteDTO>> obtenerReporte(@PathVariable String id) throws Exception {
+        ReporteDTO reporte = reporteServicio.obtenerReporte(id);
+        return ResponseEntity.ok(new MensajeDTO<>(false, reporte));
     }
 
     @PostMapping("/{id}/comentario")

@@ -11,5 +11,5 @@ public record ReporteDTO(
         @NotBlank String descripcion,
         UbicacionDTO ubicacion,
         @NotBlank String estadoActual,
-        List<String> imagen
+        List<String> imagenes
 ) {}

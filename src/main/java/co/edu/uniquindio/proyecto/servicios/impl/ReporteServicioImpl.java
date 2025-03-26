@@ -89,9 +89,30 @@ public class ReporteServicioImpl implements ReporteServicio {
     }
 
     @Override
-    public void editarReporte(String id, EditarReporteDTO reporteDTO) throws Exception {
+    public void editarReporte(String id, EditarReporteDTO editarReporteDTO) throws Exception {
 
+        // Validamos el id del reporte
+        if (!ObjectId.isValid(id)) {
+            throw new Exception("No se encontró el reporte con el id " + id);
+        }
+
+        // Convertimos el id a ObjectId
+        ObjectId objectId = new ObjectId(id);
+        Optional<Reporte> reporteOptional = reporteRepo.findById(id);
+
+        // Si no se encuentra el reporte, lanzamos una excepción
+        if (reporteOptional.isEmpty()) {
+            throw new Exception("No se encontró el reporte con el id " + id);
+        }
+
+        // Obtener el reporte y mapear los datos actualizados
+        Reporte reporte = reporteOptional.get();
+        reporteMapper.toDocument(editarReporteDTO, reporte);
+
+        // Guardamos los cambios en la base de datos
+        reporteRepo.save(reporte);
     }
+
 
     @Override
     public void eliminarReporte(String id) throws Exception {

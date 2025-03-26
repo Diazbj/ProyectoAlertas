@@ -51,11 +51,11 @@ public class ReporteControlador{
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MensajeDTO<String>> editarReporte(
-            @PathVariable String id,
-            @Valid @RequestBody EditarReporteDTO reporteDTO) throws Exception {
-        return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte actualizado"));
+    public ResponseEntity<MensajeDTO<String>> editarReporte(@PathVariable String id, @Valid @RequestBody EditarReporteDTO reporteDTO) throws Exception {
+        reporteServicio.editarReporte(id, reporteDTO);
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte actualizado correctamente"));
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<MensajeDTO<String>> eliminarReporte(@PathVariable String id) throws Exception {

@@ -3,9 +3,12 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
+import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
+import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
+import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
 import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +28,7 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     private final ReporteRepo reporteRepo;
     private final ReporteMapper reporteMapper;
+    private final UsuarioRepo usuarioRepo;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
@@ -49,8 +54,28 @@ public class ReporteServicioImpl implements ReporteServicio {
     }
 
     @Override
-    public List<ReporteDTO> obtenerReportesUsuario(String idUsuario) throws Exception {
-        return List.of();
+    public List<ReporteDTO> obtenerReportesUsuario(String id) throws Exception {
+        //Validamos el id
+        if (!ObjectId.isValid(id)) {
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
+        }
+
+        //Buscamos el usuario que se quiere obtener
+        ObjectId objectId = new ObjectId(id);
+        Optional<Usuario> usuarioOptional = usuarioRepo.findById(objectId);
+
+        //Si no se encontró el usuario, lanzamos una excepción
+        if(usuarioOptional.isEmpty()){
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
+        }
+
+        // Obtenemos los reportes asociados al usuario
+        List<Reporte> reportes = reporteRepo.findByUsuarioId(objectId);
+
+        // Convertimos los reportes a DTO usando stream y map
+        return reportes.stream()
+                .map(reporteMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

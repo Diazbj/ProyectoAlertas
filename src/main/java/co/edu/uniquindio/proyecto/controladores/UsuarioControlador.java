@@ -50,9 +50,6 @@ public class UsuarioControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Contraseña cambiada exitosamente"));
     }
 
-
-
-
     @DeleteMapping("/{id}/eliminar")
     public ResponseEntity<MensajeDTO<String>> eliminar(@PathVariable String id) throws Exception{
         usuarioServicio.eliminar(id);

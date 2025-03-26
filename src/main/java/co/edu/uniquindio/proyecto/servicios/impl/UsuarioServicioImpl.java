@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
 import co.edu.uniquindio.proyecto.excepciones.EmailRepetidoException;
+import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.UsuarioMapper;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.modelo.enums.Rol;
@@ -117,7 +118,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         //Validamos el id
         if (!ObjectId.isValid(editarUsuarioDTO.id())) {
-            throw new Exception("No se encontró el usuario con el id "+editarUsuarioDTO.id());
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+editarUsuarioDTO.id());
         }
 
 
@@ -153,7 +154,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         //Validamos el id
         if (!ObjectId.isValid(id)) {
-            throw new Exception("No se encontró el usuario con el id "+id);
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
         }
 
 
@@ -164,7 +165,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         //Si no se encontró el usuario, lanzamos una excepción
         if(usuarioOptional.isEmpty()){
-            throw new Exception("No se encontró el usuario con el id "+id);
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
         }
 
 
@@ -185,7 +186,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         //Validamos el id
         if (!ObjectId.isValid(id)) {
-            throw new Exception("No se encontró el usuario con el id "+id);
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
         }
 
         //Buscamos el usuario que se quiere obtener
@@ -194,7 +195,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         //Si no se encontró el usuario, lanzamos una excepción
         if(usuarioOptional.isEmpty()){
-            throw new Exception("No se encontró el usuario con el id "+id);
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
         }
 
         //Retornamos el usuario encontrado convertido a DTO

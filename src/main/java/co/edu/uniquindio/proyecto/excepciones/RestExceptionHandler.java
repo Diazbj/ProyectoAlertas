@@ -24,6 +24,11 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 
+    @ExceptionHandler(UsuarioNoEncontradoException.class)
+    public ResponseEntity<String> manejarUsuarioNoEncontradoException(UsuarioNoEncontradoException ex) {
+        return ResponseEntity.status(404).body(ex.getMessage());
+    }
+
 
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity<MensajeDTO<String>> noResourceFoundExceptionHandler (NoResourceFoundException ex){

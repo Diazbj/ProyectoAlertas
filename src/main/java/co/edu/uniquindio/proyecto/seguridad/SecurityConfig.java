@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.seguridad;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -27,11 +28,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/login/**","/usuarios","/usuarios/notificacion","/usuarios/Activar", "/api/reportes/**").permitAll()
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_MODERADOR")  // Solo moderadores
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/login/**","/usuarios/notificacion","/usuarios/Activar").permitAll()
+                        .requestMatchers("/moderador/**").hasAuthority("ROLE_MODERADOR")  // Solo moderadores
                         .requestMatchers("/usuarios/**").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR") // Clientes y moderadores
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(ex -> ex.accessDeniedHandler((request, response, accessDeniedException) -> {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado: No tienes permisos");
+                }))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -40,7 +40,7 @@ public class LoginServicioImpl implements LoginServicio {
             throw new DatosInvalidosException("Contraseña incorrecta.");
         }
 
-        return jwtUtil.generarToken(usuario.getNombre(),usuario.getRol());
+        return jwtUtil.generarToken(usuario.getId().toString(), usuario.getRol());
     }
 
     @Override

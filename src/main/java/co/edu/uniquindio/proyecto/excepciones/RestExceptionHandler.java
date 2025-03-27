@@ -51,6 +51,11 @@ public class RestExceptionHandler {
         return ResponseEntity.status(409).body( new MensajeDTO<>(true, ex.getMessage()) );
     }
 
+    @ExceptionHandler(AccesoNoPermitidoException.class)
+    public ResponseEntity<MensajeDTO<String>> accesoNoPermitidoExceptionHandler (AccesoNoPermitidoException ex){
+        return ResponseEntity.status(403).body( new MensajeDTO<>(true, ex.getMessage()) );
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<MensajeDTO<String>> generalExceptionHandler (Exception e){
         e.printStackTrace();

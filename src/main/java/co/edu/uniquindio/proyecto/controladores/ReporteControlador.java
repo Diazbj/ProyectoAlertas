@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/reportes")
 public class ReporteControlador{
 

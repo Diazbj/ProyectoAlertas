@@ -43,7 +43,6 @@ public class JwtFilter extends OncePerRequestFilter {
             String role = jwtUtil.obtenerRol(token);  // Obtener rol
 
             if (role == null || role.isEmpty()) {
-                System.out.println("⚠️ Rol del usuario es nulo o vacío en el token.");
                 chain.doFilter(request, response);
                 return;
             }

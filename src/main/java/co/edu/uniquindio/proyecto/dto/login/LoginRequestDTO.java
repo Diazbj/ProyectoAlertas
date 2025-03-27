@@ -7,6 +7,5 @@ import jakarta.validation.constraints.NotNull;
 
 public record LoginRequestDTO(
         @Email @NotBlank String email,
-        @NotBlank String password,
-        @NotNull Rol rol
+        @NotBlank String password
 ) {}

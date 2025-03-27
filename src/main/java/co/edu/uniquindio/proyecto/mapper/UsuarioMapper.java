@@ -17,6 +17,7 @@ public interface UsuarioMapper {
     @Mapping(target = "rol", constant = "CLIENTE")
     @Mapping(target = "estado", constant = "INACTIVO")
     @Mapping(target = "fechaRegistro", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "password", ignore = true)
     Usuario toDocument(CrearUsuarioDTO usuarioDTO);
 
 

@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
 
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/moderador")
 public class ModeradorControlador {
 

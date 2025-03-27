@@ -5,10 +5,7 @@ import co.edu.uniquindio.proyecto.dto.usuarios.CrearUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
-import co.edu.uniquindio.proyecto.excepciones.CodigoExpiradoException;
-import co.edu.uniquindio.proyecto.excepciones.DatosInvalidosException;
-import co.edu.uniquindio.proyecto.excepciones.EmailRepetidoException;
-import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
+import co.edu.uniquindio.proyecto.excepciones.*;
 import co.edu.uniquindio.proyecto.mapper.UsuarioMapper;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.modelo.enums.Rol;
@@ -21,6 +18,9 @@ import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -32,17 +32,17 @@ import java.util.Optional;
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
 
-    @Autowired
     private final UsuarioRepo usuarioRepo;
     private final UsuarioMapper usuarioMapper;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public void crear(CrearUsuarioDTO crearUsuarioDTO) throws Exception {
         
         if(existeEmail(crearUsuarioDTO.email())) throw new EmailRepetidoException("El email ya existe");
 
-
         Usuario usuario = usuarioMapper.toDocument(crearUsuarioDTO);
+        usuario.setPassword( passwordEncoder.encode(crearUsuarioDTO.password()) );
         usuarioRepo.save(usuario);
         
         //Se crea un codigo de validacion
@@ -179,7 +179,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public UsuarioDTO obtener(String id) throws Exception {
+    public UsuarioDTO obtener() throws Exception {
+
+        String id = obtenerIdSesion();
 
         //Validamos el id
         if (!ObjectId.isValid(id)) {
@@ -198,5 +200,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         //Retornamos el usuario encontrado convertido a DTO
         return usuarioMapper.toDTO(usuarioOptional.get());
 
+    }
+
+    public String obtenerIdSesion(){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return user.getUsername();
     }
 }

@@ -26,6 +26,6 @@ public interface UsuarioServicio {
 
 
 
-    UsuarioDTO obtener(String id) throws Exception;
+    UsuarioDTO obtener() throws Exception;
 
 }

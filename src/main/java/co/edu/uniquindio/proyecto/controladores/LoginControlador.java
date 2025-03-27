@@ -21,12 +21,9 @@ public class LoginControlador {
     private final LoginServicio loginServicio;
 
     @PostMapping
-    public String login(@Valid @RequestBody LoginRequestDTO loginRequest) throws Exception {
-        if (loginRequest.email().equals(loginRequest.email()) && loginRequest.password().equals(loginRequest.password())) {
-            return jwtUtil.generarToken(loginRequest.email(),loginRequest.rol());
-        } else {
-            throw new Exception("Credenciales incorrectas");
-        }
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO loginRequest) throws Exception {
+        String token = loginServicio.login(loginRequest);
+        return ResponseEntity.ok(token);
     }
 
     @GetMapping("/validate")

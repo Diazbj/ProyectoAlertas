@@ -8,6 +8,8 @@ import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
@@ -35,11 +37,6 @@ public class ReporteServicioImpl implements ReporteServicio {
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
 
-        // Validar si ya existe un reporte con la misma ubicación y descripción
-        if (existeReporte(crearReporteDTO.ubicacion().latitud(), crearReporteDTO.ubicacion().longitud(), crearReporteDTO.descripcion())) {
-            throw new DatoRepetidoException("Ya existe un reporte similar en la misma ubicación.");
-        }
-
         // Mapear DTO a documento y guardar en la base de datos
         Reporte reporte = reporteMapper.toDocument(crearReporteDTO);
         reporteRepo.save(reporte);
@@ -51,11 +48,6 @@ public class ReporteServicioImpl implements ReporteServicio {
 
 
         webSocketNotificationService.notificarClientes(notificacionDTO);
-    }
-
-    private boolean existeReporte(double latitud, double longitud, String descripcion) {
-        return reporteRepo.findByUbicacion_LatitudAndUbicacion_LongitudAndDescripcion(latitud, longitud, descripcion).isPresent();
-
     }
 
     @Override
@@ -126,6 +118,25 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public void eliminarReporte(String id) throws Exception {
+
+        // Validamos el id del reporte
+        if (!ObjectId.isValid(id)) {
+            throw new Exception("No se encontró el reporte con el id " + id);
+        }
+
+        Optional<Reporte> reporteOptional = reporteRepo.findById(id);
+
+        // Si no se encuentra el reporte, lanzamos una excepción
+        if (reporteOptional.isEmpty()) {
+            throw new Exception("No se encontró el reporte con el id " + id);
+        }
+
+        //Obtenemos el reporte que se quiere eliminar
+        Reporte reporte = reporteOptional.get();
+
+        // Eliminamos el reporte
+        reporteRepo.deleteById(id);
+
 
     }
 

@@ -59,6 +59,7 @@ public class ReporteControlador{
 
     @DeleteMapping("/{id}")
     public ResponseEntity<MensajeDTO<String>> eliminarReporte(@PathVariable String id) throws Exception {
+        reporteServicio.eliminarReporte(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte eliminado"));
     }
 

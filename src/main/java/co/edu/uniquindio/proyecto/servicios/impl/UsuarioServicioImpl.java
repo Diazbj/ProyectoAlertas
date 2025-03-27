@@ -5,6 +5,8 @@ import co.edu.uniquindio.proyecto.dto.usuarios.CrearUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
+import co.edu.uniquindio.proyecto.excepciones.CodigoExpiradoException;
+import co.edu.uniquindio.proyecto.excepciones.DatosInvalidosException;
 import co.edu.uniquindio.proyecto.excepciones.EmailRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.UsuarioMapper;
@@ -32,7 +34,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Autowired
     private final UsuarioRepo usuarioRepo;
-
     private final UsuarioMapper usuarioMapper;
 
     @Override
@@ -82,7 +83,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Optional<Usuario> usuarioOptional = usuarioRepo.findByEmail(usuarioActivacionDTO.email());
 
         if (usuarioOptional.isEmpty()) {
-            throw new Exception("No se encontró un usuario con el email " + usuarioActivacionDTO.email());
+            throw new UsuarioNoEncontradoException("No se encontró un usuario con el email " + usuarioActivacionDTO.email());
         }
 
         Usuario usuario = usuarioOptional.get();
@@ -99,12 +100,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         LocalDateTime tiempoActual = LocalDateTime.now();
 
         if (tiempoCreacion.plusMinutes(15).isBefore(tiempoActual)) {
-            throw new Exception("El código de activación ha expirado. Solicite uno nuevo.");
+            throw new CodigoExpiradoException("El código de activación ha expirado. Solicite uno nuevo.");
         }
 
         // Verificamos si el código ingresado es correcto
         if (!codigoValidacion.getCodigo().equals(usuarioActivacionDTO.codigo())) {
-            throw new Exception("El código de activación es incorrecto.");
+            throw new DatosInvalidosException("El código de activación es incorrecto.");
         }
 
         // Activamos la cuenta y eliminamos el código de validación
@@ -142,7 +143,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuarioRepo.save(usuario);
     }
 
-
     @Override
     public void cambiarPassword(String id) throws Exception {
 
@@ -177,9 +177,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         //Como el objeto usuario ya tiene un id, el save() no crea un nuevo registro sino que actualiza el que ya existe
         usuarioRepo.save(usuario);
     }
-
-
-
 
     @Override
     public UsuarioDTO obtener(String id) throws Exception {

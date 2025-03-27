@@ -6,7 +6,6 @@ import lombok.Data;
 
 public record UsuarioActivacionDTO (
         @Email @NotBlank  String email,
-
         @NotBlank String codigo
 ){
 }

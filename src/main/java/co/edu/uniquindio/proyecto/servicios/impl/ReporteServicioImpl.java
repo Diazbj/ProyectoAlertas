@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
+import co.edu.uniquindio.proyecto.dto.notificaciones.NotificacionDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
@@ -29,6 +30,7 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final ReporteRepo reporteRepo;
     private final ReporteMapper reporteMapper;
     private final UsuarioRepo usuarioRepo;
+    private final WebSocketNotificationService webSocketNotificationService;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
@@ -41,6 +43,14 @@ public class ReporteServicioImpl implements ReporteServicio {
         // Mapear DTO a documento y guardar en la base de datos
         Reporte reporte = reporteMapper.toDocument(crearReporteDTO);
         reporteRepo.save(reporte);
+        NotificacionDTO notificacionDTO = new NotificacionDTO(
+                "Nuevo Reporte",
+                "Se acaba de crear un nuevo reporte: " + reporte.getTitulo(),
+                "reports"
+        );
+
+
+        webSocketNotificationService.notificarClientes(notificacionDTO);
     }
 
     private boolean existeReporte(double latitud, double longitud, String descripcion) {

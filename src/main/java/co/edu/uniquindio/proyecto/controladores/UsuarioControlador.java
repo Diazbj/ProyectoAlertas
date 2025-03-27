@@ -47,6 +47,7 @@ public class UsuarioControlador {
 
     @PutMapping("/{id}/password")
     public ResponseEntity<MensajeDTO<String>> cambiarPassword(@PathVariable String id) throws Exception {
+        usuarioServicio.cambiarPassword(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Contraseña cambiada exitosamente"));
     }
 

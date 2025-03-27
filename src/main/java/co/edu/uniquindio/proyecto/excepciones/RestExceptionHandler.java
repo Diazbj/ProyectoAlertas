@@ -19,6 +19,17 @@ import java.util.List;
 @RestControllerAdvice
 public class RestExceptionHandler {
 
+    @ExceptionHandler(DatosInvalidosException.class)
+    public ResponseEntity<String> manejarDatosInvalidosException(DatosInvalidosException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(CodigoExpiradoException.class)
+    public ResponseEntity<String> manejarCodigoExpiradoException(CodigoExpiradoException ex) {
+        return ResponseEntity.status(HttpStatus.GONE).body(ex.getMessage());
+    }
+
+
     @ExceptionHandler(DatoRepetidoException.class)
     public ResponseEntity<String> manejarDatoRepetidoException(DatoRepetidoException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());

@@ -27,7 +27,6 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.DELETE, "/api/reportes/**").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR") // Clientes y moderadores pueden eliminar
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/login/**","/usuarios","/usuarios/notificacion","/usuarios/Activar", "/api/reportes/**").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ROLE_MODERADOR")  // Solo moderadores
                         .requestMatchers("/usuarios/**").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR") // Clientes y moderadores

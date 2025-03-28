@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearerAuth")
-@RequestMapping("/reportes")
+@RequestMapping("/api/reportes")
 public class ReporteControlador{
 
     private final ReporteServicio reporteServicio; // Inyectar servicio

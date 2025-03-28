@@ -14,7 +14,7 @@ import co.edu.uniquindio.proyecto.seguridad.JwtUtil;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/login")
+@RequestMapping("/api/login")
 public class LoginControlador {
 
     private final JwtUtil jwtUtil;

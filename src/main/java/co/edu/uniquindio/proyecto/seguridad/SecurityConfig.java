@@ -28,9 +28,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/login/**","/usuarios/notificacion","/usuarios/Activar").permitAll()
-                        .requestMatchers("/moderador/**").hasAuthority("ROLE_MODERADOR")  // Solo moderadores
-                        .requestMatchers("/usuarios/**").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR") // Clientes y moderadores
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/login/**","/api/usuarios/notificacion","/api/usuarios/Activar","/api/usuarios").permitAll()
+                        .requestMatchers("/api/moderador/**").hasAuthority("ROLE_MODERADOR")  // Solo moderadores
+                        .requestMatchers("/api/usuarios/**").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR") // Clientes y moderadores
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex.accessDeniedHandler((request, response, accessDeniedException) -> {

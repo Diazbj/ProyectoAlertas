@@ -1,10 +1,7 @@
 package co.edu.uniquindio.proyecto.controladores;
 
-import co.edu.uniquindio.proyecto.dto.usuarios.CrearUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.usuarios.*;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
-import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -40,23 +37,23 @@ public class UsuarioControlador {
     }
 
     @SecurityRequirement(name = "bearerAuth")
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<MensajeDTO<String>> editar(@Valid @RequestBody EditarUsuarioDTO cuenta) throws Exception{
         usuarioServicio.editar(cuenta);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Cuenta editada exitosamente"));
     }
 
     @SecurityRequirement(name = "bearerAuth")
-    @PutMapping("/{id}/password")
-    public ResponseEntity<MensajeDTO<String>> cambiarPassword(@PathVariable String id) throws Exception {
-        usuarioServicio.cambiarPassword(id);
+    @PutMapping("/password")
+    public ResponseEntity<MensajeDTO<String>> cambiarPassword(@RequestBody CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
+        usuarioServicio.cambiarPassword(cambiarPasswordDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Contraseña cambiada exitosamente"));
     }
 
     @SecurityRequirement(name = "bearerAuth")
-    @DeleteMapping("/{id}/eliminar")
-    public ResponseEntity<MensajeDTO<String>> eliminar(@PathVariable String id) throws Exception{
-        usuarioServicio.eliminar(id);
+    @DeleteMapping("/eliminar")
+    public ResponseEntity<MensajeDTO<String>> eliminar() throws Exception{
+        usuarioServicio.eliminar();
         return ResponseEntity.ok(new MensajeDTO<>(false, "Cuenta eliminada exitosamente"));
     }
 

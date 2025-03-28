@@ -35,11 +35,13 @@ public class LoginControlador {
 
     @PostMapping("/codigoValidacion")
     public ResponseEntity<MensajeDTO<String>> recuperarPassword(@Valid @RequestBody PasswordOlvidadoDTO passwordOlvidadoDTO) throws Exception {
+        loginServicio.recuperarPassword(passwordOlvidadoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Código enviado al correo"));
     }
 
     @PostMapping("/password/nuevo")
     public ResponseEntity<MensajeDTO<String>> actualizarPassword(@Valid @RequestBody PasswordNuevoDTO passwordNuevoDTO) throws Exception {
+        loginServicio.actualizarPassword(passwordNuevoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Contraseña actualizada"));
     }
 

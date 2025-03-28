@@ -37,7 +37,6 @@ public class ReporteControlador{
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<MensajeDTO<List<ReporteDTO>>> obtenerReportesUsuario(@PathVariable String idUsuario) throws Exception {
         List<ReporteDTO> reportes = reporteServicio.obtenerReportesUsuario(idUsuario);
-
         return ResponseEntity.ok(new MensajeDTO<>(false, reportes));
     }
 
@@ -49,6 +48,7 @@ public class ReporteControlador{
 
     @GetMapping("/topImportantes")
     public ResponseEntity<MensajeDTO<String>> obtenerTopReportes() throws Exception {
+        reporteServicio.obtenerTopReportes();
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
@@ -75,16 +75,19 @@ public class ReporteControlador{
     public ResponseEntity<MensajeDTO<String>> agregarComentario(
             @PathVariable String id,
             @Valid @RequestBody ComentarioDTO comentarioDTO) throws Exception {
+        reporteServicio.agregarComentario(id, comentarioDTO);
         return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Comentario creado exitosamente"));
     }
 
     @GetMapping("/{idReporte}/comentarios")
     public ResponseEntity<MensajeDTO<String>> obtenerComentarios(@PathVariable String idReporte) throws Exception {
+        reporteServicio.obtenerComentarios(idReporte);
         return ResponseEntity.ok(new MensajeDTO<>(false, "comentarios"));
     }
 
     @PutMapping("/{id}/importante")
     public ResponseEntity<MensajeDTO<String>> marcarImportante(@PathVariable String id) throws Exception {
+        reporteServicio.marcarImportante(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte marcado como importante"));
     }
 
@@ -92,6 +95,7 @@ public class ReporteControlador{
     public ResponseEntity<MensajeDTO<String>> cambiarEstado(
             @PathVariable String id,
             @Valid @RequestBody EstadoReporteDTO estadoDTO) throws Exception {
+        reporteServicio.cambiarEstado(id, estadoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Estado del reporte actualizado"));
     }
 

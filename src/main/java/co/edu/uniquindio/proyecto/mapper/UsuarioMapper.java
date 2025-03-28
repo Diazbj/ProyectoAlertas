@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.mapper;
 
+import co.edu.uniquindio.proyecto.dto.usuarios.CambiarPasswordDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.CrearUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
@@ -37,6 +38,10 @@ public interface UsuarioMapper {
     @Mapping(target = "email", ignore = true)
     @Mapping(target = "password", ignore = true)
     void toDocument(EditarUsuarioDTO editarUsuarioDTO, @MappingTarget Usuario usuario);
+
+    @Mapping(target = "password", source = "nuevoPassword") // Solo cambia la contraseña
+    void actualizarPassword(@MappingTarget Usuario usuario, CambiarPasswordDTO cambiarPasswordDTO);
+
 
 
 

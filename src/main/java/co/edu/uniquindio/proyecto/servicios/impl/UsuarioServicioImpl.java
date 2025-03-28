@@ -1,14 +1,10 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 
-import co.edu.uniquindio.proyecto.dto.usuarios.CrearUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.usuarios.EditarUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioActivacionDTO;
-import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.usuarios.*;
 import co.edu.uniquindio.proyecto.excepciones.*;
 import co.edu.uniquindio.proyecto.mapper.UsuarioMapper;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
-import co.edu.uniquindio.proyecto.modelo.enums.Rol;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
@@ -16,13 +12,10 @@ import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 
 import java.time.LocalDateTime;
@@ -117,20 +110,22 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public void editar(EditarUsuarioDTO editarUsuarioDTO) throws Exception {
 
+        String id = obtenerIdSesion();
+
         //Validamos el id
-        if (!ObjectId.isValid(editarUsuarioDTO.id())) {
-            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+editarUsuarioDTO.id());
+        if (!ObjectId.isValid(id)) {
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
         }
 
 
         //Buscamos el usuario que se quiere actualizar
-        ObjectId objectId = new ObjectId(editarUsuarioDTO.id());
+        ObjectId objectId = new ObjectId(id);
         Optional<Usuario> usuarioOptional = usuarioRepo.findById(objectId);
 
 
         //Si no se encontró el usuario, lanzamos una excepción
         if(usuarioOptional.isEmpty()){
-            throw new Exception("No se encontró el usuario con el id "+editarUsuarioDTO.id());
+            throw new Exception("No se encontró el usuario con el id "+id);
         }
 
 
@@ -144,14 +139,46 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public void cambiarPassword(String id) throws Exception {
+    public void cambiarPassword(CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
+        String id =obtenerIdSesion();
+        //Validamos el id
+        if (!ObjectId.isValid(id)) {
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
+        }
+
+
+        //Buscamos el usuario que se quiere actualizar
+        ObjectId objectId = new ObjectId(id);
+        Optional<Usuario> usuarioOptional = usuarioRepo.findById(objectId);
+
+
+        //Si no se encontró el usuario, lanzamos una excepción
+        if(usuarioOptional.isEmpty()){
+            throw new Exception("No se encontró el usuario con el id "+id);
+        }
+
+        // Mapear los datos actualizados al usuario existente
+        Usuario usuario = usuarioOptional.get();
+
+        // 🔹 Validar que la contraseña actual coincida con la almacenada
+        if (!passwordEncoder.matches(cambiarPasswordDTO.actualPassword(), usuario.getPassword())) {
+            throw new IllegalArgumentException("La contraseña actual es incorrecta");
+        }
+
+        // 🔹 Encriptar la nueva contraseña antes de actualizarla
+        String nuevaPasswordEncriptada = passwordEncoder.encode(cambiarPasswordDTO.nuevoPassword());
+
+        // 🔹 Actualizar la contraseña del usuario
+        usuario.setPassword(nuevaPasswordEncriptada);
+
+        usuarioRepo.save(usuario);
 
     }
 
     @Override
-    public void eliminar(String id) throws Exception {
+    public void eliminar() throws Exception {
 
-
+        String id = obtenerIdSesion();
         //Validamos el id
         if (!ObjectId.isValid(id)) {
             throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);

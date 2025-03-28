@@ -13,7 +13,7 @@ public interface ModeradorServicio {
 
     void crearCategoria(CategoriaDTO categoriaDTO) throws Exception;
 
-    public ResponseEntity<MensajeDTO<String>> obtenerCategorias() throws Exception;
+    List<CategoriaDTO> obtenerCategorias() throws Exception;
 
     void editarCategoria( String id, CategoriaDTO categoriaDTO) throws Exception;
 

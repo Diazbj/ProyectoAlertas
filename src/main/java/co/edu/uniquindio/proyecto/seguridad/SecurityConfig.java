@@ -32,7 +32,7 @@ public class SecurityConfig {
                         // Permitir SOLO GET en /api/moderador/** para CLIENTE y MODERADOR
                         .requestMatchers(HttpMethod.GET, "/api/moderador/**").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR")
                         .requestMatchers("/api/moderador/**").hasAuthority("ROLE_MODERADOR")  // Solo moderadores
-                        .requestMatchers("/api/usuarios/**","/api/us").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR") // Clientes y moderadores
+                        .requestMatchers("/api/usuarios/**","/api/us","/api/reportes/**").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR") // Clientes y moderadores
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex.accessDeniedHandler((request, response, accessDeniedException) -> {

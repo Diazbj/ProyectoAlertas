@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,14 +30,15 @@ public class ReporteControlador{
     }
 
     @GetMapping
-    public ResponseEntity<MensajeDTO<String>> obtenerReportes() throws Exception{
-        reporteServicio.obtenerReportes();
-        return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
+    public ResponseEntity<MensajeDTO<List<ReporteDTO>>> obtenerReportes() throws Exception{
+        List<ReporteDTO> reportes = reporteServicio.obtenerReportes();
+        return ResponseEntity.ok(new MensajeDTO<>(false, reportes));
     }
 
-    @GetMapping("/usuario/{idUsuario}")
-    public ResponseEntity<MensajeDTO<List<ReporteDTO>>> obtenerReportesUsuario(@PathVariable String idUsuario) throws Exception {
-        List<ReporteDTO> reportes = reporteServicio.obtenerReportesUsuario(idUsuario);
+    @GetMapping("/usuario")
+    @Operation(summary = "Obtener todos los reportes del usuario")
+    public ResponseEntity<MensajeDTO<List<ReporteDTO>>> obtenerReportesUsuario() throws Exception {
+        List<ReporteDTO> reportes = reporteServicio.obtenerReportesUsuario();
         return ResponseEntity.ok(new MensajeDTO<>(false, reportes));
     }
 

@@ -17,7 +17,11 @@ import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import co.edu.uniquindio.proyecto.servicios.impl.UsuarioServicioImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,12 +37,16 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final ReporteMapper reporteMapper;
     private final UsuarioRepo usuarioRepo;
     private final WebSocketNotificationService webSocketNotificationService;
+    private final UsuarioServicioImpl usuarioServicio;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
 
+        String id = usuarioServicio.obtenerIdSesion();
+
         // Mapear DTO a documento y guardar en la base de datos
         Reporte reporte = reporteMapper.toDocument(crearReporteDTO);
+        reporte.setUsuarioId(new ObjectId(id));
         reporteRepo.save(reporte);
         NotificacionDTO notificacionDTO = new NotificacionDTO(
                 "Nuevo Reporte",
@@ -52,11 +60,19 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public List<ReporteDTO> obtenerReportes() throws Exception {
-        return List.of();
+        // Obtenemos todos los reportes
+        List<Reporte> reportes = reporteRepo.findAll();
+
+        // Convertimos los reportes a DTO
+        return reportes.stream()
+                .map(reporteMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<ReporteDTO> obtenerReportesUsuario(String id) throws Exception {
+    public List<ReporteDTO> obtenerReportesUsuario() throws Exception {
+
+        String id = usuarioServicio.obtenerIdSesion();
         //Validamos el id
         if (!ObjectId.isValid(id)) {
             throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
@@ -78,6 +94,7 @@ public class ReporteServicioImpl implements ReporteServicio {
         return reportes.stream()
                 .map(reporteMapper::toDTO)
                 .collect(Collectors.toList());
+
     }
 
     @Override

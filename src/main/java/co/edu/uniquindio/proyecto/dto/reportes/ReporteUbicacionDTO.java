@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record ReporteUbicacionDTO(
         @NotNull Double latitud,
-        @NotNull Double longitud,
-        @NotNull int radio
+        @NotNull Double longitud
+
 ) {
 }

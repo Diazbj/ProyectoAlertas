@@ -81,8 +81,10 @@ public class ReporteServicioImpl implements ReporteServicio {
     }
 
     @Override
-    public List<ReporteDTO> obtenerReportesCerca(ReporteUbicacionDTO reporteUbicacionDTO) throws Exception {
-        return List.of();
+    public List<ReporteDTO> obtenerReportesCerca(double latitud, double longitud) {
+        // Lógica para encontrar reportes cercanos usando latitud y longitud
+        List<Reporte> reportes = reporteRepo.findAll(); // Aquí deberías filtrar según la ubicación
+        return reportes.stream().map(reporteMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override

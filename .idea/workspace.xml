@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances jenn 1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/seguridad/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/seguridad/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/ReporteControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/ReporteControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/reportes/ReporteUbicacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/reportes/ReporteUbicacionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/ReporteRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/ReporteRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/ReporteServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/ReporteServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ReporteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ReporteServicioImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,47 +82,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Gradle.Build ProyectoAlertas.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.ProyectoAlertas [:co.edu.uniquindio.proyecto.ProyectoApplication.main()].executor": "Run",
-    "HTTP Request.Saludo | #2.executor": "Run",
-    "HTTP Request.Saludo | GET request to example server.executor": "Run",
-    "HTTP Request.auth | Iniciar sesión.executor": "Run",
-    "HTTP Request.usuarios | Actualizar un usuario.executor": "Run",
-    "HTTP Request.usuarios | Crear un usuario.executor": "Run",
-    "HTTP Request.usuarios | Eliminar un usuario.executor": "Run",
-    "HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia y su nombre sea Carlos.executor": "Run",
-    "HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia.executor": "Run",
-    "HTTP Request.usuarios | Obtener todos los usuarios que tengan un nombre dado.executor": "Run",
-    "HTTP Request.usuarios | Obtener todos los usuarios.executor": "Run",
-    "HTTP Request.usuarios | Obtener un usuario por su id.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.ProyectoApplication (1).executor": "Run",
-    "Spring Boot.ProyectoApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/java/co/edu/uniquindio/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Gradle.Build ProyectoAlertas.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ProyectoAlertas [:co.edu.uniquindio.proyecto.ProyectoApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.Saludo | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.Saludo | GET request to example server.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.auth | Iniciar sesión.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Actualizar un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Crear un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Eliminar un usuario.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia y su nombre sea Carlos.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios cuya ciudad de residencia sea Armenia.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios que tengan un nombre dado.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener todos los usuarios.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.usuarios | Obtener un usuario por su id.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ProyectoApplication (1).executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ProyectoApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/DiazJ/Documents/Universidad/Programacion Avanzada/ProyectoFinal/ProyectoAlertas/src/main/java/co/edu/uniquindio/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Spring Boot.ProyectoApplication (1)">
     <configuration name="auth | Iniciar sesión" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/auth.http" runType="Run single request">
       <method v="2" />
@@ -224,7 +228,9 @@
       <workItem from="1743023736314" duration="4816000" />
       <workItem from="1743032076615" duration="339000" />
       <workItem from="1743039626922" duration="150000" />
-      <workItem from="1743095868421" duration="6585000" />
+      <workItem from="1743095868421" duration="7203000" />
+      <workItem from="1743203205505" duration="35000" />
+      <workItem from="1743212260972" duration="3698000" />
     </task>
     <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
       <option name="closed" value="true" />
@@ -378,7 +384,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743103482628</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Avances jenn 1.0">
+      <option name="closed" value="true" />
+      <created>1743104500864</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1743104500864</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

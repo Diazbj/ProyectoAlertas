@@ -41,9 +41,12 @@ public class ReporteControlador{
     }
 
     @GetMapping("/ubicacion")
-    public ResponseEntity<MensajeDTO<String>> obtenerReportesCerca(@Valid @RequestBody ReporteUbicacionDTO reporteUbicacionDTO ) throws Exception {
-        reporteServicio.obtenerReportesCerca(reporteUbicacionDTO);
-        return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
+    public ResponseEntity<MensajeDTO<List<ReporteDTO>>> obtenerReportesCerca(
+            @RequestParam double latitud,
+            @RequestParam double longitud
+    ) throws Exception {
+        List<ReporteDTO> reportes = reporteServicio.obtenerReportesCerca(latitud, longitud);
+        return ResponseEntity.ok(new MensajeDTO<>(false, reportes));
     }
 
     @GetMapping("/topImportantes")

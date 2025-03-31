@@ -99,8 +99,12 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public List<ReporteDTO> obtenerReportesCerca(double latitud, double longitud) {
+
+        double radioEnKm = 5.0;
+        double radioEnRadianes = radioEnKm / 6378.1; // Convertir km a radianes
+
         // Lógica para encontrar reportes cercanos usando latitud y longitud
-        List<Reporte> reportes = reporteRepo.findAll(); // Aquí deberías filtrar según la ubicación
+        List<Reporte> reportes = reporteRepo.findByUbicacionCerca(latitud, longitud, radioEnRadianes);
         return reportes.stream().map(reporteMapper::toDTO).collect(Collectors.toList());
     }
 

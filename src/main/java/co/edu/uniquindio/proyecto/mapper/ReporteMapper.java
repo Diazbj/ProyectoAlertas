@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Mapper(componentModel = "spring")
 public interface ReporteMapper {
-
+    @Mapping(target = "nombreUsuario", ignore = true)
     @Mapping(target = "fechaCreacion", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "estadoActual", constant = "PENDIENTE")
     Reporte toDocument(CrearReporteDTO reporteDTO);
@@ -40,4 +40,6 @@ public interface ReporteMapper {
     default UbicacionDTO map(Ubicacion ubicacion) {
         return ubicacion != null ? new UbicacionDTO(ubicacion.getLatitud(), ubicacion.getLongitud()) : null;
     }
+
+
 }

@@ -47,6 +47,11 @@ public class ReporteServicioImpl implements ReporteServicio {
         // Mapear DTO a documento y guardar en la base de datos
         Reporte reporte = reporteMapper.toDocument(crearReporteDTO);
         reporte.setUsuarioId(new ObjectId(id));
+        // Buscar al usuario por su ID
+        Usuario usuario = usuarioRepo.findById(new ObjectId(id))
+                .orElseThrow(() -> new Exception("Usuario no encontrado"));
+        // Establecer el nombre del usuario en el reporte
+        reporte.setNombreUsuario(usuario.getNombre());  // Aquí se asigna el nombre del usuario
         reporteRepo.save(reporte);
         NotificacionDTO notificacionDTO = new NotificacionDTO(
                 "Nuevo Reporte",

@@ -3,12 +3,13 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface ReporteServicio {
 
-    void crearReporte( CrearReporteDTO crearReporteDTO) throws Exception ;
+    void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception ;
 
     List<ReporteDTO> obtenerReportes() throws Exception;
 

@@ -23,6 +23,7 @@ public class Reporte {
 
     private ObjectId usuarioId;
 
+    private String nombreUsuario;
     private String titulo;
     private ObjectId CategoriaId;
     private String descripcion;

@@ -35,7 +35,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.simplejavamail:simple-java-mail:8.12.5")
     implementation("org.simplejavamail:batch-module:8.12.5")
-
+    implementation("com.cloudinary:cloudinary-http45:1.39.0")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

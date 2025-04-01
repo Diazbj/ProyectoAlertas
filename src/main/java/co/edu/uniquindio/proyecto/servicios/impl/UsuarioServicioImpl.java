@@ -1,12 +1,14 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 
+import co.edu.uniquindio.proyecto.dto.notificaciones.EmailDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.*;
 import co.edu.uniquindio.proyecto.excepciones.*;
 import co.edu.uniquindio.proyecto.mapper.UsuarioMapper;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.servicios.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 
 import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
@@ -28,6 +30,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final UsuarioRepo usuarioRepo;
     private final UsuarioMapper usuarioMapper;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final EmailServicio emailServicio;
 
     @Override
     public void crear(CrearUsuarioDTO crearUsuarioDTO) throws Exception {
@@ -65,8 +68,33 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override 
-    public void enviarCodigoActivacion(UsuarioActivacionDTO usuarioActivacionDTO) throws Exception {
+    public void enviarCodigoActivacion(UsuarioNuevoCodigoDTO usuarioNuevoCodigoDTO) throws Exception {
+        // 1. Generar un nuevo código de activación
+        String nuevoCodigo = generarCodigoAleatorio();
 
+        // 2. Buscar el usuario por su correo
+        Optional<Usuario> usuarioOptional = usuarioRepo.findByEmail(usuarioNuevoCodigoDTO.email());
+        if (usuarioOptional.isEmpty()) {
+            throw new UsuarioNoEncontradoException("No se encontró un usuario con el email " + usuarioNuevoCodigoDTO.email());
+        }
+
+        // 3. Obtener el usuario
+        Usuario usuario = usuarioOptional.get();
+
+        // 4. Crear un nuevo código de validación
+        CodigoValidacion codigo = new CodigoValidacion(
+                LocalDateTime.now(),
+                nuevoCodigo
+        );
+
+        // 5. Asignar el nuevo código al usuario
+        usuario.setCodigoValidacion(codigo);
+        usuarioRepo.save(usuario); // Guardar los cambios en la base de datos
+
+        // 6. Enviar el código de activación por correo
+        String cuerpoCorreo = "Tu código de activación es: " + nuevoCodigo;
+        EmailDTO emailDTO = new EmailDTO("Código de Activación", cuerpoCorreo, usuarioNuevoCodigoDTO.email());
+        emailServicio.enviarCorreo(emailDTO); // Enviar el correo con el código
     }
 
     @Override

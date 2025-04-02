@@ -196,8 +196,7 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public void agregarComentario(String id, ComentarioDTO comentarioDTO) throws Exception {
-        Reporte reporte = reporteRepo.findById(id)
-                .orElseThrow(() -> new Exception("Reporte no encontrado"));
+        Reporte reporte = reporteRepo.findById(id).orElseThrow(() -> new Exception("Reporte no encontrado"));
 
         // Convertir el DTO a entidad Comentario
         Comentario comentario = comentarioMapper.toEntity(new CrearComentarioDTO(

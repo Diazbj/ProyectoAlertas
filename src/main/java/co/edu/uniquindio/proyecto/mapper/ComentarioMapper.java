@@ -11,7 +11,8 @@ import org.mapstruct.Mapping;
 public interface ComentarioMapper {
 
     @Mapping(target = "fechaCreacion", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "reporteId", source = "id")  // ✅ Mapea el ID del reporte
-    @Mapping(target = "mensaje", source = "mensaje")  // ✅ "mensaje" en DTO → "mensaje" en Comentario
+    @Mapping(target = "reporteId", source = "id")  // Mapea el ID del reporte
+    @Mapping(target = "mensaje", source = "mensaje")  // "mensaje" en DTO → "mensaje" en Comentario
+    @Mapping(target = "nombreUsuario", source = "nombreUsuario")
     Comentario toEntity(CrearComentarioDTO comentarioDTO);
 }

@@ -18,4 +18,5 @@ public class Comentario {
     private ObjectId reporteId;
     private String mensaje;  // Este es el campo correcto
     private LocalDateTime fechaCreacion;
+    private String nombreUsuario;
 }

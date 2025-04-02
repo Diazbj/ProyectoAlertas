@@ -9,12 +9,13 @@ import java.time.LocalDateTime;
 
 @Document(collection = "comentarios")
 @AllArgsConstructor
+@NoArgsConstructor // Necesario para el mapeo
+@Getter
+@Setter
 public class Comentario {
-
-    @Id
     private ObjectId id;
-    private ObjectId clienteId ;
+    private ObjectId clienteId;
     private ObjectId reporteId;
-    private String mensaje;
+    private String mensaje;  // Este es el campo correcto
     private LocalDateTime fechaCreacion;
 }

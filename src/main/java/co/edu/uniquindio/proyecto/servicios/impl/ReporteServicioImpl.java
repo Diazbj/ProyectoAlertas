@@ -1,11 +1,14 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
+import co.edu.uniquindio.proyecto.dto.comentarios.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.notificaciones.NotificacionDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
+import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
+import co.edu.uniquindio.proyecto.modelo.documentos.Comentario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
@@ -23,6 +26,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import co.edu.uniquindio.proyecto.servicios.impl.UsuarioServicioImpl;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +43,7 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final UsuarioRepo usuarioRepo;
     private final WebSocketNotificationService webSocketNotificationService;
     private final UsuarioServicioImpl usuarioServicio;
+    private final ComentarioMapper comentarioMapper;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
@@ -190,8 +196,28 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public void agregarComentario(String id, ComentarioDTO comentarioDTO) throws Exception {
+        Reporte reporte = reporteRepo.findById(id)
+                .orElseThrow(() -> new Exception("Reporte no encontrado"));
 
+        // Convertir el DTO a entidad Comentario
+        Comentario comentario = comentarioMapper.toEntity(new CrearComentarioDTO(
+                new ObjectId(id), // Convierte el ID a ObjectId
+                comentarioDTO.comentario(), // Mensaje del comentario
+                comentarioDTO.nombreUsuario(), // Nombre del usuario
+                LocalDateTime.now() // Fecha de creación
+        ));
+        // Asegurar que la lista de comentarios no sea nula
+        if (reporte.getComentarios() == null) {
+            reporte.setComentarios(new ArrayList<>());
+        }
+
+        // Agregar el comentario a la lista
+        reporte.getComentarios().add(comentario);
+
+        // Guardar el reporte con el nuevo comentario
+        reporteRepo.save(reporte);
     }
+
 
     @Override
     public List<ComentarioDTO> obtenerComentarios(String idReporte) throws Exception {

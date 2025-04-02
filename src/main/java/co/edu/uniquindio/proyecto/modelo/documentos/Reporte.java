@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "reportes")
@@ -34,4 +35,5 @@ public class Reporte {
     private EstadoReporte estadoActual;
     private List<String> imagenes;
     private int contadorImportante;
+    private List<Comentario> comentarios = new ArrayList<>();
 }

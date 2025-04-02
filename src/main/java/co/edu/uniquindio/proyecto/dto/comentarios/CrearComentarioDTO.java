@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public record CrearComentarioDTO(
         ObjectId id,
-        String mensaje,
+        String mensaje,  // Coincide con "mensaje" en Comentario
         String nombre,
-        LocalDateTime fecha) {
-}
+        LocalDateTime fecha
+) {}

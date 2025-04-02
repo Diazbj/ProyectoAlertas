@@ -3,6 +3,8 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
+import co.edu.uniquindio.proyecto.excepciones.EmailRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.CategoriaMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
@@ -26,11 +28,18 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
     @Override
     public void crearCategoria(CategoriaDTO categoriaDTO) throws Exception {
+        if(this.existeCategoria(categoriaDTO.nombre()))
+            throw new DatoRepetidoException("La categoria ya existe");
+
+
         Categoria categoria = categoriaMapper.toDocument(categoriaDTO);
-
         categoriaRepo.save(categoria);
-
     }
+
+    public boolean existeCategoria(String nombre) {
+        return categoriaRepo.existsByNombre(nombre);
+    }
+
 
     @Override
     public List<CategoriaDTO> obtenerCategorias() throws Exception {
@@ -51,4 +60,5 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     public List<ReporteDTO> generarInforme(String fechaInicio, String fechaFin, String categoria, Double latitud, Double longitud, int radio) throws Exception {
         return List.of();
     }
+
 }

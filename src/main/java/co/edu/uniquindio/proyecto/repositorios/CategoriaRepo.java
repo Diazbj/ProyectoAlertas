@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoriaRepo extends MongoRepository<Categoria, ObjectId> {
+
+    boolean existsByNombre(String nombre);
+
 }

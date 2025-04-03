@@ -8,11 +8,13 @@ import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
+import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
 import co.edu.uniquindio.proyecto.modelo.documentos.Comentario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
+import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
@@ -43,6 +45,7 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final UsuarioRepo usuarioRepo;
     private final WebSocketNotificationService webSocketNotificationService;
     private final UsuarioServicioImpl usuarioServicio;
+    private final CategoriaRepo categoriaRepo;
     private final ComentarioMapper comentarioMapper;
 
     @Override
@@ -58,6 +61,14 @@ public class ReporteServicioImpl implements ReporteServicio {
                 .orElseThrow(() -> new Exception("Usuario no encontrado"));
         // Establecer el nombre del usuario en el reporte
         reporte.setNombreUsuario(usuario.getNombre());  // Aquí se asigna el nombre del usuario
+        //Validar que la categoría existe antes de asignarla al reporte
+        ObjectId categoriaId = new ObjectId(crearReporteDTO.categoriaId());
+        Categoria categoria = categoriaRepo.findById(categoriaId)
+                .orElseThrow(() -> new Exception("Categoría no encontrada"));
+
+        // Asignar la categoría al reporte
+        reporte.setCategoriaId(categoria.getId());
+
         reporteRepo.save(reporte);
         NotificacionDTO notificacionDTO = new NotificacionDTO(
                 "Nuevo Reporte",

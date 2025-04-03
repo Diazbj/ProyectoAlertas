@@ -11,5 +11,6 @@ public record CrearReporteDTO(
         @NotBlank String titulo,
         @NotBlank String descripcion,
         @NotNull UbicacionDTO ubicacion, //  Aquí agregamos el objeto de ubicación
-        List<String>imagenes
+        List<String>imagenes,
+        @NotBlank String categoriaId
 ) {}

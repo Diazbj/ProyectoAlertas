@@ -7,6 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "categorias")
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Categoria {
 

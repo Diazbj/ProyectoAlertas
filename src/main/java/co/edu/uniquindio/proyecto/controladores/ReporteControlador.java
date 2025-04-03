@@ -24,12 +24,14 @@ public class ReporteControlador{
     private final ReporteServicio reporteServicio; // Inyectar servicio
 
     @PostMapping
+    @Operation(summary = "Crear Reporte")
     public ResponseEntity<MensajeDTO<String>> crearReporte(@Valid @RequestBody CrearReporteDTO crearReporteDTO) throws Exception {
         reporteServicio.crearReporte(crearReporteDTO);
         return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Reporte creado exitosamente"));
     }
 
     @GetMapping
+    @Operation(summary = "Obtener todos los Reportes")
     public ResponseEntity<MensajeDTO<List<ReporteDTO>>> obtenerReportes() throws Exception{
         List<ReporteDTO> reportes = reporteServicio.obtenerReportes();
         return ResponseEntity.ok(new MensajeDTO<>(false, reportes));
@@ -43,6 +45,7 @@ public class ReporteControlador{
     }
 
     @GetMapping("/ubicacion")
+    @Operation(summary = "Obtener reportes cerca a ubicación")
     public ResponseEntity<MensajeDTO<List<ReporteDTO>>> obtenerReportesCerca(
             @RequestParam double latitud,
             @RequestParam double longitud
@@ -52,12 +55,14 @@ public class ReporteControlador{
     }
 
     @GetMapping("/topImportantes")
+    @Operation(summary = "Obtener top 10 reportes")
     public ResponseEntity<MensajeDTO<String>> obtenerTopReportes() throws Exception {
         reporteServicio.obtenerTopReportes();
         return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Editar reportes")
     public ResponseEntity<MensajeDTO<String>> editarReporte(@PathVariable String id, @Valid @RequestBody EditarReporteDTO reporteDTO) throws Exception {
         reporteServicio.editarReporte(id, reporteDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte actualizado correctamente"));
@@ -65,12 +70,14 @@ public class ReporteControlador{
 
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar reportes")
     public ResponseEntity<MensajeDTO<String>> eliminarReporte(@PathVariable String id) throws Exception {
         reporteServicio.eliminarReporte(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte eliminado"));
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtener reporte dado el Id")
     public ResponseEntity<MensajeDTO<ReporteDTO>> obtenerReporte(@PathVariable String id) throws Exception {
         ReporteDTO reporte = reporteServicio.obtenerReporte(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, reporte));
@@ -91,12 +98,14 @@ public class ReporteControlador{
     }
 
     @PutMapping("/{id}/importante")
+    @Operation(summary = "Marcar reporte como importante")
     public ResponseEntity<MensajeDTO<String>> marcarImportante(@PathVariable String id) throws Exception {
         reporteServicio.marcarImportante(id);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte marcado como importante"));
     }
 
     @PostMapping("/{id}/estado")
+    @Operation(summary = "Editar estado de reporte")
     public ResponseEntity<MensajeDTO<String>> cambiarEstado(
             @PathVariable String id,
             @Valid @RequestBody EstadoReporteDTO estadoDTO) throws Exception {

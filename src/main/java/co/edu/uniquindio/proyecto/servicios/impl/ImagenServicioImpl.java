@@ -27,9 +27,16 @@ public class ImagenServicioImpl implements ImagenServicio {
     }
 
     @Override
-    public Map subirImagen(MultipartFile imagen) throws Exception {
-        File file= convertir(imagen);
-        return cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+    public Map<String, Object> subirImagen(MultipartFile imagen) throws Exception {
+        File file = convertir(imagen);
+
+        Map<String, Object> opciones = ObjectUtils.asMap(
+                "folder", "Proyecto Alertas" // Guardar en la carpeta ProyectiAlertas
+        );
+
+        Map<String, Object> resultado = cloudinary.uploader().upload(file, opciones);
+        file.delete(); // Eliminar archivo temporal después de la subida
+        return resultado;
     }
 
 

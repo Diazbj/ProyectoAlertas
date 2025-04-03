@@ -17,9 +17,9 @@ public class ImagenControlador {
 
     private final ImagenServicio imagenServicio;
 
-    @PostMapping
-    public String subir(@RequestParam("image")MultipartFile imagen) throws Exception{
-        Map mapa = imagenServicio.subirImagen(imagen);
-        return mapa.toString();
+    @PostMapping(consumes = "multipart/form-data")
+    public String subir(@RequestParam("imagen") MultipartFile imagen) throws Exception{
+        Map<String, Object> response = imagenServicio.subirImagen(imagen);
+        return response.get("url").toString();
     }
 }

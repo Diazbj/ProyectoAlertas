@@ -38,7 +38,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if(existeEmail(crearUsuarioDTO.email())) throw new EmailRepetidoException("El email ya existe");
 
         Usuario usuario = usuarioMapper.toDocument(crearUsuarioDTO);
-        usuario.setPassword( passwordEncoder.encode(crearUsuarioDTO.password()) );
+        usuario.setPassword( passwordEncoder.encode(crearUsuarioDTO.password()));
         usuarioRepo.save(usuario);
         
         //Se crea un codigo de validacion

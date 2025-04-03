@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/login/**","/api/usuarios/notificacion","/api/usuarios/Activar","/api/usuarios").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/login/**","/api/usuarios/notificacion","/api/usuarios/Activar","/api/usuarios", "/api/imagenes").permitAll()
                         // Permitir SOLO GET en /api/moderador/** para CLIENTE y MODERADOR
                         .requestMatchers(HttpMethod.GET, "/api/moderador/**").hasAnyAuthority("ROLE_CLIENTE", "ROLE_MODERADOR")
                         .requestMatchers("/api/moderador/**").hasAuthority("ROLE_MODERADOR")  // Solo moderadores
@@ -42,5 +42,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+
 
 }

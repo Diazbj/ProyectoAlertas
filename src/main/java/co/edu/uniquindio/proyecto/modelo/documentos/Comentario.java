@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Comentario {
+    @Id
     private ObjectId id;
     private ObjectId clienteId;
     private ObjectId reporteId;

@@ -35,5 +35,4 @@ public class Reporte {
     private EstadoReporte estadoActual;
     private List<String> imagenes;
     private int contadorImportante;
-    private List<Comentario> comentarios = new ArrayList<>();
 }

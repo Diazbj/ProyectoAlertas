@@ -205,16 +205,9 @@ public class ReporteServicioImpl implements ReporteServicio {
                 comentarioDTO.nombreUsuario(), // Nombre del usuario
                 LocalDateTime.now() // Fecha de creación
         ));
-        // Asegurar que la lista de comentarios no sea nula
-        if (reporte.getComentarios() == null) {
-            reporte.setComentarios(new ArrayList<>());
-        }
-
-        // Agregar el comentario a la lista
-        reporte.getComentarios().add(comentario);
 
         // Guardar el reporte con el nuevo comentario
-        reporteRepo.save(reporte);
+        //comentarioRepo.save(comentario);
     }
 
 

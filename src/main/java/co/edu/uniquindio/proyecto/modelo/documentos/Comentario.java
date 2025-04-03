@@ -17,7 +17,9 @@ public class Comentario {
     private ObjectId id;
     private ObjectId clienteId;
     private ObjectId reporteId;
-    private String mensaje;  // Este es el campo correcto
-    private LocalDateTime fechaCreacion;
     private String nombreUsuario;
+    private LocalDateTime fechaCreacion;
+    private String mensaje;  // Este es el campo correcto
+
+
 }

@@ -1,35 +1,32 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
-import co.edu.uniquindio.proyecto.dto.login.LoginRequestDTO;
+import co.edu.uniquindio.proyecto.dto.TokenDTO;
+import co.edu.uniquindio.proyecto.dto.login.LoginDTO;
 import co.edu.uniquindio.proyecto.dto.login.PasswordNuevoDTO;
 import co.edu.uniquindio.proyecto.dto.login.PasswordOlvidadoDTO;
+import co.edu.uniquindio.proyecto.seguridad.JWTUtils;
 import co.edu.uniquindio.proyecto.servicios.LoginServicio;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import co.edu.uniquindio.proyecto.seguridad.JwtUtil;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/login")
 public class LoginControlador {
 
-    private final JwtUtil jwtUtil;
+    private final JWTUtils jwtUtils;
     private final LoginServicio loginServicio;
 
     @PostMapping
-    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO loginRequest) throws Exception {
-        String token = loginServicio.login(loginRequest);
+    @Operation(summary = "Login")
+    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO loginDTO) throws Exception {
+        TokenDTO tokenDTO = loginServicio.login(loginDTO);
+        String token = tokenDTO.toString();
         return ResponseEntity.ok(token);
-    }
-
-    @GetMapping("/validate")
-    public ResponseEntity<?> validarToken(@RequestHeader("Authorization") String authorizationHeader) throws Exception {
-        String token = authorizationHeader.replace("Bearer ", "");
-        return ResponseEntity.ok().body(loginServicio.validarToken(token));
     }
 
 

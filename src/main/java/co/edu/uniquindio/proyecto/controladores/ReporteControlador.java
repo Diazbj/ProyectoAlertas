@@ -83,19 +83,6 @@ public class ReporteControlador{
         return ResponseEntity.ok(new MensajeDTO<>(false, reporte));
     }
 
-    @PostMapping("/{id}/comentario")
-    public ResponseEntity<MensajeDTO<String>> agregarComentario(
-            @PathVariable String id,
-            @Valid @RequestBody ComentarioDTO comentarioDTO) throws Exception {
-        reporteServicio.agregarComentario(id, comentarioDTO);
-        return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Comentario creado exitosamente"));
-    }
-
-    @GetMapping("/{idReporte}/comentarios")
-    public ResponseEntity<MensajeDTO<String>> obtenerComentarios(@PathVariable String idReporte) throws Exception {
-        reporteServicio.obtenerComentarios(idReporte);
-        return ResponseEntity.ok(new MensajeDTO<>(false, "comentarios"));
-    }
 
     @PutMapping("/{id}/importante")
     @Operation(summary = "Marcar reporte como importante")

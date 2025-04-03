@@ -12,8 +12,10 @@ import co.edu.uniquindio.proyecto.servicios.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 
 import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
+import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -261,4 +263,15 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user.getUsername();
     }
+    public String obtenerNombreUsuario() throws Exception {
+
+        String id = obtenerIdSesion();
+
+        Usuario usuario = usuarioRepo.findById(new ObjectId(id))
+                .orElseThrow(() -> new Exception("Usuario no encontrado"));
+
+        return usuario.getNombre();
+
+    }
+
 }

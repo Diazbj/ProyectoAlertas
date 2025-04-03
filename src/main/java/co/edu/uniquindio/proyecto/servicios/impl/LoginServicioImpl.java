@@ -1,13 +1,12 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
-import co.edu.uniquindio.proyecto.dto.login.LoginRequestDTO;
+import co.edu.uniquindio.proyecto.dto.TokenDTO;
+import co.edu.uniquindio.proyecto.dto.login.LoginDTO;
 import co.edu.uniquindio.proyecto.dto.login.PasswordNuevoDTO;
 import co.edu.uniquindio.proyecto.dto.login.PasswordOlvidadoDTO;
-import co.edu.uniquindio.proyecto.excepciones.DatosInvalidosException;
-import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
-import co.edu.uniquindio.proyecto.seguridad.JwtUtil;
+import co.edu.uniquindio.proyecto.seguridad.JWTUtils;
 import co.edu.uniquindio.proyecto.servicios.LoginServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -23,45 +23,44 @@ import java.util.Optional;
 public class LoginServicioImpl implements LoginServicio {
 
     private final UsuarioRepo usuarioRepo;
-    private final JwtUtil jwtUtil;
+    private final JWTUtils jwtUtils;
     private final BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
     @Override
-    public String login(LoginRequestDTO loginRequest) throws Exception {
-        Optional<Usuario> usuarioOpt = usuarioRepo.findByEmail(loginRequest.email());
+    public TokenDTO login(LoginDTO loginDTO) throws Exception {
 
-        if (usuarioOpt.isEmpty()) {
-            throw new UsuarioNoEncontradoException("Usuario no encontrado.");
+
+        Optional<Usuario> optionalUsuario = usuarioRepo.findByEmail(loginDTO.email());
+
+
+        if(optionalUsuario.isEmpty()){
+            throw new Exception("El usuario no existe");
         }
 
-        Usuario usuario = usuarioOpt.get();
 
-        if (!passwordEncoder.matches(loginRequest.password(), usuario.getPassword())) {
-            throw new DatosInvalidosException("Contraseña incorrecta.");
+        Usuario usuario = optionalUsuario.get();
+
+
+        // Verificar si la contraseña es correcta usando el PasswordEncoder
+        if(!passwordEncoder.matches(loginDTO.password(), usuario.getPassword())){
+            throw new Exception("El usuario no existe");
         }
 
-        return jwtUtil.generarToken(usuario.getId().toString(), usuario.getRol());
+
+        String token = jwtUtils.generateToken(usuario.getId().toString(), crearClaims(usuario));
+        return new TokenDTO(token);
     }
 
-    @Override
-    public ResponseEntity<?> validarToken(String token) throws Exception {
-        try {
-            // Eliminar "Bearer " si el token lo incluye
-            token = token.replace("Bearer ", "").trim();
 
-            // Validar si el token es correcto
-            boolean esValido = jwtUtil.validarToken(token);
-
-            if (esValido) {
-                String usuario = jwtUtil.obtenerUsuario(token);
-                return ResponseEntity.ok("Token válido para el usuario: " + usuario);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token inválido o expirado");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error en la validación del token: " + e.getMessage());
-        }
+    private Map<String, String> crearClaims(Usuario usuario){
+        return Map.of(
+                "email", usuario.getEmail(),
+                "nombre", usuario.getNombre(),
+                "rol", "ROLE_"+usuario.getRol().name()
+        );
     }
+
+
 
     @Override
     public void recuperarPassword(PasswordOlvidadoDTO passwordOlvidadoDTO) throws Exception {
@@ -72,4 +71,6 @@ public class LoginServicioImpl implements LoginServicio {
     public void actualizarPassword(PasswordNuevoDTO passwordNuevoDTO) throws Exception {
 
     }
+
+
 }

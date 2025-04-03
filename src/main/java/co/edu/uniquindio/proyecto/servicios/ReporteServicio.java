@@ -25,9 +25,6 @@ public interface ReporteServicio {
 
     ReporteDTO obtenerReporte(String id) throws Exception;
 
-    void agregarComentario(String id, ComentarioDTO comentarioDTO) throws Exception ;
-
-    List<ComentarioDTO> obtenerComentarios( String idReporte) throws Exception ;
 
    void marcarImportante( String id) throws Exception ;
 

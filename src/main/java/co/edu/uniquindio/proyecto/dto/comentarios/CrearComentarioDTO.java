@@ -5,8 +5,5 @@ import org.bson.types.ObjectId;
 import java.time.LocalDateTime;
 
 public record CrearComentarioDTO(
-        ObjectId id,
-        String mensaje,
-        String nombreUsuario,
-        LocalDateTime fecha
+        String mensaje
 ) {}

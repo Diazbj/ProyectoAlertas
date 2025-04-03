@@ -194,27 +194,6 @@ public class ReporteServicioImpl implements ReporteServicio {
         return reporteMapper.toDTO(reporteOptional.get());
     }
 
-    @Override
-    public void agregarComentario(String id, ComentarioDTO comentarioDTO) throws Exception {
-        Reporte reporte = reporteRepo.findById(id).orElseThrow(() -> new Exception("Reporte no encontrado"));
-
-        // Convertir el DTO a entidad Comentario
-        Comentario comentario = comentarioMapper.toEntity(new CrearComentarioDTO(
-                new ObjectId(id), // Convierte el ID a ObjectId
-                comentarioDTO.comentario(), // Mensaje del comentario
-                comentarioDTO.nombreUsuario(), // Nombre del usuario
-                LocalDateTime.now() // Fecha de creación
-        ));
-
-        // Guardar el reporte con el nuevo comentario
-        //comentarioRepo.save(comentario);
-    }
-
-
-    @Override
-    public List<ComentarioDTO> obtenerComentarios(String idReporte) throws Exception {
-        return List.of();
-    }
 
     @Override
     public void marcarImportante(String id) throws Exception {

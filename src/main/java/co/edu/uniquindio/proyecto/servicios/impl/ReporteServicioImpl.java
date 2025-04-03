@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.comentarios.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.notificaciones.NotificacionDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
+import co.edu.uniquindio.proyecto.excepciones.CategoriaNoEncontradaException;
 import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
@@ -57,14 +58,18 @@ public class ReporteServicioImpl implements ReporteServicio {
         Reporte reporte = reporteMapper.toDocument(crearReporteDTO);
         reporte.setUsuarioId(new ObjectId(id));
         // Buscar al usuario por su ID
-        Usuario usuario = usuarioRepo.findById(new ObjectId(id))
-                .orElseThrow(() -> new Exception("Usuario no encontrado"));
+        Usuario usuario = usuarioRepo.findById(new ObjectId(id)).orElseThrow(() -> new Exception("Usuario no encontrado"));
         // Establecer el nombre del usuario en el reporte
         reporte.setNombreUsuario(usuario.getNombre());  // Aquí se asigna el nombre del usuario
-        //Validar que la categoría existe antes de asignarla al reporte
+
+        // Validar si el categoriaId es válido antes de intentar convertirlo
+        if (crearReporteDTO.categoriaId() == null || !ObjectId.isValid(crearReporteDTO.categoriaId())) {
+            throw new CategoriaNoEncontradaException("Categoría no encontrada");
+        }
+
+        // Validar que la categoría existe antes de asignarla al reporte
         ObjectId categoriaId = new ObjectId(crearReporteDTO.categoriaId());
-        Categoria categoria = categoriaRepo.findById(categoriaId)
-                .orElseThrow(() -> new Exception("Categoría no encontrada"));
+        Categoria categoria = categoriaRepo.findById(categoriaId).orElseThrow(() -> new CategoriaNoEncontradaException("Categoría no encontrada"));
 
         // Asignar la categoría al reporte
         reporte.setCategoriaId(categoria.getId());

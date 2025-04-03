@@ -62,6 +62,11 @@ public class RestExceptionHandler {
         return ResponseEntity.internalServerError().body( new MensajeDTO<>(true, e.getMessage()) );
     }
 
+    @ExceptionHandler(CategoriaNoEncontradaException.class)
+    public ResponseEntity<String> manejarCategoriaNoEncontradaException(CategoriaNoEncontradaException ex) {
+        return ResponseEntity.status(404).body(ex.getMessage());
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MensajeDTO<List<ValidacionDTO>>> validationExceptionHandler ( MethodArgumentNotValidException ex ) {

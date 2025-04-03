@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances jenn 1.0">
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/excepciones/CategoriaNoEncontradaException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/reportes/CrearReporteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/reportes/CrearReporteDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Categoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/excepciones/RestExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/excepciones/RestExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ReporteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ReporteServicioImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,9 +48,9 @@
         <option value="HTTP Request" />
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Exception" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -235,7 +235,8 @@
       <workItem from="1743528488509" duration="1061000" />
       <workItem from="1743615504731" duration="2529000" />
       <workItem from="1743621354518" duration="3243000" />
-      <workItem from="1743681960166" duration="2020000" />
+      <workItem from="1743681960166" duration="2097000" />
+      <workItem from="1743695339472" duration="2988000" />
     </task>
     <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
       <option name="closed" value="true" />
@@ -429,7 +430,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743624589988</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Avances jenn 1.0">
+      <option name="closed" value="true" />
+      <created>1743684050331</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1743684050331</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

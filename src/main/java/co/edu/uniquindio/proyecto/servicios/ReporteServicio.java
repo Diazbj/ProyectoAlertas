@@ -25,8 +25,7 @@ public interface ReporteServicio {
 
     ReporteDTO obtenerReporte(String id) throws Exception;
 
-
-   void marcarImportante( String id) throws Exception ;
+    int marcarImportante( String id) throws Exception ;
 
     void cambiarEstado(String id, EstadoReporteDTO estadoDTO) throws Exception ;
 

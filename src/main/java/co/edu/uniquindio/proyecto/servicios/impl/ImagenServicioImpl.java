@@ -31,7 +31,7 @@ public class ImagenServicioImpl implements ImagenServicio {
         File file = convertir(imagen);
 
         Map<String, Object> opciones = ObjectUtils.asMap(
-                "folder", "Proyecto Alertas" // Guardar en la carpeta ProyectiAlertas
+                "folder", "ProyectoAlertas" // Guardar en la carpeta ProyectiAlertas
         );
 
         Map<String, Object> resultado = cloudinary.uploader().upload(file, opciones);

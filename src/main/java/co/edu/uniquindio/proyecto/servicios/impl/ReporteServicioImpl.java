@@ -39,8 +39,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ReporteServicioImpl implements ReporteServicio {
 
-
-
     private final ReporteRepo reporteRepo;
     private final ReporteMapper reporteMapper;
     private final UsuarioRepo usuarioRepo;
@@ -212,8 +210,21 @@ public class ReporteServicioImpl implements ReporteServicio {
 
 
     @Override
-    public void marcarImportante(String id) throws Exception {
+    public int marcarImportante(String id) throws Exception {
 
+        Optional<Reporte> optionalReporte = reporteRepo.findById(id);
+
+        if(optionalReporte.isEmpty()){
+            throw new Exception("No existe");
+        }
+
+        Reporte reporte = optionalReporte.get();
+        int contador = reporte.getContadorImportante()+1;
+
+        reporte.setContadorImportante(contador);
+        reporteRepo.save(reporte);
+
+        return contador;
     }
 
     @Override

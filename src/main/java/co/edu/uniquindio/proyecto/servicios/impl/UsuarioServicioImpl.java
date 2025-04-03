@@ -39,6 +39,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         
         if(existeEmail(crearUsuarioDTO.email())) throw new EmailRepetidoException("El email ya existe");
 
+        String codigoGenerado=generarCodigoAleatorio();
+
         Usuario usuario = usuarioMapper.toDocument(crearUsuarioDTO);
         usuario.setPassword( passwordEncoder.encode(crearUsuarioDTO.password()));
         usuarioRepo.save(usuario);
@@ -46,12 +48,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         //Se crea un codigo de validacion
         CodigoValidacion codigo= new CodigoValidacion(
                 LocalDateTime.now(),
-                generarCodigoAleatorio()
-                
+                codigoGenerado
         );
 
         usuario.setCodigoValidacion(codigo);
         usuarioRepo.save(usuario);
+
+        // 6. Enviar el código de activación por correo
+        String cuerpoCorreo = "Tu código de activación es: " + codigoGenerado;
+        EmailDTO emailDTO = new EmailDTO("Código de Activación", cuerpoCorreo, usuario.getEmail());
+        emailServicio.enviarCorreo(emailDTO); // Enviar el correo con el código
 
     }
 

@@ -38,4 +38,15 @@ public class EmailServicioImpl implements EmailServicio {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void enviarCorreoComentarioReporte(String nombreUsuario, String comentario, String destinatario) {
+        String asunto = "Nuevo comentario en tu reporte";
+        String cuerpoCorreo = "Hola,\n\nEl usuario " + nombreUsuario + " ha comentado en tu reporte:\n\n"
+                + "\"" + comentario + "\"\n\n"
+                + "Revisa el reporte para más detalles.";
+
+        EmailDTO emailDTO = new EmailDTO(asunto, cuerpoCorreo, destinatario);
+        enviarCorreo(emailDTO); // Usa el método ya existente
+    }
 }

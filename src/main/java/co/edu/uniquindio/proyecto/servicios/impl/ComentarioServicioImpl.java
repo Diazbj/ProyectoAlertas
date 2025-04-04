@@ -2,13 +2,17 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.comentarios.CrearComentarioDTO;
+import co.edu.uniquindio.proyecto.dto.notificaciones.EmailDTO;
 import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Comentario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
+import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
+import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.ComentarioServicio;
+import co.edu.uniquindio.proyecto.servicios.EmailServicio;
 import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
@@ -29,29 +33,37 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     private final ComentarioRepo comentarioRepo;
     private final ReporteRepo reporteRepo;
     private final UsuarioServicioImpl usuarioServicio;
+    private final UsuarioRepo usuarioRepo;
+    private final EmailServicio emailServicio;
 
 
     @Override
     public void agregarComentario(String idReporte, CrearComentarioDTO crearComentarioDTO) throws Exception {
-        // Verificar si el reporte existe
-        if (!reporteRepo.existsById(idReporte)) {
-            throw new Exception("El reporte con ID " + idReporte + " no existe.");
-        }
+
+        // Obtener el reporte y validar existencia
+        Reporte reporte = reporteRepo.findById(idReporte)
+                .orElseThrow(() -> new Exception("El reporte con ID " + idReporte + " no existe."));
 
         String idUsuario = usuarioServicio.obtenerIdSesion();
- // Extraer el nombre del usuario
-        String nombreUsuario=usuarioServicio.obtenerNombreUsuario();
-        // Convertir DTO a entidad Comentario
+        String nombreUsuario = usuarioServicio.obtenerNombreUsuario();
+
         Comentario comentario = comentarioMapper.toDocument(crearComentarioDTO);
-        comentario.setId(new ObjectId()); // Generar un nuevo ID para el comentario
-        comentario.setReporteId(new ObjectId(idReporte)); // Asociar el comentario al reporte
-        comentario.setClienteId(new ObjectId(idUsuario)); // Asignar el ID del usuario autenticado
+        comentario.setId(new ObjectId());
+        comentario.setReporteId(reporte.getId());
+        comentario.setClienteId(new ObjectId(idUsuario));
         comentario.setNombreUsuario(nombreUsuario);
 
-        // Guardar comentario en MongoDB
         comentarioRepo.save(comentario);
-    }
 
+        // Obtener email del creador del reporte
+        String emailDestinatario = usuarioRepo.findById(reporte.getUsuarioId())
+                .map(Usuario::getEmail)
+                .orElseThrow(() -> new Exception("No se pudo obtener el email del creador del reporte"));
+
+        String cuerpoCorreo = "Se ha agregado un nuevo comentario a tu reporte: " + crearComentarioDTO.mensaje();
+        EmailDTO emailDTO = new EmailDTO("Nuevo comentario en tu reporte", cuerpoCorreo, emailDestinatario);
+        emailServicio.enviarCorreo(emailDTO);
+    }
 
 
     @Override

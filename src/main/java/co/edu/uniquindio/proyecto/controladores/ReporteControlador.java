@@ -56,9 +56,9 @@ public class ReporteControlador{
 
     @GetMapping("/topImportantes")
     @Operation(summary = "Obtener top 10 reportes")
-    public ResponseEntity<MensajeDTO<String>> obtenerTopReportes() throws Exception {
-        reporteServicio.obtenerTopReportes();
-        return ResponseEntity.ok(new MensajeDTO<>(false, "reportes"));
+    public ResponseEntity<MensajeDTO<List<ReporteDTO>>> obtenerTopReportes() throws Exception {
+        List<ReporteDTO> reportes = reporteServicio.obtenerTopReportes();
+        return ResponseEntity.ok(new MensajeDTO<>(false, reportes));
     }
 
     @PutMapping("/{id}")

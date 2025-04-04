@@ -135,7 +135,12 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public List<ReporteDTO> obtenerTopReportes() throws Exception {
-        return List.of();
+        List<Reporte> topReportes = reporteRepo.findTop10ByOrderByContadorImportanteDesc();
+
+        //Convertir a DTO usando mapper
+        return topReportes.stream()
+                .map(reporteMapper::toDTO)
+                .toList();
     }
 
     @Override

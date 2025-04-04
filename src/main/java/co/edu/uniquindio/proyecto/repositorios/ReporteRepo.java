@@ -17,10 +17,9 @@ public interface ReporteRepo extends MongoRepository<Reporte, String> {
 
     List<Reporte> findByUsuarioId(ObjectId usuarioId);
 
-    //@Query("{ 'ubicacion': { $near: { $geometry: { type: 'Point', coordinates: [?1, ?0] }, $maxDistance: 2000 } } }")
-   // List<Reporte> obtenerReportesCercanos(double latitud, double longitud);
+    List<Reporte> findTop10ByOrderByContadorImportanteDesc();
 
-    @Query("{ 'ubicacion': { $geoWithin: { $centerSphere: [ [?0, ?1], ?2 ] } } }")
+    @Query("{ 'ubicacion': { $geoWithin: { $centerSphere: [ [?0, ?1], ?2 ] } } }" )
     List<Reporte> findByUbicacionCerca(double latitud, double longitud, double radioEnRadianes);
 
 }

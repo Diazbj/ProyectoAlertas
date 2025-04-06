@@ -60,7 +60,20 @@ public class ComentarioServicioImpl implements ComentarioServicio {
                 .map(Usuario::getEmail)
                 .orElseThrow(() -> new Exception("No se pudo obtener el email del creador del reporte"));
 
-        String cuerpoCorreo = "Se ha agregado un nuevo comentario a tu reporte: " + crearComentarioDTO.mensaje();
+        String cuerpoCorreo = """
+        ¡Hola!
+
+        Has recibido un nuevo comentario en tu reporte.
+
+        Título del reporte: %s
+        Usuario que comentó: %s
+        Comentario: %s
+
+        Por favor revisa la plataforma para más detalles.
+
+        Saludos,
+        El equipo de Alertas Ciudadanas.
+        """.formatted(reporte.getTitulo(), nombreUsuario, crearComentarioDTO.mensaje());
         EmailDTO emailDTO = new EmailDTO("Nuevo comentario en tu reporte", cuerpoCorreo, emailDestinatario);
         emailServicio.enviarCorreo(emailDTO);
     }

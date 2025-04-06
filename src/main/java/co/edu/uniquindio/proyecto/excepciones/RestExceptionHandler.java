@@ -23,6 +23,10 @@ public class RestExceptionHandler {
     public ResponseEntity<String> manejarDatosInvalidosException(DatosInvalidosException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+    @ExceptionHandler(EstadoInvalidoException.class)
+    public ResponseEntity<String> manejarEstadoInvalidoException(EstadoInvalidoException ex) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ex.getMessage());
+    }
 
     @ExceptionHandler(CodigoExpiradoException.class)
     public ResponseEntity<String> manejarCodigoExpiradoException(CodigoExpiradoException ex) {

@@ -4,7 +4,9 @@ import co.edu.uniquindio.proyecto.dto.TokenDTO;
 import co.edu.uniquindio.proyecto.dto.login.LoginDTO;
 import co.edu.uniquindio.proyecto.dto.login.PasswordNuevoDTO;
 import co.edu.uniquindio.proyecto.dto.login.PasswordOlvidadoDTO;
+import co.edu.uniquindio.proyecto.excepciones.EstadoInvalidoException;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.seguridad.JWTUtils;
 import co.edu.uniquindio.proyecto.servicios.LoginServicio;
@@ -39,6 +41,12 @@ public class LoginServicioImpl implements LoginServicio {
 
 
         Usuario usuario = optionalUsuario.get();
+
+        // Verificar si el usuario est Activo
+
+        if(usuario.getEstado()!= EstadoUsuario.ACTIVO){
+            throw new EstadoInvalidoException("El usuario no esta activo");
+        }
 
 
         // Verificar si la contraseña es correcta usando el PasswordEncoder

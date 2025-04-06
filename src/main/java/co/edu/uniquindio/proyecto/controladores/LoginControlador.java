@@ -30,7 +30,8 @@ public class LoginControlador {
     }
 
 
-    @PostMapping("/codigoValidacion")
+    @PostMapping("/recuperarPassword")
+    @Operation(summary = "enviar codigo")
     public ResponseEntity<MensajeDTO<String>> recuperarPassword(@Valid @RequestBody PasswordOlvidadoDTO passwordOlvidadoDTO) throws Exception {
         loginServicio.recuperarPassword(passwordOlvidadoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Código enviado al correo"));

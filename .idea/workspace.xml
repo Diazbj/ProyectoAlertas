@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances jenn 1.0&#10;Retorna la lista de los reportes más importantes">
+    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances jenn 1.0">
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/excepciones/ReporteNoEncontradoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/HistorialRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ComentarioServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ComentarioServicioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/excepciones/RestExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/excepciones/RestExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/vo/HistorialReporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/vo/HistorialReporte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ReporteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ReporteServicioImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +49,9 @@
         <option value="spring-beans.schema" />
         <option value="HTTP Request" />
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Record" />
         <option value="Class" />
+        <option value="Interface" />
         <option value="Exception" />
       </list>
     </option>
@@ -236,7 +240,7 @@
       <workItem from="1743681960166" duration="2097000" />
       <workItem from="1743695339472" duration="3775000" />
       <workItem from="1743783986191" duration="7498000" />
-      <workItem from="1743900963432" duration="1577000" />
+      <workItem from="1743900963432" duration="6149000" />
     </task>
     <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
       <option name="closed" value="true" />
@@ -462,7 +466,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743793567549</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Avances jenn 1.0">
+      <option name="closed" value="true" />
+      <created>1743904969263</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1743904969263</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,10 +499,10 @@
     <MESSAGE value="Avances 1.0 Repositorios" />
     <MESSAGE value="Avances 2.0 Repositorios" />
     <MESSAGE value="Avances 3.0 Repositorios" />
-    <MESSAGE value="Avances jenn 1.0" />
     <MESSAGE value="Avances jenn 1.0&#10;Ya envía el correo al dueño del reporte al momento de hacer un comentario" />
     <MESSAGE value="Avances jenn 1.0&#10;Retorna la lista de los reportes más importantes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avances jenn 1.0&#10;Retorna la lista de los reportes más importantes" />
+    <MESSAGE value="Avances jenn 1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avances jenn 1.0" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

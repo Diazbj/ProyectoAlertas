@@ -71,6 +71,12 @@ public class RestExceptionHandler {
         return ResponseEntity.status(404).body(ex.getMessage());
     }
 
+    @ExceptionHandler(ReporteNoEncontradoException.class)
+    public ResponseEntity<MensajeDTO<String>> manejarReporteNoEncontradoException(ReporteNoEncontradoException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new MensajeDTO<>(true, ex.getMessage()));
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MensajeDTO<List<ValidacionDTO>>> validationExceptionHandler ( MethodArgumentNotValidException ex ) {

@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.notificaciones.NotificacionDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.excepciones.CategoriaNoEncontradaException;
 import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
+import co.edu.uniquindio.proyecto.excepciones.ReporteNoEncontradoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
@@ -15,7 +16,9 @@ import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
+import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
+import co.edu.uniquindio.proyecto.repositorios.HistorialRepo;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
@@ -46,6 +49,7 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final UsuarioServicioImpl usuarioServicio;
     private final CategoriaRepo categoriaRepo;
     private final ComentarioMapper comentarioMapper;
+    private final HistorialRepo historialRepo;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
@@ -234,7 +238,32 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public void cambiarEstado(String id, EstadoReporteDTO estadoDTO) throws Exception {
+        Optional<Reporte> optionalReporte = reporteRepo.findById(id);
 
+        if (optionalReporte.isEmpty()) {
+            throw new ReporteNoEncontradoException("El reporte no existe");
+        }
+
+        Reporte reporte = optionalReporte.get();
+
+        //Convertir el nuevo estado (String) a Enum
+        EstadoReporte nuevoEstado = EstadoReporte.valueOf(estadoDTO.nuevoEstado().toUpperCase());
+
+        //Cambiar el estado del reporte
+        reporte.setEstadoActual(nuevoEstado);
+        reporteRepo.save(reporte);
+
+        //Crear el historial de cambio
+        HistorialReporte historial = HistorialReporte.builder()
+                .estado(nuevoEstado)
+                .motivo(estadoDTO.motivo())
+                .fecha(LocalDateTime.now())
+                .usuarioId(new ObjectId(estadoDTO.idUsuario()))
+                .reporteId(new ObjectId(id))
+                .build();
+
+        // Guardar historial en su colección independiente
+        historialRepo.save(historial); // ← Asegúrate de tener este repositorio creado
     }
 }
 

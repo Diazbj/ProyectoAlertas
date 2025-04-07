@@ -19,6 +19,5 @@ public class HistorialReporte {
     private String motivo;
     private EstadoReporte estado;
     private LocalDateTime fecha;
-    private ObjectId usuarioId;
 
 }

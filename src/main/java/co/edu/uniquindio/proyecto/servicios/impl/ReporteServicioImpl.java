@@ -4,10 +4,7 @@ import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.comentarios.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.notificaciones.NotificacionDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
-import co.edu.uniquindio.proyecto.excepciones.CategoriaNoEncontradaException;
-import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
-import co.edu.uniquindio.proyecto.excepciones.ReporteNoEncontradoException;
-import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
+import co.edu.uniquindio.proyecto.excepciones.*;
 import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
@@ -240,11 +237,27 @@ public class ReporteServicioImpl implements ReporteServicio {
     public void cambiarEstado(String id, EstadoReporteDTO estadoDTO) throws Exception {
         Optional<Reporte> optionalReporte = reporteRepo.findById(id);
 
+
         if (optionalReporte.isEmpty()) {
             throw new ReporteNoEncontradoException("El reporte no existe");
         }
 
         Reporte reporte = optionalReporte.get();
+
+        // Obtener ID y ROL del usuario autenticado
+        String idUsuario = usuarioServicio.obtenerIdSesion(); // Debe devolver un String que se pueda convertir a ObjectId
+        String rolUsuario = usuarioServicio.obtenerRolSesion();
+        System.out.println(idUsuario);
+        System.out.println(rolUsuario);
+
+        // Verificar permisos
+        boolean esCreador = reporte.getUsuarioId().toHexString().equals(idUsuario);
+        boolean esModerador = rolUsuario.equals("MODERADOR");
+
+        if (!esCreador && !esModerador) {
+            throw new AccesoNoPermitidoException("No tienes permiso para cambiar el estado de este reporte");
+        }
+
 
         //Convertir el nuevo estado (String) a Enum
         EstadoReporte nuevoEstado = EstadoReporte.valueOf(estadoDTO.nuevoEstado().toUpperCase());
@@ -258,7 +271,6 @@ public class ReporteServicioImpl implements ReporteServicio {
                 .estado(nuevoEstado)
                 .motivo(estadoDTO.motivo())
                 .fecha(LocalDateTime.now())
-                .usuarioId(new ObjectId(estadoDTO.idUsuario()))
                 .reporteId(new ObjectId(id))
                 .build();
 

@@ -9,6 +9,8 @@ import org.bson.types.ObjectId;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.time.LocalDateTime;
+
 @Mapper(componentModel = "spring")
 public interface ComentarioMapper {
 
@@ -19,4 +21,14 @@ public interface ComentarioMapper {
     Comentario toDocument(CrearComentarioDTO crearComentarioDTO);
 
     ComentarioDTO toDTO(Comentario comentario);
+
+    default String map(LocalDateTime fecha) {
+        if (fecha == null) return null;
+
+        java.time.format.DateTimeFormatter formatter =
+                java.time.format.DateTimeFormatter.ofPattern("d 'de' MMMM 'de' yyyy h:mm a", new java.util.Locale("es", "CO"));
+
+        // Convertir "PM" a "pm", etc.
+        return fecha.format(formatter).replace("AM", "am").replace("PM", "pm");
+    }
 }

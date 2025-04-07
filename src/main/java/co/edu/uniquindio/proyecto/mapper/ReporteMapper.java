@@ -41,5 +41,15 @@ public interface ReporteMapper {
         return ubicacion != null ? new UbicacionDTO(ubicacion.getLatitud(), ubicacion.getLongitud()) : null;
     }
 
+    default String map(LocalDateTime fecha) {
+        if (fecha == null) return null;
+
+        java.time.format.DateTimeFormatter formatter =
+                java.time.format.DateTimeFormatter.ofPattern("d 'de' MMMM 'de' yyyy h:mm a", new java.util.Locale("es", "CO"));
+
+        // Convertir "PM" a "pm", etc.
+        return fecha.format(formatter).replace("AM", "am").replace("PM", "pm");
+    }
+
 
 }

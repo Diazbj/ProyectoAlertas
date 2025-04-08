@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.dto.reportes;
 
+import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.bson.types.ObjectId;

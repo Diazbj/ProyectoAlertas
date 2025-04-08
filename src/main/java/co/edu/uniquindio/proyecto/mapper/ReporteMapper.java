@@ -20,6 +20,7 @@ public interface ReporteMapper {
     @Mapping(target = "estadoActual", constant = "PENDIENTE")
     Reporte toDocument(CrearReporteDTO reporteDTO);
 
+
     ReporteDTO toDTO(Reporte reporte);
 
     // Método para mapear de ObjectId a String
@@ -50,6 +51,10 @@ public interface ReporteMapper {
         // Convertir "PM" a "pm", etc.
         return fecha.format(formatter).replace("AM", "am").replace("PM", "pm");
     }
+
+
+
+
 
 
 }

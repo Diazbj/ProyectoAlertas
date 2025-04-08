@@ -30,8 +30,9 @@ public class Reporte {
     private Ubicacion ubicacion;
     private LocalDateTime fecha;
     private LocalDateTime fechaCreacion;
-    private List<HistorialReporte> historial;
+    private List<HistorialReporte> historialReporte;
     private EstadoReporte estadoActual;
     private List<String> imagenes;
     private List<ObjectId> contadorImportante;
+    private LocalDateTime fechaLimiteEdicion;
 }

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.dto.reportes;
 
 import co.edu.uniquindio.proyecto.dto.UbicacionDTO;
+import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
@@ -15,5 +16,7 @@ public record ReporteDTO(
         UbicacionDTO ubicacion,
         @NotBlank String estadoActual,
         List<String> imagenes,
-        String fechaCreacion
+        String fechaCreacion,
+        List<HistorialReporteDTO> historialReporte
+
 ) {}

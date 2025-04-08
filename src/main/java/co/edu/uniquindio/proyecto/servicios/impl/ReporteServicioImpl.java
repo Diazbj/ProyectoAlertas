@@ -11,7 +11,6 @@ import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
-import co.edu.uniquindio.proyecto.repositorios.HistorialRepo;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
@@ -36,7 +35,6 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final UsuarioServicioImpl usuarioServicio;
     private final CategoriaRepo categoriaRepo;
     private final ComentarioMapper comentarioMapper;
-    private final HistorialRepo historialRepo;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
@@ -91,7 +89,7 @@ public class ReporteServicioImpl implements ReporteServicio {
         String id = usuarioServicio.obtenerIdSesion();
         //Validamos el id
         if (!ObjectId.isValid(id)) {
-            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id " + id);
         }
 
         //Buscamos el usuario que se quiere obtener
@@ -99,8 +97,8 @@ public class ReporteServicioImpl implements ReporteServicio {
         Optional<Usuario> usuarioOptional = usuarioRepo.findById(objectId);
 
         //Si no se encontró el usuario, lanzamos una excepción
-        if(usuarioOptional.isEmpty()){
-            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
+        if (usuarioOptional.isEmpty()) {
+            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id " + id);
         }
 
         // Obtenemos los reportes asociados al usuario
@@ -200,6 +198,8 @@ public class ReporteServicioImpl implements ReporteServicio {
             throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
+        Reporte reporte = reporteOptional.get();
+
         // Retornamos el reporte encontrado convertido a DTO
         return reporteMapper.toDTO(reporteOptional.get());
     }
@@ -210,7 +210,7 @@ public class ReporteServicioImpl implements ReporteServicio {
 
         Optional<Reporte> optionalReporte = reporteRepo.findById(id);
 
-        if(optionalReporte.isEmpty()){
+        if (optionalReporte.isEmpty()) {
             throw new ReporteNoEncontradoException("No existe el reporte con id: " + id);
         }
 
@@ -241,7 +241,6 @@ public class ReporteServicioImpl implements ReporteServicio {
     public void cambiarEstado(String id, EstadoReporteDTO estadoDTO) throws Exception {
         Optional<Reporte> optionalReporte = reporteRepo.findById(id);
 
-
         if (optionalReporte.isEmpty()) {
             throw new ReporteNoEncontradoException("El reporte no existe");
         }
@@ -249,12 +248,9 @@ public class ReporteServicioImpl implements ReporteServicio {
         Reporte reporte = optionalReporte.get();
 
         // Obtener ID y ROL del usuario autenticado
-        String idUsuario = usuarioServicio.obtenerIdSesion(); // Debe devolver un String que se pueda convertir a ObjectId
+        String idUsuario = usuarioServicio.obtenerIdSesion();
         String rolUsuario = usuarioServicio.obtenerRolSesion();
-        System.out.println(idUsuario);
-        System.out.println(rolUsuario);
 
-        // Verificar permisos
         boolean esCreador = reporte.getUsuarioId().toHexString().equals(idUsuario);
         boolean esModerador = rolUsuario.equals("MODERADOR");
 
@@ -262,24 +258,55 @@ public class ReporteServicioImpl implements ReporteServicio {
             throw new AccesoNoPermitidoException("No tienes permiso para cambiar el estado de este reporte");
         }
 
-
-        //Convertir el nuevo estado (String) a Enum
         EstadoReporte nuevoEstado = EstadoReporte.valueOf(estadoDTO.nuevoEstado().toUpperCase());
 
-        //Cambiar el estado del reporte
+        // Validación si el nuevo estado es RECHAZADO
+        if (nuevoEstado == EstadoReporte.RECHAZADO) {
+            if (!esModerador) {
+                throw new AccesoNoPermitidoException("Solo un moderador puede rechazar un reporte");
+            }
+            if (estadoDTO.motivo() == null || estadoDTO.motivo().isBlank()) {
+                throw new Exception("Debes proporcionar un motivo al rechazar el reporte");
+            }
+
+            // Establecer fecha límite de edición (5 días después del rechazo)
+            LocalDateTime fechaLimite = LocalDateTime.now().plusMinutes(1);
+            reporte.setFechaLimiteEdicion(fechaLimite);
+        } else {
+            // Limpiar fecha límite si no fue rechazado
+            reporte.setFechaLimiteEdicion(null);
+        }
+
+        // Actualizar estado actual del reporte
         reporte.setEstadoActual(nuevoEstado);
         reporteRepo.save(reporte);
 
-        //Crear el historial de cambio
-        HistorialReporte historial = HistorialReporte.builder()
+        // Crear historial del cambio
+        HistorialReporte.HistorialReporteBuilder historialBuilder = HistorialReporte.builder()
                 .estado(nuevoEstado)
                 .motivo(estadoDTO.motivo())
                 .fecha(LocalDateTime.now())
-                .reporteId(new ObjectId(id))
-                .build();
+                .reporteId(reporte.getId());
 
-        // Guardar historial en su colección independiente
-        historialRepo.save(historial); // ← Asegúrate de tener este repositorio creado
+// Incluir fecha límite si el estado es RECHAZADO
+        if (nuevoEstado == EstadoReporte.RECHAZADO) {
+            historialBuilder.fechaLimiteEdicion(reporte.getFechaLimiteEdicion());
+        }
+
+// Construir historial
+        HistorialReporte historial = historialBuilder.build();
+
+// Añadir historial al reporte
+        if (reporte.getHistorialReporte() == null) {
+            reporte.setHistorialReporte(new ArrayList<>());
+        }
+
+        reporte.getHistorialReporte().add(historial);
+
+// Guardar el reporte con el historial actualizado
+        reporteRepo.save(reporte);
+
     }
+
 }
 

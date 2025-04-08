@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.repositorios;
 
 
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -21,5 +22,7 @@ public interface ReporteRepo extends MongoRepository<Reporte, String> {
 
     @Query("{ 'ubicacion': { $geoWithin: { $centerSphere: [ [?0, ?1], ?2 ] } } }" )
     List<Reporte> findByUbicacionCerca(double latitud, double longitud, double radioEnRadianes);
+
+    List<Reporte> findByEstadoActual(EstadoReporte estado);
 
 }

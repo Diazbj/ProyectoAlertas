@@ -1,33 +1,23 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
-import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
-import co.edu.uniquindio.proyecto.dto.comentarios.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.notificaciones.NotificacionDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.excepciones.*;
 import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
-import co.edu.uniquindio.proyecto.modelo.documentos.Comentario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
-import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.repositorios.HistorialRepo;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
-import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import co.edu.uniquindio.proyecto.servicios.impl.UsuarioServicioImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -199,7 +189,7 @@ public class ReporteServicioImpl implements ReporteServicio {
 
         // Validamos que el id sea válido
         if (!ObjectId.isValid(id)) {
-            throw new Exception("No se encontró el reporte con el id " + id);
+            throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
         // Buscamos el reporte que se quiere obtener usando el id en formato String
@@ -207,7 +197,7 @@ public class ReporteServicioImpl implements ReporteServicio {
 
         // Si no se encontró el reporte, lanzamos una excepción
         if (reporteOptional.isEmpty()) {
-            throw new Exception("No se encontró el reporte con el id " + id);
+            throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
         // Retornamos el reporte encontrado convertido a DTO
@@ -221,16 +211,30 @@ public class ReporteServicioImpl implements ReporteServicio {
         Optional<Reporte> optionalReporte = reporteRepo.findById(id);
 
         if(optionalReporte.isEmpty()){
-            throw new Exception("No existe");
+            throw new ReporteNoEncontradoException("No existe el reporte con id: " + id);
         }
 
         Reporte reporte = optionalReporte.get();
-        int contador = reporte.getContadorImportante()+1;
+        String usuarioIdString = usuarioServicio.obtenerIdSesion();
+        ObjectId usuarioId = new ObjectId(usuarioIdString);
+        List<ObjectId> listaUsuarios = reporte.getContadorImportante();
 
-        reporte.setContadorImportante(contador);
-        reporteRepo.save(reporte);
+        if (listaUsuarios == null) {
+            listaUsuarios = new ArrayList<>();
+            listaUsuarios.add(usuarioId);
+            reporte.setContadorImportante(listaUsuarios);
+            reporteRepo.save(reporte);
+            return 1;
+        }
 
-        return contador;
+        if (!listaUsuarios.contains(usuarioId)) {
+
+            listaUsuarios.add(usuarioId);
+            reporte.setContadorImportante(listaUsuarios);
+            reporteRepo.save(reporte);
+        }
+
+        return listaUsuarios.size();
     }
 
     @Override

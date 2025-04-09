@@ -73,12 +73,15 @@ public class ReporteServicioImpl implements ReporteServicio {
     }
 
     @Override
-    public List<ReporteDTO> obtenerReportes() throws Exception {
+    public List<ReporteDTO> obtenerReportes() {
         // Obtenemos todos los reportes
         List<Reporte> reportes = reporteRepo.findAll();
 
-        // Convertimos los reportes a DTO
+        // Filtramos los que NO están eliminados ni resueltos
         return reportes.stream()
+                .filter(reporte ->
+                        reporte.getEstadoActual() != EstadoReporte.ELIMINADO && reporte.getEstadoActual() != EstadoReporte.RESUELTO
+                )
                 .map(reporteMapper::toDTO)
                 .collect(Collectors.toList());
     }
@@ -128,6 +131,9 @@ public class ReporteServicioImpl implements ReporteServicio {
 
         //Convertir a DTO usando mapper
         return topReportes.stream()
+                .filter(reporte ->
+                        reporte.getEstadoActual() != EstadoReporte.ELIMINADO && reporte.getEstadoActual() != EstadoReporte.RESUELTO
+                )
                 .map(reporteMapper::toDTO)
                 .toList();
     }

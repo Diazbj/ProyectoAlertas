@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances jenn 1.0" />
+    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances jenn 1.0&#10;Ya filtra que en obtener reportes y el topreportes, no traiga ni los resueltos, ni eliminados" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -235,7 +235,7 @@
       <workItem from="1743783986191" duration="7498000" />
       <workItem from="1743900963432" duration="6236000" />
       <workItem from="1744126633257" duration="131000" />
-      <workItem from="1744235885482" duration="1597000" />
+      <workItem from="1744235885482" duration="2003000" />
     </task>
     <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
       <option name="closed" value="true" />
@@ -485,7 +485,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744237189775</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Avances jenn 1.0&#10;Ya filtra que en obtener reportes y el topreportes, no traiga ni los resueltos, ni eliminados">
+      <option name="closed" value="true" />
+      <created>1744237889811</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1744237889811</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,7 +521,8 @@
     <MESSAGE value="Avances jenn 1.0&#10;Ya envía el correo al dueño del reporte al momento de hacer un comentario" />
     <MESSAGE value="Avances jenn 1.0&#10;Retorna la lista de los reportes más importantes" />
     <MESSAGE value="Avances jenn 1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avances jenn 1.0" />
+    <MESSAGE value="Avances jenn 1.0&#10;Ya filtra que en obtener reportes y el topreportes, no traiga ni los resueltos, ni eliminados" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avances jenn 1.0&#10;Ya filtra que en obtener reportes y el topreportes, no traiga ni los resueltos, ni eliminados" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

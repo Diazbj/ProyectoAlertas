@@ -19,7 +19,7 @@ public interface ReporteMapper {
     @Mapping(target = "fechaCreacion", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "estadoActual", constant = "PENDIENTE")
     Reporte toDocument(CrearReporteDTO reporteDTO);
-
+    @Mapping(source = "categoriaId", target = "categoria")
 
     ReporteDTO toDTO(Reporte reporte);
 

@@ -37,7 +37,7 @@ class LoginControladorTest {
     void loginTest() throws Exception {
         LoginDTO loginDTO = new LoginDTO(
                 "diaz.jordy@hotmail.com", // Cambia por un correo válido
-                "123456789"          // Cambia por una contraseña válida
+                "987654321"          // Cambia por una contraseña válida
         );
 
         mockMvc.perform(post("/api/login")

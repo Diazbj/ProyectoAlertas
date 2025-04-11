@@ -65,7 +65,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.existsByEmail(email);
     }
 
-    private String generarCodigoAleatorio(){
+    public String generarCodigoAleatorio(){
         String digitos="0123456789";
         StringBuilder codigo=new StringBuilder();
         for(int i=0;i<4;i++){

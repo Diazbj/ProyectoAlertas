@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.TokenDTO;
 import co.edu.uniquindio.proyecto.dto.login.LoginDTO;
 import co.edu.uniquindio.proyecto.dto.login.PasswordNuevoDTO;
 import co.edu.uniquindio.proyecto.dto.login.PasswordOlvidadoDTO;
+import co.edu.uniquindio.proyecto.dto.usuarios.UsuarioNuevoCodigoDTO;
 import co.edu.uniquindio.proyecto.seguridad.JWTUtils;
 import co.edu.uniquindio.proyecto.servicios.LoginServicio;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,8 +33,8 @@ public class LoginControlador {
 
     @PostMapping("/recuperarPassword")
     @Operation(summary = "enviar codigo")
-    public ResponseEntity<MensajeDTO<String>> recuperarPassword(@Valid @RequestBody PasswordOlvidadoDTO passwordOlvidadoDTO) throws Exception {
-        loginServicio.recuperarPassword(passwordOlvidadoDTO);
+    public ResponseEntity<MensajeDTO<String>> recuperarPassword(@Valid @RequestBody UsuarioNuevoCodigoDTO usuarioNuevoCodigoDTO) throws Exception {
+        loginServicio.recuperarPassword(usuarioNuevoCodigoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Código enviado al correo"));
     }
 

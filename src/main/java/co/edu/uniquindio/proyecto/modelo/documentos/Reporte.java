@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.modelo.documentos;
 
+import co.edu.uniquindio.proyecto.modelo.enums.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import lombok.*;
@@ -28,6 +29,7 @@ public class Reporte {
     private ObjectId CategoriaId;
     private String descripcion;
     private Ubicacion ubicacion;
+    private Ciudad ciudad;
     private LocalDateTime fecha;
     private LocalDateTime fechaCreacion;
     private List<HistorialReporte> historialReporte;

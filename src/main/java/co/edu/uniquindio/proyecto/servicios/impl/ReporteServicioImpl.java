@@ -134,23 +134,29 @@ public class ReporteServicioImpl implements ReporteServicio {
 
         // Validamos el id del reporte
         if (!ObjectId.isValid(id)) {
-            throw new Exception("No se encontró el reporte con el id " + id);
+            throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
         Optional<Reporte> reporteOptional = reporteRepo.findById(id);
 
-        // Si no se encuentra el reporte, lanzamos una excepción
         if (reporteOptional.isEmpty()) {
-            throw new Exception("No se encontró el reporte con el id " + id);
+            throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
-        //Obtenemos el reporte que se quiere eliminar
+        // Obtenemos el reporte que se quiere eliminar
         Reporte reporte = reporteOptional.get();
+
+        // Obtenemos el usuario autenticado
+        String usernameAutenticado = SecurityContextHolder.getContext().getAuthentication().getName();
+        ObjectId usuarioAutenticadoId = new ObjectId(usernameAutenticado);
+
+        // Verificamos si el reporte pertenece al usuario autenticado
+        if (!reporte.getUsuarioId().equals(usuarioAutenticadoId)) {
+            throw new AccesoNoPermitidoException("No tienes permiso para eliminar este reporte.");
+        }
 
         // Eliminamos el reporte
         reporteRepo.deleteById(id);
-
-
     }
 
     @Override

@@ -1,7 +1,9 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.HistorialReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import jakarta.validation.Valid;
@@ -24,5 +26,7 @@ public interface ModeradorServicio {
     void eliminarCategoria(String id) throws Exception;
 
     List<InformeDTO> generarInforme(String ciudad, String categoria, LocalDate fechaInicio, LocalDate fechaFin)throws Exception;
+
+    List<HistorialReporteDTO> obtenerHistorial(String idReporte) throws Exception ;
 
 }

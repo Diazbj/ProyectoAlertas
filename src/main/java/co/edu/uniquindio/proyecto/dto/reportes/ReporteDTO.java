@@ -17,6 +17,6 @@ public record ReporteDTO(
         @NotBlank String estadoActual,
         List<String> imagenes,
         String fechaCreacion,
-        int cantidadImportante
+        Integer cantidadImportante
 
 ) {}

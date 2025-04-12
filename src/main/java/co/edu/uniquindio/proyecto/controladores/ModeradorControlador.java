@@ -1,9 +1,11 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
 
 import co.edu.uniquindio.proyecto.dto.moderadores.InformeDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.HistorialReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.servicios.ModeradorServicio;
@@ -68,5 +70,12 @@ public class ModeradorControlador {
         List<InformeDTO> informes = moderadorServicio.generarInforme(ciudad, categoria, fechaInicio, fechaFin);
 
         return ResponseEntity.ok(new MensajeDTO<>(false, informes));
+    }
+
+    @GetMapping("/historialEstados/{idReporte}")
+    @Operation(summary = "Obtener historial de estados de un reporte")
+    public ResponseEntity<MensajeDTO<List<HistorialReporteDTO>>> obtenerComentarios(@PathVariable String idReporte) throws Exception {
+        List<HistorialReporteDTO> historialReporte =moderadorServicio.obtenerHistorial(idReporte);
+        return ResponseEntity.ok(new MensajeDTO<>(false, historialReporte));
     }
 }

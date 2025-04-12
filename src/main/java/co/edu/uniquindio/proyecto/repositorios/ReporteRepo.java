@@ -21,10 +21,18 @@ public interface ReporteRepo extends MongoRepository<Reporte, String> {
     List<Reporte> findByUsuarioId(ObjectId usuarioId);
 
 
-    @Query("{ 'ubicacion': { $geoWithin: { $centerSphere: [ [?0, ?1], ?2 ] } } }")
-    List<Reporte> findByUbicacionCerca(double latitud, double longitud, double radioEnRadianes);
-
     List<Reporte> findByEstadoActual(EstadoReporte estado);
+
+    @Aggregation({
+            "{ $match: { _id: ?0 } }",
+            "{ $addFields: { cantidadImportante: { $cond: { if: { $isArray: '$contadorImportante' }, then: { $size: '$contadorImportante' }, else: 0 } } } }",
+            "{ $lookup: { from: 'categorias', localField: 'categoriaId', foreignField: '_id', as: 'categoria' } }",
+            "{ $unwind: '$categoria' }",
+            "{ $lookup: { from: 'usuarios', localField: 'usuarioId', foreignField: '_id', as: 'usuario' } }",
+            "{ $unwind: '$usuario' }",
+            "{ $project: { usuario: '$usuario.nombre', titulo: 1, categoria: '$categoria.nombre', descripcion: 1, ubicacion: 1, estadoActual: 1, imagenes: 1, fechaCreacion: 1, cantidadImportante: 1 } }"
+    })
+    ReporteDTO obtenerReporteId(ObjectId id);
 
     @Aggregation({
             "{ $match: { estadoActual: { $in: ['VERIFICADO', 'RECHAZADO', 'PENDIENTE'] } } }",

@@ -159,18 +159,7 @@ public class ReporteServicioImpl implements ReporteServicio {
             throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
-        // Buscamos el reporte que se quiere obtener usando el id en formato String
-        Optional<Reporte> reporteOptional = reporteRepo.findById(id);
-
-        // Si no se encontró el reporte, lanzamos una excepción
-        if (reporteOptional.isEmpty()) {
-            throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
-        }
-
-        Reporte reporte = reporteOptional.get();
-
-        // Retornamos el reporte encontrado convertido a DTO
-        return reporteMapper.toDTO(reporteOptional.get());
+        return reporteRepo.obtenerReporteId(new ObjectId(id));
     }
 
 

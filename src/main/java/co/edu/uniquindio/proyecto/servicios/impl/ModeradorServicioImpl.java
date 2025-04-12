@@ -3,11 +3,13 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.InformeDTO;
+import co.edu.uniquindio.proyecto.dto.reportes.HistorialReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.EmailRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.CategoriaMapper;
+import co.edu.uniquindio.proyecto.mapper.HistorialReporteMapper;
 import co.edu.uniquindio.proyecto.mapper.InformeMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
@@ -16,6 +18,7 @@ import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
+import co.edu.uniquindio.proyecto.repositorios.HistorialRepo;
 import co.edu.uniquindio.proyecto.repositorios.InformeRepo;
 import co.edu.uniquindio.proyecto.servicios.ModeradorServicio;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +46,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     private final CategoriaRepo categoriaRepo;
     private final ReporteMapper reporteMapper;
     private final InformeRepo informeRepo;
+    private final HistorialRepo historialRepo;
     @Autowired
     private MongoTemplate mongoTemplate;
 
@@ -126,6 +130,17 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
 
         return reportes;
+    }
+
+    @Override
+    public List<HistorialReporteDTO> obtenerHistorial(String id) throws Exception{
+
+        //Validamos el id
+        if (!ObjectId.isValid(id)) {
+            throw new UsuarioNoEncontradoException("No se encontró el reporte con el id "+id);
+        }
+
+        return historialRepo.obtenerHistorial(new ObjectId(id));
     }
 
 }

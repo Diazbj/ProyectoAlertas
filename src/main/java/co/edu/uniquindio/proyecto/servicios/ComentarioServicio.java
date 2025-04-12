@@ -9,5 +9,5 @@ public interface ComentarioServicio {
 
     void agregarComentario(String idReporte, CrearComentarioDTO crearComentarioDTO) throws Exception ;
     List<ComentarioDTO> obtenerComentarios(String idReporte) throws Exception ;
-    void eliminarComentario() throws Exception ;
+    void eliminarComentario(String id) throws Exception ;
 }

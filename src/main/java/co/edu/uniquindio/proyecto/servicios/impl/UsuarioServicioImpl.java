@@ -274,7 +274,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         String id = obtenerIdSesion();
 
         Usuario usuario = usuarioRepo.findById(new ObjectId(id))
-                .orElseThrow(() -> new Exception("Usuario no encontrado"));
+                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado"));
 
         return usuario.getNombre();
 
@@ -282,7 +282,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public String obtenerRolSesion() throws Exception {
         String id = obtenerIdSesion();
         Usuario usuario = usuarioRepo.findById(new ObjectId(id))
-                .orElseThrow(() -> new Exception("Usuario no encontrado"));
+                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado"));
 
         return usuario.getRol().toString();
 

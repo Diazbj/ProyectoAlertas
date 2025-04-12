@@ -3,9 +3,10 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.comentarios.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.notificaciones.EmailDTO;
-import co.edu.uniquindio.proyecto.excepciones.ReporteNoEncontradoException;
+import co.edu.uniquindio.proyecto.excepciones.*;
 import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
+import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
 import co.edu.uniquindio.proyecto.modelo.documentos.Comentario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -63,7 +65,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         // Obtener email del creador del reporte
         String emailDestinatario = usuarioRepo.findById(reporte.getUsuarioId())
                 .map(Usuario::getEmail)
-                .orElseThrow(() -> new Exception("No se pudo obtener el email del creador del reporte"));
+                .orElseThrow(() -> new EmailNoEncontradoException("No se pudo obtener el email del creador del reporte"));
 
         String cuerpoCorreo = """
         ¡Hola!
@@ -101,7 +103,36 @@ public class ComentarioServicioImpl implements ComentarioServicio {
                 .collect(Collectors.toList());
     }
     @Override
-    public void eliminarComentario() throws Exception {
+    public void eliminarComentario(String id) throws Exception {
+        //Validamos el id
+        if (!ObjectId.isValid(id)) {
+            throw new CategoriaNoEncontradaException("No se encontró el comentario con el id "+id);
+        }
 
+
+        //Buscamos el usuario que se quiere obtener
+        ObjectId objectId = new ObjectId(id);
+
+        Optional<Comentario> comentarioOptional = comentarioRepo.findById(objectId);
+
+
+        //Si no se encontró el usuario, lanzamos una excepción
+        if(comentarioOptional.isEmpty()){
+            throw new ComentarioNoEncontradoException("No se encontró el comentario con el id "+id);
+        }
+
+
+        //Obtenemos el usuario que se quiere eliminar y le asignamos el estado eliminado
+        Comentario comentario = comentarioOptional.get();
+        // Obtenemos el usuario autenticado
+        String usernameAutenticado = SecurityContextHolder.getContext().getAuthentication().getName();
+        ObjectId usuarioAutenticadoId = new ObjectId(usernameAutenticado);
+
+        // Verificamos si el reporte pertenece al usuario autenticado
+        if (!comentario.getClienteId().equals(usuarioAutenticadoId)) {
+            throw new AccesoNoPermitidoException("No tienes permiso para eliminar este comentario.");
+        }
+
+        comentarioRepo.delete(comentario);
     }
 }

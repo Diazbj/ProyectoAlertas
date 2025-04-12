@@ -46,7 +46,7 @@ public class LoginServicioImpl implements LoginServicio {
 
 
         if(optionalUsuario.isEmpty()){
-            throw new Exception("El usuario no existe");
+            throw new UsuarioNoEncontradoException("El usuario no existe");
         }
 
 

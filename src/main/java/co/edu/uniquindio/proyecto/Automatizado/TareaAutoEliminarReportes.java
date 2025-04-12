@@ -18,7 +18,7 @@ public class TareaAutoEliminarReportes {
     @Autowired
     private ReporteRepo reporteRepo;
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(cron = "0 * * * * *")
     public void eliminarReportesRechazadosVencidos() {
         List<Reporte> reportes = reporteRepo.findByEstadoActual(EstadoReporte.RECHAZADO);
 

@@ -5,6 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public record PasswordNuevoDTO(
         @NotBlank String codigo,
-        @Email @NotBlank String email,
+        @Email @NotBlank  String email,
         @NotBlank String nuevoPassword
 ) {}

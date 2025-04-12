@@ -34,4 +34,22 @@ public class Usuario {
     private String password;
     private CodigoValidacion codigoValidacion;
     private LocalDateTime fechaRegistro;
+
+    public void setCiudad (String ciudad) throws Exception {
+        boolean existeCiudad = false;
+        Ciudad ciudadAux = null;
+
+        for(Ciudad c: Ciudad.values()){
+            if(c.equals(ciudad)) {
+                existeCiudad = true;
+                ciudadAux = c;
+                break;
+            }
+        }
+
+        if(!existeCiudad)
+            throw new Exception("La ciudad no existe");
+        else
+            this.ciudad = ciudadAux;
+    }
 }

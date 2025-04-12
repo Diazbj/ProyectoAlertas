@@ -55,7 +55,6 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         if(this.existeCategoria(categoriaDTO.nombre()))
             throw new DatoRepetidoException("La categoria ya existe");
 
-
         Categoria categoria = categoriaMapper.toDocument(categoriaDTO);
         categoriaRepo.save(categoria);
     }
@@ -64,13 +63,12 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         return categoriaRepo.existsByNombre(nombre);
     }
 
-
     @Override
     public List<CategoriaDTO> obtenerCategorias() throws Exception {
         List<Categoria> categorias = categoriaRepo.findAll();
 
         return categorias.stream()
-                .map(categoria -> new CategoriaDTO(categoria.getNombre()))
+                .map(categoriaMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -87,8 +85,6 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         Categoria categoria = categoriaOptional.get();
         categoria.setNombre(categoriaDTO.nombre());
         categoriaRepo.save(categoria);
-
-
     }
 
     @Override
@@ -99,25 +95,19 @@ public class ModeradorServicioImpl implements ModeradorServicio {
             throw new UsuarioNoEncontradoException("No se encontró la categoria con el id "+id);
         }
 
-
         //Buscamos el usuario que se quiere obtener
         ObjectId objectId = new ObjectId(id);
 
         Optional<Categoria> categoriaOptional = categoriaRepo.findById(objectId);
-
 
         //Si no se encontró el usuario, lanzamos una excepción
         if(categoriaOptional.isEmpty()){
             throw new UsuarioNoEncontradoException("No se encontró la categoria con el id "+id);
         }
 
-
         //Obtenemos el usuario que se quiere eliminar y le asignamos el estado eliminado
         Categoria categoria = categoriaOptional.get();
         categoriaRepo.delete(categoria);
-
-
-
     }
 
     @Override
@@ -127,7 +117,6 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
         // Llamar al repositorio que ya devuelve los conteos agrupados
         List<InformeDTO> reportes = informeRepo.findReportesByCiudadAndFecha(ciudad,categoria, fechaInicioDate, fechaFinDate);
-
 
         return reportes;
     }

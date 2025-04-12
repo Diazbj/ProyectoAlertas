@@ -21,8 +21,6 @@ public interface UsuarioServicio {
 
     void eliminar() throws Exception;
 
-
-
     UsuarioDTO obtener() throws Exception;
 
 }

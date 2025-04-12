@@ -6,5 +6,4 @@ public record ComentarioDTO(
         @NotBlank String nombreUsuario,
         @NotBlank String mensaje,
         String fechaCreacion
-
 ) {}

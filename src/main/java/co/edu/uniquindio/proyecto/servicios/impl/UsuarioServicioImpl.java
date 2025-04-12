@@ -1,10 +1,10 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
-
 import co.edu.uniquindio.proyecto.dto.notificaciones.EmailDTO;
 import co.edu.uniquindio.proyecto.dto.usuarios.*;
 import co.edu.uniquindio.proyecto.excepciones.*;
 import co.edu.uniquindio.proyecto.mapper.UsuarioMapper;
+import co.edu.uniquindio.proyecto.modelo.enums.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
@@ -12,15 +12,12 @@ import co.edu.uniquindio.proyecto.servicios.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 
 import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
-import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -36,7 +33,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public void crear(CrearUsuarioDTO crearUsuarioDTO) throws Exception {
-        
+
         if(existeEmail(crearUsuarioDTO.email())) throw new EmailRepetidoException("El email ya existe");
 
         String codigoGenerado=generarCodigoAleatorio();
@@ -213,29 +210,30 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public void eliminar() throws Exception {
-
         String id = obtenerIdSesion();
         //Validamos el id
         if (!ObjectId.isValid(id)) {
             throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
         }
 
-
         //Buscamos el usuario que se quiere obtener
         ObjectId objectId = new ObjectId(id);
         Optional<Usuario> usuarioOptional = usuarioRepo.findById(objectId);
-
 
         //Si no se encontró el usuario, lanzamos una excepción
         if(usuarioOptional.isEmpty()){
             throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
         }
 
-
         //Obtenemos el usuario que se quiere eliminar y le asignamos el estado eliminado
         Usuario usuario = usuarioOptional.get();
-        usuario.setEstado(EstadoUsuario.ELIMINADO);
 
+        //Si el usuario se encuentra eliminado
+        if(usuario.getEstado().equals(EstadoUsuario.INACTIVO)){
+            throw new Exception("La cuenta ya esta eliminada.");
+        }
+
+        usuario.setEstado(EstadoUsuario.ELIMINADO);
 
         //Como el objeto usuario ya tiene un id, el save() no crea un nuevo registro sino que actualiza el que ya existe
         usuarioRepo.save(usuario);

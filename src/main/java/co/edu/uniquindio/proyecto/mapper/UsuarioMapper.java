@@ -10,20 +10,16 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-
 @Mapper(componentModel = "spring")
 public interface UsuarioMapper {
-
 
     @Mapping(target = "rol", constant = "CLIENTE")
     @Mapping(target = "estado", constant = "INACTIVO")
     @Mapping(target = "fechaRegistro", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "password", ignore = true)
-    Usuario toDocument(CrearUsuarioDTO usuarioDTO);
-
+    Usuario toDocument(CrearUsuarioDTO usuarioDTO) throws Exception;
 
     UsuarioDTO toDTO(Usuario usuario);
-
 
     // Metodo para mapear de ObjectId a String
     default String map(ObjectId value) {
@@ -37,14 +33,9 @@ public interface UsuarioMapper {
     @Mapping(target = "codigoValidacion", ignore = true)
     @Mapping(target = "email", ignore = true)
     @Mapping(target = "password", ignore = true)
-    void toDocument(EditarUsuarioDTO editarUsuarioDTO, @MappingTarget Usuario usuario);
+    void toDocument(EditarUsuarioDTO editarUsuarioDTO, @MappingTarget Usuario usuario) throws Exception;
 
     @Mapping(target = "password", source = "nuevoPassword") // Solo cambia la contraseña
     void actualizarPassword(@MappingTarget Usuario usuario, CambiarPasswordDTO cambiarPasswordDTO);
 
-
-
-
-
 }
-

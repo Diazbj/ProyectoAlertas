@@ -17,14 +17,11 @@ import java.time.LocalDateTime;
 @Mapper(componentModel = "spring")
 public interface ReporteMapper {
 
-
     @Mapping(target = "fechaCreacion", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "estadoActual", constant = "PENDIENTE")
     Reporte toDocument(CrearReporteDTO reporteDTO);
 
     ReporteDTO toDTO(Reporte reporte);
-
-
 
     // Método para mapear de ObjectId a String
     default String map(ObjectId value) {
@@ -54,10 +51,5 @@ public interface ReporteMapper {
         // Convertir "PM" a "pm", etc.
         return fecha.format(formatter).replace("AM", "am").replace("PM", "pm");
     }
-
-
-
-
-
 
 }

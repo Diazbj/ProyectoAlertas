@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
+import co.edu.uniquindio.proyecto.dto.notificaciones.EmailDTO;
 import co.edu.uniquindio.proyecto.dto.notificaciones.NotificacionDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.*;
 import co.edu.uniquindio.proyecto.excepciones.*;
@@ -13,6 +14,7 @@ import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.servicios.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -35,6 +37,7 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final UsuarioServicioImpl usuarioServicio;
     private final CategoriaRepo categoriaRepo;
     private final ComentarioMapper comentarioMapper;
+    private final EmailServicio emailServicio;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
@@ -74,16 +77,11 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public List<ReporteDTO> obtenerReportes() {
-        // Obtenemos todos los reportes
-        List<Reporte> reportes = reporteRepo.findAll();
+        return reporteRepo.obtenerReportes();
+    }
 
-        // Filtramos los que NO están eliminados ni resueltos
-        return reportes.stream()
-                .filter(reporte ->
-                        reporte.getEstadoActual() != EstadoReporte.ELIMINADO && reporte.getEstadoActual() != EstadoReporte.RESUELTO
-                )
-                .map(reporteMapper::toDTO)
-                .collect(Collectors.toList());
+    public String obtenerNombre(ObjectId idCategoria){
+        return categoriaRepo.findById(idCategoria).orElseThrow().getNombre();
     }
 
     @Override
@@ -122,7 +120,12 @@ public class ReporteServicioImpl implements ReporteServicio {
 
         // Lógica para encontrar reportes cercanos usando latitud y longitud
         List<Reporte> reportes = reporteRepo.findByUbicacionCerca(latitud, longitud, radioEnRadianes);
-        return reportes.stream().map(reporteMapper::toDTO).collect(Collectors.toList());
+        return reportes.stream().filter(reporte ->
+                        reporte.getEstadoActual() != EstadoReporte.ELIMINADO && reporte.getEstadoActual() != EstadoReporte.RESUELTO
+                )
+                .map(reporteMapper::toDTO)
+                .toList();
+
     }
 
     @Override
@@ -278,6 +281,9 @@ public class ReporteServicioImpl implements ReporteServicio {
             // Establecer fecha límite de edición (5 días después del rechazo)
             LocalDateTime fechaLimite = LocalDateTime.now().plusMinutes(1);
             reporte.setFechaLimiteEdicion(fechaLimite);
+
+
+
         } else {
             // Limpiar fecha límite si no fue rechazado
             reporte.setFechaLimiteEdicion(null);
@@ -297,6 +303,26 @@ public class ReporteServicioImpl implements ReporteServicio {
 // Incluir fecha límite si el estado es RECHAZADO
         if (nuevoEstado == EstadoReporte.RECHAZADO) {
             historialBuilder.fechaLimiteEdicion(reporte.getFechaLimiteEdicion());
+            // Obtener email del creador del reporte
+            String emailDestinatario = usuarioRepo.findById(reporte.getUsuarioId())
+                    .map(Usuario::getEmail)
+                    .orElseThrow(() -> new Exception("No se pudo obtener el email del creador del reporte"));
+
+            String cuerpoCorreo = """
+        ¡Hola!
+
+        Tu reporte fue rechazado
+
+        Título del reporte: %s
+        Motivo: %s
+
+        Por favor revisa la plataforma para más detalles.
+
+        Saludos,
+        El equipo de Alertas Ciudadanas.
+        """.formatted(reporte.getTitulo(), estadoDTO.motivo());
+            EmailDTO emailDTO = new EmailDTO("Reporte rechazado", cuerpoCorreo, emailDestinatario);
+            emailServicio.enviarCorreo(emailDTO);
         }
 
 // Construir historial

@@ -10,18 +10,27 @@ import org.bson.types.ObjectId;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 
 import java.time.LocalDateTime;
 
 @Mapper(componentModel = "spring")
 public interface ReporteMapper {
+
     @Mapping(target = "nombreUsuario", ignore = true)
     @Mapping(target = "fechaCreacion", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "estadoActual", constant = "PENDIENTE")
     Reporte toDocument(CrearReporteDTO reporteDTO);
-    @Mapping(source = "categoriaId", target = "categoria")
 
+    @Mapping(source = "categoriaId", target = "categoria", qualifiedByName = "categoriaIdToNombre")
     ReporteDTO toDTO(Reporte reporte);
+
+    @Named("categoriaIdToNombre")
+    default String categoriaIdToNombre(ObjectId categoriaId) {
+        // Este método se implementa en un helper
+        return null; // lo inyectaremos
+    }
+
 
     // Método para mapear de ObjectId a String
     default String map(ObjectId value) {

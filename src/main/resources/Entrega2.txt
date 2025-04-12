@@ -1,0 +1,144 @@
+1) Crear Usuario
+FUNCIONA
+{
+  "nombre": "John Cifuentes",
+  "telefono": "3123569874",
+  "ciudad": "ARMENIA",
+  "direccion": "7 de agosto mz 3 casa 234",
+  "email": "diaz.jordyb@gmail.com",
+  "password": "123456789"
+}
+
+
+ NO FUNCIONA
+{
+  "nombre": "John Cifuentes",
+  "telefono": "31235",
+  "ciudad": "ARMENIA",
+  "direccion": "7 de agosto mz 3 casa 234",
+  "email": "jfdiazbuqvirtual.edu.co",
+  "password": "12345"
+}
+
+2) Activar Usuario
+
+{
+  "email": "diaz.jordyb@gmail.com",
+  "codigo": "1234"
+}
+
+3)Login
+
+{
+  "email": "diaz.jordyb@gmail.com",
+  "password": "123456789"
+}
+
+4) Recuperar contraseña
+
+{
+  "email": "diaz.jordyb@gmail.com"
+}
+
+5) PasswordNuevo
+
+{
+  "codigo": "string",
+  "email": "diaz.jordyb@gmail.com",
+  "nuevoPassword": "987654321"
+}
+
+6) Get usuario
+
+7)Editar usuario
+
+{
+  "nombre": "Jordy",
+  "telefono": "3123146223",
+  "ciudad": "PEREIRA",
+  "direccion": "Calle lejos"
+}
+
+8) cambiar contraseña
+{
+  "actualPassword": "987654321",
+  "nuevoPassword": "123456789"
+}
+
+9) Eliminar Usuario
+
+10) Crear Reporte
+{
+    "titulo": "Festival de comida comunitaria",
+    "descripcion": "Gran festival gastronómico en el parque de la Vida.",
+    "ubicacion": {
+      "latitud": 4.518,
+      "longitud": -75.673
+    },
+    "ciudad": "ARMENIA",
+    "imagenes": [
+      "http://res.cloudinary.com/dmbcs2t8r/image/upload/v1744494325/ProyectoAlertas/na8s8afis45br8hcqrws.jpg"
+    ],
+    "categoria": "67fa6f4ac10d3c3d02807471"
+  }
+
+  11) Editar Reporte
+
+  {
+    "titulo": "Festival de comida comunitaria",
+    "categoria": "67fa6f4ac10d3c3d02807471",
+    "ciudad": "PEREIRA",
+    "descripcion": "Gran festival gastronómico en el parque de la Vida.",
+    "ubicacion": {
+      "latitud": 4.1,
+      "longitud": -75.1
+    },
+    "imagen": [
+      "http://res.cloudinary.com/dmbcs2t8r/image/upload/v1744494325/ProyectoAlertas/na8s8afis45br8hcqrws.jpg"
+    ]
+  }
+
+  12)Elimina Reporte
+
+  13) Obtener Reporte dado id
+  14) Obtener Reportes
+  14) Obtener Reportes dado idUsusario
+  15) Obtener Reportes dada la ubicacion
+  16) obtener top reportes
+  17) Marcar como importante
+  18)Editar estado del reporte
+
+  {
+    "nuevoEstado": "RESUELTO",
+    "motivo": "Ya se encontro la mascota"
+  }
+
+19) comentar en reporte
+
+{
+  "mensaje": "La mascota fue vista en laureles"
+}
+
+20) Crear categoria
+
+{
+  "nombre": "Desastre Natural",
+  "color": "Azul",
+  "descripción": "Arbol caido"
+}
+
+21) Editar categoria
+
+{
+  "nombre": "Desastre",
+  "color": "Verde",
+  "descripción": "Arbol"
+}
+
+22)Eliminar Categoria
+
+23)obtener todas las categorias
+
+24) crear informe
+
+25) Obtener historial estados

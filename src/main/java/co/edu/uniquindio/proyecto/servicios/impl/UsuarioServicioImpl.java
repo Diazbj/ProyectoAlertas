@@ -118,7 +118,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         CodigoValidacion codigoValidacion = usuario.getCodigoValidacion();
 
         if (codigoValidacion == null) {
-            throw new Exception("No se ha generado un código de activación para este usuario.");
+            throw new DatosInvalidosException("No se ha generado un código de activación para este usuario.");
         }
 
         // Verificamos si el código ha expirado (15 minutos de validez)

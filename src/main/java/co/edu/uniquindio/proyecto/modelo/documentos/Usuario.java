@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.modelo.documentos;
 
+import co.edu.uniquindio.proyecto.excepciones.DatosInvalidosException;
+import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.modelo.enums.Rol;
 import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
@@ -35,7 +37,7 @@ public class Usuario {
     private CodigoValidacion codigoValidacion;
     private LocalDateTime fechaRegistro;
 
-    public void setCiudad (String ciudad) throws Exception {
+   /* public void setCiudad (String ciudad) throws Exception {
         boolean existeCiudad = false;
         Ciudad ciudadAux = null;
 
@@ -48,8 +50,8 @@ public class Usuario {
         }
 
         if(!existeCiudad)
-            throw new Exception("La ciudad no existe");
+            throw new UsuarioNoEncontradoException("La ciudad no existe");
         else
             this.ciudad = ciudadAux;
-    }
+    }*/
 }

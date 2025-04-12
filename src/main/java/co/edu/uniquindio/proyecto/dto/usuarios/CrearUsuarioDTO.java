@@ -8,10 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 public record CrearUsuarioDTO(
         @NotBlank @Length(max = 100) String nombre,
-        @Pattern(
-                regexp = "^\\+?\\d+$",
-                message = "El número solo puede contener dígitos y un signo '+' opcional al inicio"
-        ) @Length(min = 10, max = 20) String telefono,
+        @Length(min = 10, max = 20) String telefono,
         @NotNull String ciudad,
         @NotBlank @Length(max = 100) String direccion,
         @NotBlank @Length(max = 50) @Email String email,

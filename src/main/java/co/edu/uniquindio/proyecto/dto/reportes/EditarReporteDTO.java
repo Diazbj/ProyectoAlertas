@@ -10,6 +10,7 @@ import java.util.List;
 public record EditarReporteDTO(
         @NotBlank String titulo,
         @NotBlank String categoria,
+        @NotBlank String ciudad,
         @NotBlank String descripcion,
         @NotNull UbicacionDTO ubicacion,
         @NotEmpty List<String> imagen

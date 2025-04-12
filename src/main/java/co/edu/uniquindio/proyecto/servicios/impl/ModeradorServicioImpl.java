@@ -13,6 +13,8 @@ import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.repositorios.InformeRepo;
 import co.edu.uniquindio.proyecto.servicios.ModeradorServicio;
@@ -61,16 +63,56 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
     @Override
     public List<CategoriaDTO> obtenerCategorias() throws Exception {
-        return null;
+        List<Categoria> categorias = categoriaRepo.findAll();
+
+        return categorias.stream()
+                .map(categoria -> new CategoriaDTO(categoria.getNombre()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public void editarCategoria(String id, CategoriaDTO categoriaDTO) throws Exception {
 
+        ObjectId objectId = new ObjectId(id);
+        Optional<Categoria> categoriaOptional = categoriaRepo.findById(objectId);
+
+        if(categoriaOptional.isEmpty()){
+            throw new Exception("No se encontró la categoria con el id "+id);
+        }
+
+        Categoria categoria = categoriaOptional.get();
+        categoria.setNombre(categoriaDTO.nombre());
+        categoriaRepo.save(categoria);
+
+
     }
 
     @Override
     public void eliminarCategoria(String id) throws Exception {
+
+        //Validamos el id
+        if (!ObjectId.isValid(id)) {
+            throw new UsuarioNoEncontradoException("No se encontró la categoria con el id "+id);
+        }
+
+
+        //Buscamos el usuario que se quiere obtener
+        ObjectId objectId = new ObjectId(id);
+
+        Optional<Categoria> categoriaOptional = categoriaRepo.findById(objectId);
+
+
+        //Si no se encontró el usuario, lanzamos una excepción
+        if(categoriaOptional.isEmpty()){
+            throw new UsuarioNoEncontradoException("No se encontró la categoria con el id "+id);
+        }
+
+
+        //Obtenemos el usuario que se quiere eliminar y le asignamos el estado eliminado
+        Categoria categoria = categoriaOptional.get();
+        categoriaRepo.delete(categoria);
+
+
 
     }
 

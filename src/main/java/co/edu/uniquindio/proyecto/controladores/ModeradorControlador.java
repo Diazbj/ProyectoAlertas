@@ -37,15 +37,15 @@ public class ModeradorControlador {
 
     @GetMapping("/categorias")
     @Operation(summary = "Obtener todas las categorias")
-    public ResponseEntity<MensajeDTO<String>> obtenerCategorias() throws Exception {
-        moderadorServicio.obtenerCategorias();
-        return ResponseEntity.ok(new MensajeDTO<>(false, "categorias"));
+    public ResponseEntity<MensajeDTO<List<CategoriaDTO>>> obtenerCategorias() throws Exception {
+        List<CategoriaDTO> categorias=moderadorServicio.obtenerCategorias();
+        return ResponseEntity.ok(new MensajeDTO<>(false, categorias));
     }
 
     @PutMapping("/categorias/{id}")
     @Operation(summary = "Editar categoria")
     public ResponseEntity<MensajeDTO<String>> editarCategoria(@PathVariable String id, @Valid @RequestBody CategoriaDTO categoriaDTO) throws Exception {
-
+        moderadorServicio.editarCategoria(id,categoriaDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Categoría editada exitosamente"));
     }
 

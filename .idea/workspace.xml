@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances jenn 1.0&#10;Ya filtra que en obtener reportes y el topreportes, no traiga ni los resueltos, ni eliminados">
+    <list default="true" id="37225b5e-92ed-4948-afd1-07bc046151c2" name="Changes" comment="Avances jenn 1.0&#10;Permitía editar todos los reportes, ya no">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ReporteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ReporteServicioImpl.java" afterDir="false" />
     </list>
@@ -295,7 +295,7 @@
       <workItem from="1744405511396" duration="471000" />
       <workItem from="1744406019475" duration="798000" />
       <workItem from="1744412794460" duration="672000" />
-      <workItem from="1744464277509" duration="5620000" />
+      <workItem from="1744464277509" duration="8622000" />
     </task>
     <task id="LOCAL-00001" summary="Se elimino archivos innecesarios">
       <option name="closed" value="true" />
@@ -569,7 +569,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744413442012</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Avances jenn 1.0&#10;Permitía editar todos los reportes, ya no">
+      <option name="closed" value="true" />
+      <created>1744470003045</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1744470003045</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -598,7 +606,8 @@
     <MESSAGE value="Avances jenn 1.0&#10;Retorna la lista de los reportes más importantes" />
     <MESSAGE value="Avances jenn 1.0" />
     <MESSAGE value="Avances jenn 1.0&#10;Ya filtra que en obtener reportes y el topreportes, no traiga ni los resueltos, ni eliminados" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avances jenn 1.0&#10;Ya filtra que en obtener reportes y el topreportes, no traiga ni los resueltos, ni eliminados" />
+    <MESSAGE value="Avances jenn 1.0&#10;Permitía editar todos los reportes, ya no" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avances jenn 1.0&#10;Permitía editar todos los reportes, ya no" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

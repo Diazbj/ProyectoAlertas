@@ -104,35 +104,28 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public void editarReporte(String id, EditarReporteDTO editarReporteDTO) throws Exception {
-        // Validamos el id del reporte
         if (!ObjectId.isValid(id)) {
             throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
-        // Convertimos el id a ObjectId
-        ObjectId objectId = new ObjectId(id);
         Optional<Reporte> reporteOptional = reporteRepo.findById(id);
-
-        // Si no se encuentra el reporte, lanzamos una excepción
         if (reporteOptional.isEmpty()) {
-            throw new Exception("No se encontró el reporte con el id " + id);
+            throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
-        // Obtener el reporte
         Reporte reporte = reporteOptional.get();
 
-        // Obtener el username del usuario autenticado (suponiendo que el username es el identificador único del usuario)
+        // Obtener ID del usuario autenticado
         String usernameAutenticado = SecurityContextHolder.getContext().getAuthentication().getName();
+        ObjectId usuarioAutenticadoId = new ObjectId(usernameAutenticado);
 
-        // Verificar si el reporte pertenece al usuario autenticado
-        if (!reporte.getUsuarioId().equals(usernameAutenticado)) {
+        // Verificar que el reporte le pertenezca
+        if (!reporte.getUsuarioId().equals(usuarioAutenticadoId)) {
             throw new AccesoNoPermitidoException("No tienes permiso para editar este reporte.");
         }
 
-        // Mapear los datos actualizados al reporte
+        // Mapear y guardar
         reporteMapper.toDocument(editarReporteDTO, reporte);
-
-        // Guardar los cambios en la base de datos
         reporteRepo.save(reporte);
     }
 

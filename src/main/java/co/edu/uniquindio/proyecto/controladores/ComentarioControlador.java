@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.comentarios.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.servicios.ComentarioServicio;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,13 @@ public class ComentarioControlador {
     public ResponseEntity<MensajeDTO<List<ComentarioDTO>>> obtenerComentarios(@PathVariable String idReporte) throws Exception {
         List<ComentarioDTO> comentarios=comentarioServicio.obtenerComentarios(idReporte);
         return ResponseEntity.ok(new MensajeDTO<>(false, comentarios));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar comentario")
+    public ResponseEntity<String> eliminarComentario(@PathVariable String id) throws Exception {
+        comentarioServicio.eliminarComentario(id);
+        return ResponseEntity.ok("Comentario eliminado.");
     }
 
 }

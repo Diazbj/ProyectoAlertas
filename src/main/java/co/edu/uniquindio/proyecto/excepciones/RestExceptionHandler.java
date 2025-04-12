@@ -44,6 +44,16 @@ public class RestExceptionHandler {
         return ResponseEntity.status(404).body(ex.getMessage());
     }
 
+    @ExceptionHandler(EmailNoEncontradoException.class)
+    public ResponseEntity<String> manejarEmailNoEncontradoException(EmailNoEncontradoException ex) {
+        return ResponseEntity.status(404).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(ComentarioNoEncontradoException.class)
+    public ResponseEntity<String> manejarComentarioNoEncontradoException(ComentarioNoEncontradoException ex) {
+        return ResponseEntity.status(404).body(ex.getMessage());
+    }
+
 
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity<MensajeDTO<String>> noResourceFoundExceptionHandler (NoResourceFoundException ex){

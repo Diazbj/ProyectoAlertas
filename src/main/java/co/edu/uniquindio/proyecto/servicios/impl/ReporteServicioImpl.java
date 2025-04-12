@@ -263,7 +263,7 @@ public class ReporteServicioImpl implements ReporteServicio {
             // Obtener email del creador del reporte
             String emailDestinatario = usuarioRepo.findById(reporte.getUsuarioId())
                     .map(Usuario::getEmail)
-                    .orElseThrow(() -> new Exception("No se pudo obtener el email del creador del reporte"));
+                    .orElseThrow(() -> new EmailNoEncontradoException("No se pudo obtener el email del creador del reporte"));
 
             String cuerpoCorreo = """
         ¡Hola!

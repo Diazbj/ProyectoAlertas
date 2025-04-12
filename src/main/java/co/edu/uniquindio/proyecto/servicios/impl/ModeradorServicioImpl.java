@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.InformeDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.HistorialReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.excepciones.CategoriaNoEncontradaException;
 import co.edu.uniquindio.proyecto.excepciones.DatoRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.EmailRepetidoException;
 import co.edu.uniquindio.proyecto.excepciones.UsuarioNoEncontradoException;
@@ -79,7 +80,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         Optional<Categoria> categoriaOptional = categoriaRepo.findById(objectId);
 
         if(categoriaOptional.isEmpty()){
-            throw new Exception("No se encontró la categoria con el id "+id);
+            throw new CategoriaNoEncontradaException("No se encontró la categoria con el id "+id);
         }
 
         Categoria categoria = categoriaOptional.get();
@@ -92,7 +93,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
         //Validamos el id
         if (!ObjectId.isValid(id)) {
-            throw new UsuarioNoEncontradoException("No se encontró la categoria con el id "+id);
+            throw new CategoriaNoEncontradaException("No se encontró la categoria con el id "+id);
         }
 
         //Buscamos el usuario que se quiere obtener
@@ -102,7 +103,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
         //Si no se encontró el usuario, lanzamos una excepción
         if(categoriaOptional.isEmpty()){
-            throw new UsuarioNoEncontradoException("No se encontró la categoria con el id "+id);
+            throw new CategoriaNoEncontradaException("No se encontró la categoria con el id "+id);
         }
 
         //Obtenemos el usuario que se quiere eliminar y le asignamos el estado eliminado

@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.comentarios.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.notificaciones.EmailDTO;
+import co.edu.uniquindio.proyecto.excepciones.ReporteNoEncontradoException;
 import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Comentario;
@@ -40,9 +41,13 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     @Override
     public void agregarComentario(String idReporte, CrearComentarioDTO crearComentarioDTO) throws Exception {
 
+        if (!ObjectId.isValid(idReporte)) {
+            throw new ReporteNoEncontradoException("El reporte con ID " + idReporte + " no existe.");
+        }
+
         // Obtener el reporte y validar existencia
         Reporte reporte = reporteRepo.findById(idReporte)
-                .orElseThrow(() -> new Exception("El reporte con ID " + idReporte + " no existe."));
+                .orElseThrow(() -> new ReporteNoEncontradoException("El reporte con ID " + idReporte + " no existe."));
 
         String idUsuario = usuarioServicio.obtenerIdSesion();
         String nombreUsuario = usuarioServicio.obtenerNombreUsuario();
@@ -81,9 +86,10 @@ public class ComentarioServicioImpl implements ComentarioServicio {
 
     @Override
     public List<ComentarioDTO> obtenerComentarios(String idReporte) throws Exception {
+
         // Verificar si el reporte existe en la base de datos
         if (!reporteRepo.existsById(idReporte)) {
-            throw new Exception("El reporte con ID " + idReporte + " no existe.");
+            throw new ReporteNoEncontradoException("El reporte con ID " + idReporte + " no existe.");
         }
 
         // Buscar todos los comentarios que tengan el ID del reporte

@@ -3,10 +3,13 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
+import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import co.edu.uniquindio.proyecto.dto.moderadores.InformeDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ModeradorServicio {
@@ -20,12 +23,6 @@ public interface ModeradorServicio {
 
     void eliminarCategoria(String id) throws Exception;
 
-    List<ReporteDTO> generarInforme(
-            @RequestParam String fechaInicio,
-            @RequestParam String fechaFin,
-            @RequestParam(required = false) String categoria,
-            @RequestParam(required = false) Double latitud,
-            @RequestParam(required = false) Double longitud,
-            @RequestParam(required = false, defaultValue = "5") int radio)throws Exception;
+    List<InformeDTO> generarInforme(String ciudad, String categoria, LocalDate fechaInicio, LocalDate fechaFin)throws Exception;
 
 }

@@ -16,7 +16,6 @@ public record ReporteDTO(
         UbicacionDTO ubicacion,
         @NotBlank String estadoActual,
         List<String> imagenes,
-        String fechaCreacion,
-        List<HistorialReporteDTO> historialReporte
+        String fechaCreacion
 
 ) {}

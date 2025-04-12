@@ -9,13 +9,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record ReporteDTO(
-        @NotBlank String nombreUsuario,
+        @NotBlank String usuario,
         @NotBlank String titulo,
         @NotBlank String categoria,
         @NotBlank String descripcion,
         UbicacionDTO ubicacion,
         @NotBlank String estadoActual,
         List<String> imagenes,
-        String fechaCreacion
+        String fechaCreacion,
+        int cantidadImportante
 
 ) {}

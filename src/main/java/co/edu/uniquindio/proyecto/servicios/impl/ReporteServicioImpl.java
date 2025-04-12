@@ -49,16 +49,15 @@ public class ReporteServicioImpl implements ReporteServicio {
         reporte.setUsuarioId(new ObjectId(id));
         // Buscar al usuario por su ID
         Usuario usuario = usuarioRepo.findById(new ObjectId(id)).orElseThrow(() -> new Exception("Usuario no encontrado"));
-        // Establecer el nombre del usuario en el reporte
-        reporte.setNombreUsuario(usuario.getNombre());  // Aquí se asigna el nombre del usuario
+        reporte.setUsuarioId(usuario.getId());
 
         // Validar si el categoriaId es válido antes de intentar convertirlo
-        if (crearReporteDTO.categoriaId() == null || !ObjectId.isValid(crearReporteDTO.categoriaId())) {
+        if (crearReporteDTO.categoria() == null || !ObjectId.isValid(crearReporteDTO.categoria())) {
             throw new CategoriaNoEncontradaException("Categoría no encontrada");
         }
 
         // Validar que la categoría existe antes de asignarla al reporte
-        ObjectId categoriaId = new ObjectId(crearReporteDTO.categoriaId());
+        ObjectId categoriaId = new ObjectId(crearReporteDTO.categoria());
         Categoria categoria = categoriaRepo.findById(categoriaId).orElseThrow(() -> new CategoriaNoEncontradaException("Categoría no encontrada"));
 
         // Asignar la categoría al reporte
@@ -87,58 +86,19 @@ public class ReporteServicioImpl implements ReporteServicio {
     @Override
     public List<ReporteDTO> obtenerReportesUsuario() throws Exception {
 
-        String id = usuarioServicio.obtenerIdSesion();
-        //Validamos el id
-        if (!ObjectId.isValid(id)) {
-            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id " + id);
-        }
-
-        //Buscamos el usuario que se quiere obtener
-        ObjectId objectId = new ObjectId(id);
-        Optional<Usuario> usuarioOptional = usuarioRepo.findById(objectId);
-
-        //Si no se encontró el usuario, lanzamos una excepción
-        if (usuarioOptional.isEmpty()) {
-            throw new UsuarioNoEncontradoException("No se encontró el usuario con el id " + id);
-        }
-
-        // Obtenemos los reportes asociados al usuario
-        List<Reporte> reportes = reporteRepo.findByUsuarioId(objectId);
-
-        // Convertimos los reportes a DTO usando stream y map
-        return reportes.stream()
-                .map(reporteMapper::toDTO)
-                .collect(Collectors.toList());
+        String usuarioId = usuarioServicio.obtenerIdSesion();
+        return reporteRepo.obtenerReportesUsuario(new ObjectId(usuarioId));
 
     }
 
     @Override
     public List<ReporteDTO> obtenerReportesCerca(double latitud, double longitud) {
-
-        double radioEnKm = 5.0;
-        double radioEnRadianes = radioEnKm / 6378.1; // Convertir km a radianes
-
-        // Lógica para encontrar reportes cercanos usando latitud y longitud
-        List<Reporte> reportes = reporteRepo.findByUbicacionCerca(latitud, longitud, radioEnRadianes);
-        return reportes.stream().filter(reporte ->
-                        reporte.getEstadoActual() != EstadoReporte.ELIMINADO && reporte.getEstadoActual() != EstadoReporte.RESUELTO
-                )
-                .map(reporteMapper::toDTO)
-                .toList();
-
+        return reporteRepo.obtenerReportesCerca(latitud, longitud);
     }
 
     @Override
     public List<ReporteDTO> obtenerTopReportes() throws Exception {
-        List<Reporte> topReportes = reporteRepo.findTop10ByOrderByContadorImportanteDesc();
-
-        //Convertir a DTO usando mapper
-        return topReportes.stream()
-                .filter(reporte ->
-                        reporte.getEstadoActual() != EstadoReporte.ELIMINADO && reporte.getEstadoActual() != EstadoReporte.RESUELTO
-                )
-                .map(reporteMapper::toDTO)
-                .toList();
+        return reporteRepo.obtenerTopReportes();
     }
 
     @Override

@@ -24,9 +24,8 @@ public class Reporte {
 
     private ObjectId usuarioId;
 
-    private String nombreUsuario;
     private String titulo;
-    private ObjectId CategoriaId;
+    private ObjectId categoriaId;
     private String descripcion;
     private Ubicacion ubicacion;
     private Ciudad ciudad;

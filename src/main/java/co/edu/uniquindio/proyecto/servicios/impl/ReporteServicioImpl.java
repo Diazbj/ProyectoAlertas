@@ -18,6 +18,7 @@ import co.edu.uniquindio.proyecto.servicios.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.ReporteServicio;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -103,10 +104,9 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     @Override
     public void editarReporte(String id, EditarReporteDTO editarReporteDTO) throws Exception {
-
         // Validamos el id del reporte
         if (!ObjectId.isValid(id)) {
-            throw new Exception("No se encontró el reporte con el id " + id);
+            throw new ReporteNoEncontradoException("No se encontró el reporte con el id " + id);
         }
 
         // Convertimos el id a ObjectId
@@ -118,14 +118,23 @@ public class ReporteServicioImpl implements ReporteServicio {
             throw new Exception("No se encontró el reporte con el id " + id);
         }
 
-        // Obtener el reporte y mapear los datos actualizados
+        // Obtener el reporte
         Reporte reporte = reporteOptional.get();
+
+        // Obtener el username del usuario autenticado (suponiendo que el username es el identificador único del usuario)
+        String usernameAutenticado = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        // Verificar si el reporte pertenece al usuario autenticado
+        if (!reporte.getUsuarioId().equals(usernameAutenticado)) {
+            throw new AccesoNoPermitidoException("No tienes permiso para editar este reporte.");
+        }
+
+        // Mapear los datos actualizados al reporte
         reporteMapper.toDocument(editarReporteDTO, reporte);
 
-        // Guardamos los cambios en la base de datos
+        // Guardar los cambios en la base de datos
         reporteRepo.save(reporte);
     }
-
 
     @Override
     public void eliminarReporte(String id) throws Exception {

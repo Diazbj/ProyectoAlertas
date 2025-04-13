@@ -46,7 +46,7 @@ public interface ReporteRepo extends MongoRepository<Reporte, String> {
     List<ReporteDTO> obtenerReportes();
 
     @Aggregation({
-            "{ $match: { usuarioId: ?0, estadoActual: { $in: ['VERIFICADO', 'RECHAZADO', 'PENDIENTE'] } } }",
+            "{ $match: { usuarioId: ?0 } }",
             "{ $addFields: { cantidadImportante: { $cond: { if: { $isArray: '$contadorImportante' }, then: { $size: '$contadorImportante' }, else: 0 } } } }",
             "{ $lookup: { from: 'categorias', localField: 'categoriaId', foreignField: '_id', as: 'categoria' } }",
             "{ $unwind: '$categoria' }",

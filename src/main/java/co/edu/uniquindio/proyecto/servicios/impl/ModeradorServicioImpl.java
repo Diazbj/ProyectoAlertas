@@ -84,7 +84,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         }
 
         Categoria categoria = categoriaOptional.get();
-        categoria.setNombre(categoriaDTO.nombre());
+        categoriaMapper.toDocument(categoriaDTO,categoria);
         categoriaRepo.save(categoria);
     }
 

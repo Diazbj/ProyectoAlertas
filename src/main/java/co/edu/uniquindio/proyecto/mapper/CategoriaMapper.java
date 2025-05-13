@@ -11,7 +11,7 @@ import org.mapstruct.MappingTarget;
 
 
 @Mapper(componentModel = "spring")
-public interface CategoriaMapper {
+public interface  CategoriaMapper {
 
     Categoria toDocument(CategoriaDTO categoriaDTO);
     void toDocument(CategoriaDTO categoriaDTO, @MappingTarget Categoria categoria) throws Exception;

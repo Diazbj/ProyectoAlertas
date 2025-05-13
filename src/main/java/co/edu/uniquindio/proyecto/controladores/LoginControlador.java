@@ -24,10 +24,9 @@ public class LoginControlador {
 
     @PostMapping
     @Operation(summary = "Login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO loginDTO) throws Exception {
+    public ResponseEntity<MensajeDTO<TokenDTO>> login(@Valid @RequestBody LoginDTO loginDTO) throws Exception {
         TokenDTO tokenDTO = loginServicio.login(loginDTO);
-        String token = tokenDTO.toString();
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new MensajeDTO<>(false, tokenDTO));
     }
 
 

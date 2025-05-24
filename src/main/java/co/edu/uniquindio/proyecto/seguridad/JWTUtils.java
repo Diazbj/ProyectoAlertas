@@ -8,16 +8,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Map;
 
-
 @Component
 public class JWTUtils {
 
-
     public String generateToken(String id, Map<String, String> claims) {
 
-
         Instant now = Instant.now();
-
 
         return Jwts.builder()
                 .claims(claims)
@@ -28,12 +24,10 @@ public class JWTUtils {
                 .compact();
     }
 
-
     public Jws<Claims> parseJwt(String jwtString) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException {
         JwtParser jwtParser = Jwts.parser().verifyWith( getKey() ).build();
         return jwtParser.parseSignedClaims(jwtString);
     }
-
 
     private SecretKey getKey(){
         String claveSecreta = "secretsecretsecretsecretsecretsecretsecretsecret";
@@ -41,6 +35,4 @@ public class JWTUtils {
         return Keys.hmacShaKeyFor(secretKeyBytes);
     }
 
-
 }
-

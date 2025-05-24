@@ -173,7 +173,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public void cambiarPassword(CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
-        String id =obtenerIdSesion();
+        String id = obtenerIdSesion();
         //Validamos el id
         if (!ObjectId.isValid(id)) {
             throw new UsuarioNoEncontradoException("No se encontró el usuario con el id "+id);
@@ -267,6 +267,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user.getUsername();
     }
+
     public String obtenerNombreUsuario() throws Exception {
 
         String id = obtenerIdSesion();
@@ -277,6 +278,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuario.getNombre();
 
     }
+
     public String obtenerRolSesion() throws Exception {
         String id = obtenerIdSesion();
         Usuario usuario = usuarioRepo.findById(new ObjectId(id))

@@ -16,5 +16,7 @@ public class Categoria {
     @Id
     private ObjectId id;
     private String nombre;
+    private String color;
     private String descripcion;
+
 }

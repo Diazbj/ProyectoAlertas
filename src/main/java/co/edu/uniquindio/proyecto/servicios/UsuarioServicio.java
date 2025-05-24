@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 public interface UsuarioServicio {
 
-    void crear( CrearUsuarioDTO cuenta) throws Exception;
+    void crearUsuario( CrearUsuarioDTO cuenta) throws Exception;
 
     void enviarCodigoActivacion( UsuarioNuevoCodigoDTO usuarioNuevoCodigoDTO) throws Exception ;
 

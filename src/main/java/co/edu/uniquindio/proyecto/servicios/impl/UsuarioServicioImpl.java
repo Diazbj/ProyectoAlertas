@@ -32,7 +32,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final EmailServicio emailServicio;
 
     @Override
-    public void crear(CrearUsuarioDTO crearUsuarioDTO) throws Exception {
+    public void crearUsuario(CrearUsuarioDTO crearUsuarioDTO) throws Exception {
 
         if(existeEmail(crearUsuarioDTO.email())) throw new EmailRepetidoException("El email ya existe");
 

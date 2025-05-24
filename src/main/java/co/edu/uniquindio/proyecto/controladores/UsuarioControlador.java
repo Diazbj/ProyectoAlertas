@@ -22,8 +22,8 @@ public class UsuarioControlador {
 
     @PostMapping
     @Operation(summary = "Crear Usuario")
-    public ResponseEntity<MensajeDTO<String>> crear(@Valid @RequestBody CrearUsuarioDTO cuenta) throws Exception{
-        usuarioServicio.crear(cuenta);
+    public ResponseEntity<MensajeDTO<String>> crearUsuario(@Valid @RequestBody CrearUsuarioDTO cuenta) throws Exception{
+        usuarioServicio.crearUsuario(cuenta);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Su registro ha sido exitoso"));
     }
 

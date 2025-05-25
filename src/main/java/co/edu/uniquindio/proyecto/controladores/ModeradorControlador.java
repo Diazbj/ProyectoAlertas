@@ -9,6 +9,7 @@ import co.edu.uniquindio.proyecto.dto.moderadores.ObtenerCategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.HistorialReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
+import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.servicios.ModeradorServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -28,6 +29,7 @@ import java.util.List;
 public class ModeradorControlador {
 
     private final ModeradorServicio moderadorServicio;
+    private final CategoriaRepo categoriaRepo;
 
 
     @PostMapping("/categorias")
@@ -79,4 +81,12 @@ public class ModeradorControlador {
         List<HistorialReporteDTO> historialReporte =moderadorServicio.obtenerHistorial(idReporte);
         return ResponseEntity.ok(new MensajeDTO<>(false, historialReporte));
     }
+
+    @GetMapping("/categoria/{categoriaNombre}")
+    @Operation(summary = "Obtener color de la categoria")
+    public ResponseEntity<MensajeDTO<String>> obtenerCategoriaColor(@PathVariable String categoriaNombre) throws Exception {
+        String color = moderadorServicio.obtenerColorByCategoria(categoriaNombre);
+        return ResponseEntity.ok(new MensajeDTO<>(false, color));
+    }
+
 }

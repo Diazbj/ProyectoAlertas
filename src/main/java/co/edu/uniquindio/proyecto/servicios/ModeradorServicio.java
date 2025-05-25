@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
+import co.edu.uniquindio.proyecto.dto.moderadores.ObtenerCategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.HistorialReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
@@ -18,7 +19,7 @@ public interface ModeradorServicio {
 
     void crearCategoria(CategoriaDTO categoriaDTO) throws Exception;
 
-    List<CategoriaDTO> obtenerCategorias() throws Exception;
+    List<ObtenerCategoriaDTO> obtenerCategorias() throws Exception;
 
     void editarCategoria( String id, CategoriaDTO categoriaDTO) throws Exception;
 

@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.comentarios.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
 
 import co.edu.uniquindio.proyecto.dto.moderadores.InformeDTO;
+import co.edu.uniquindio.proyecto.dto.moderadores.ObtenerCategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.HistorialReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
@@ -39,8 +40,8 @@ public class ModeradorControlador {
 
     @GetMapping("/categorias")
     @Operation(summary = "Obtener todas las categorias")
-    public ResponseEntity<MensajeDTO<List<CategoriaDTO>>> obtenerCategorias() throws Exception {
-        List<CategoriaDTO> categorias=moderadorServicio.obtenerCategorias();
+    public ResponseEntity<MensajeDTO<List<ObtenerCategoriaDTO>>> obtenerCategorias() throws Exception {
+        List<ObtenerCategoriaDTO> categorias=moderadorServicio.obtenerCategorias();
         return ResponseEntity.ok(new MensajeDTO<>(false, categorias));
     }
 

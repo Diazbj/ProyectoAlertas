@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.CategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.moderadores.InformeDTO;
+import co.edu.uniquindio.proyecto.dto.moderadores.ObtenerCategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.HistorialReporteDTO;
 import co.edu.uniquindio.proyecto.dto.reportes.ReporteDTO;
 import co.edu.uniquindio.proyecto.excepciones.CategoriaNoEncontradaException;
@@ -65,7 +66,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     }
 
     @Override
-    public List<CategoriaDTO> obtenerCategorias() throws Exception {
+    public List<ObtenerCategoriaDTO> obtenerCategorias() throws Exception {
         List<Categoria> categorias = categoriaRepo.findAll();
 
         return categorias.stream()

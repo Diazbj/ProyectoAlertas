@@ -22,6 +22,4 @@ public interface  CategoriaMapper {
         return value != null ? value.toString() : null;
     }
 
-
-
 }

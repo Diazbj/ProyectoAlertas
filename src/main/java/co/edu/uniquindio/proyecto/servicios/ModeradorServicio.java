@@ -22,8 +22,9 @@ public interface ModeradorServicio {
 
     void editarCategoria( String id, CategoriaDTO categoriaDTO) throws Exception;
 
-
     void eliminarCategoria(String id) throws Exception;
+
+    String obtenerColorByCategoria(String nombreCategoria) throws Exception;
 
     List<InformeDTO> generarInforme(String ciudad, String categoria, LocalDate fechaInicio, LocalDate fechaFin)throws Exception;
 

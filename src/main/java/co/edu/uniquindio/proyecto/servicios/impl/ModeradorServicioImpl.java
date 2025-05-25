@@ -112,6 +112,12 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     }
 
     @Override
+    public String obtenerColorByCategoria(String nombreCategoria) throws Exception {
+        Categoria categoria= categoriaRepo.findByNombre(nombreCategoria);
+        return categoria.getColor();
+    }
+
+    @Override
     public List<InformeDTO> generarInforme(String ciudad, String categoria, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
         Date fechaInicioDate = java.sql.Timestamp.valueOf(fechaInicio.atStartOfDay());
         Date fechaFinDate = java.sql.Timestamp.valueOf(fechaFin.atStartOfDay());
